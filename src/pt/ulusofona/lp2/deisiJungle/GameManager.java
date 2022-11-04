@@ -54,7 +54,7 @@ public class GameManager {
             // validar o ID dos players
             boolean isNumeric =  playersInfo[i][0].matches("[+-]?\\d*(\\.\\d+)?");
 
-            if(idJogadores.contains(playersInfo[i][0]) && !isNumeric){
+            if(idJogadores.contains(playersInfo[i][0]) || !isNumeric){
                 return false;
             }
 
