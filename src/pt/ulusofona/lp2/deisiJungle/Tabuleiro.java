@@ -6,6 +6,8 @@ public class Tabuleiro {
     int tamanho;
     int energiaInicial;
 
+    Celula[] celula = new Celula[tamanho];
+
     public Tabuleiro(){}
 
     public Tabuleiro(Celula[] arrayCelulas, int tamanho, int energiaInicial){
@@ -14,8 +16,9 @@ public class Tabuleiro {
         this.energiaInicial = energiaInicial;
     }
 
-     void criarTabuleiro(int tamanho, int energiaInicial, Celula[] jungle){
+     Tabuleiro criarTabuleiro(int tamanho, int energiaInicial, Celula[] jungle){
         Tabuleiro tabuleiro = new Tabuleiro(jungle,tamanho,energiaInicial);
+        return tabuleiro;
     }
 
 }

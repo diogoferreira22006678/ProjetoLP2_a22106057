@@ -8,6 +8,7 @@ public class GameManager {
 
     Tabuleiro jungle = new Tabuleiro();
 
+
     public GameManager(){}
 
     public String[][] getSpecies(){
@@ -51,7 +52,9 @@ public class GameManager {
         for(int i = 0; i < playersInfo.length;i++){
 
             // validar o ID dos players
-            if(idJogadores.contains(playersInfo[i][0])){
+            boolean isNumeric =  playersInfo[i][0].matches("[+-]?\\d*(\\.\\d+)?");
+
+            if(idJogadores.contains(playersInfo[i][0]) && !isNumeric){
                 return false;
             }
 
@@ -97,6 +100,9 @@ public class GameManager {
             return false;
         }
 
+        Celula[] arrayCelulas = new Celula[jungleSize];
+
+        jungle = jungle.criarTabuleiro(jungleSize,initialEnergy,arrayCelulas);
 
         return true;
     }
