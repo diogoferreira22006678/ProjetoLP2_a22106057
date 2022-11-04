@@ -141,7 +141,7 @@ public class GameManager {
 
         String[] informacao = new String[3];
 
-        if(squareNr == jungle.tamanho){
+        if(squareNr - 1 == jungle.tamanho){
             informacao[0] = "finish.png";
             informacao[1] = "Meta";
         }else{
@@ -213,7 +213,7 @@ public class GameManager {
     }
 
     public String whoIsTaborda() {
-        return "Futebol";
+        return "Football";
     }
 
 
