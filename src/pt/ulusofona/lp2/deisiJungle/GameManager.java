@@ -1,19 +1,14 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
-import java.awt.image.AreaAveragingScaleFilter;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 public class GameManager {
 
-    static public Tabuleiro jungle;
-    public ArrayList<Player> playersNoJogo = new ArrayList<>();
+    Tabuleiro jungle = new Tabuleiro();
 
-    public GameManager(){
-
-    }
+    public GameManager(){}
 
     public String[][] getSpecies(){
 
@@ -65,7 +60,7 @@ public class GameManager {
             //validar Nº de Tarzans
             int procurarTarzan = 0;
 
-            if (playersInfo[i][0] == "Z"){
+            if (playersInfo[i][0].equals("Z")){
                 procurarTarzan++;
             }
             if(procurarTarzan > 1){
@@ -102,69 +97,20 @@ public class GameManager {
             return false;
         }
 
-        jungle = Tabuleiro.criarTabuleiro(jungleSize, initialEnergy, new Celula[jungleSize]);
-        ArrayList<Player> players = new ArrayList<>();
-        for (int i = 0; i < playersInfo.length; i++){
-            Player player = new Player(Integer.parseInt(playersInfo[i][0]),playersInfo[i][1],playersInfo[i][2]);
-            Player playerComEnergia = new Player(Integer.parseInt(playersInfo[i][0]),
-                    playersInfo[i][1],playersInfo[i][2],initialEnergy);
-            players.add(player);
-            playersNoJogo.add(playerComEnergia);
-        }
 
-        HashMap<Integer,ArrayList<Player>> informacaoCelula = new HashMap<>();
-        informacaoCelula.put(1, players);
-        jungle.arrayCelulas[0] = new Celula(informacaoCelula);
         return true;
     }
 
     public int[] getPlayerIds(int squareNr){
 
-        //validar o square e se ha informacao na celula
-        if (squareNr <= 0 || squareNr > jungle.tamanho){
-            return new int[0];
-        }else if(jungle.arrayCelulas[squareNr] == null){
-            return new int[0];
-        }
 
-        //criar array de ids
-        ArrayList<Player> players = jungle.arrayCelulas[squareNr - 1].informacaoCelula.get(squareNr);
-        int[] idPlayers = new int[players.size()];
-        for (int i = 0; i < players.size(); i++){
-            idPlayers[i] = players.get(i).id;
-        }
-
-        return idPlayers;
+        return null;
     }
 
     public String[] getSquareInfo(int squareNr){
 
         String[] informacao = new String[3];
 
-        if(squareNr - 1 == jungle.tamanho){
-            informacao[0] = "finish.png";
-            informacao[1] = "Meta";
-        }else{
-            informacao[0] = "blank.png";
-            informacao[1] = "Vazio";
-        }
-
-        ArrayList<Player> players = jungle.arrayCelulas[squareNr - 1].informacaoCelula.get(squareNr);
-
-        if(players == null){
-            informacao[2] = "";
-            return informacao;
-        }
-        String stringPlayers = "";
-        for (int i = 0; i < players.size(); i++) {
-
-            if (players.size() - 1 == i) {
-                stringPlayers += String.valueOf(players.get(i).id);
-            } else {
-                stringPlayers += players.get(i).id + ",";
-            }
-        }
-        informacao[2] = stringPlayers;
 
         return informacao;
     }
@@ -173,17 +119,7 @@ public class GameManager {
 
         String[] playerInfo = new String[4];
 
-        for (int i = 0; i < playersNoJogo.size();i++){
-            if(playerId == playersNoJogo.get(i).id){
-                Player playerRequisitado = playersNoJogo.get(i);
-                playerInfo[0] = String.valueOf(playerRequisitado.id);
-                playerInfo[1] = playerRequisitado.nome;
-                playerInfo[2] = playerRequisitado.especie;
-                playerInfo[3] = String.valueOf(playerRequisitado.currentEnergy);
 
-                return playerInfo;
-            }
-        }
         return null;
     }
 

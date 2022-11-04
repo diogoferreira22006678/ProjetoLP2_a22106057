@@ -1,13 +1,11 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-public class Player {
+ class Player {
 
-    int id;
-    String nome;
-    String especie;
-    int currentEnergy;
-
-    public Player(){}
+     int id;
+     String nome;
+     String especie;
+     int currentEnergy;
 
     public Player(int id, String nome, String especie){
         this.id = id;
@@ -21,5 +19,7 @@ public class Player {
         this.especie = especie;
         this.currentEnergy = currentEnergy;
     }
+
+
 
 }

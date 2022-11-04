@@ -14,9 +14,8 @@ public class Tabuleiro {
         this.energiaInicial = energiaInicial;
     }
 
-    static public Tabuleiro criarTabuleiro(int tamanho, int energiaInicial, Celula[] jungle){
+     void criarTabuleiro(int tamanho, int energiaInicial, Celula[] jungle){
         Tabuleiro tabuleiro = new Tabuleiro(jungle,tamanho,energiaInicial);
-        return tabuleiro;
     }
 
 }
