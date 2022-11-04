@@ -213,7 +213,7 @@ public class GameManager {
     }
 
     public String whoIsTaborda() {
-        return "Football";
+        return "Wrestling";
     }
 
 
