@@ -7,7 +7,7 @@ public class Celula {
 
 
 
-   static HashMap<Integer,ArrayList<Player>> informacaoCelula;
+    HashMap<Integer,ArrayList<Player>> informacaoCelula;
 
 
     public Celula(){}
