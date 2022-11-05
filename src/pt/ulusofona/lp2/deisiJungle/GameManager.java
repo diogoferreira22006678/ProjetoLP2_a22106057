@@ -106,15 +106,6 @@ public class GameManager {
 
         jungle = jungle.criarTabuleiro(jungleSize,initialEnergy);
 
-
-        for(int i = 0; i < playersInfo.length;i++) {
-
-            Player player = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2]);
-
-            jungle.arrayCelulas[0].adicionarInformacao(player, jungle.arrayCelulas, 1);
-
-        }
-
         return true;
     }
 
@@ -127,8 +118,29 @@ public class GameManager {
 
     public String[] getSquareInfo(int squareNr){
 
+        if(squareNr < 1 || squareNr > jungle.arrayCelulas.length){
+            return null;
+        }
+
         String[] informacao = new String[3];
 
+        if(squareNr == jungle.arrayCelulas.length){
+            informacao[0] = "finish.png";
+            informacao[1] = "Meta";
+        }
+
+        informacao[0] = "blank.png";
+        informacao[1] = "Vazio";
+
+        String idPlayers = "";
+        ArrayList<Player> players = jungle.arrayCelulas[squareNr - 1].informacaoCelula.get(squareNr);
+
+        for (int i = 0; i < players.size(); i++){
+            if(i == players.size()){
+                idPlayers += String.valueOf(players.get(i));
+            }
+            idPlayers += (players.get(i)) + ",";
+        }
 
         return informacao;
     }
