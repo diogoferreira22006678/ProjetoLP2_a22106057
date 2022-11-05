@@ -1,5 +1,8 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Tabuleiro {
 
     Celula[] arrayCelulas;
@@ -16,7 +19,17 @@ public class Tabuleiro {
         this.energiaInicial = energiaInicial;
     }
 
-     Tabuleiro criarTabuleiro(int tamanho, int energiaInicial, Celula[] jungle){
+     Tabuleiro criarTabuleiro(int tamanho, int energiaInicial){
+
+        Celula[] jungle = new Celula[tamanho];
+
+        for (int i = 0; i < tamanho;i++){
+            ArrayList<Player> player = new ArrayList<>();
+            if(jungle[i] != null){
+            jungle[i].informacaoCelula.put(i + 1, player);
+            }
+        }
+
         Tabuleiro tabuleiro = new Tabuleiro(jungle,tamanho,energiaInicial);
         return tabuleiro;
     }

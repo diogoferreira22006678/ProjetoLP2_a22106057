@@ -104,13 +104,14 @@ public class GameManager {
             return false;
         }
 
-        Celula[] arrayCelulas = new Celula[jungleSize];
+        jungle = jungle.criarTabuleiro(jungleSize,initialEnergy);
 
-        jungle = jungle.criarTabuleiro(jungleSize,initialEnergy,arrayCelulas);
 
         for(int i = 0; i < playersInfo.length;i++) {
             Player player = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2]);
-            jungle.arrayCelulas[0].adicionarInformacao(player,jungle.arrayCelulas,0);
+            if(jungle.arrayCelulas[0] != null){
+            jungle.arrayCelulas[0].adicionarInformacao(player, jungle.arrayCelulas, 0);
+            }
         }
         return true;
     }

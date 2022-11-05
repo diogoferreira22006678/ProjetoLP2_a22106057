@@ -20,6 +20,7 @@ public class Celula {
 
      Celula[] adicionarInformacao(Player player,Celula[] arrayCelula, int nrSquare){
 
+
         if(arrayCelula[nrSquare - 1].informacaoCelula.containsKey(nrSquare)){
             arrayCelula[nrSquare - 1].informacaoCelula.get(nrSquare).add(player);
             return arrayCelula;
