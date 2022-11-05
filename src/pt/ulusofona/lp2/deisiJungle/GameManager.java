@@ -108,13 +108,18 @@ public class GameManager {
 
         jungle = jungle.criarTabuleiro(jungleSize,initialEnergy,arrayCelulas);
 
+        for(int i = 0; i < playersInfo.length;i++) {
+            Player player = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2]);
+            jungle.arrayCelulas[0].adicionarInformacao(player,jungle.arrayCelulas,0);
+        }
         return true;
     }
 
     public int[] getPlayerIds(int squareNr){
 
+        int[] arrayids = jungle.arrayCelulas[squareNr - 1].getPlayersIdCelula(jungle.arrayCelulas, squareNr);
 
-        return null;
+        return arrayids;
     }
 
     public String[] getSquareInfo(int squareNr){
