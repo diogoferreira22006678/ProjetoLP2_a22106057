@@ -23,11 +23,13 @@ public class Tabuleiro {
 
         Celula[] jungle = new Celula[tamanho];
 
-        for (int i = 0; i < tamanho;i++){
+        for (int i = 0; i < tamanho - 1;i++){
             ArrayList<Player> player = new ArrayList<>();
-            if(jungle[i] != null){
+
+            jungle[i] = new Celula(new HashMap<>());
+
             jungle[i].informacaoCelula.put(i + 1, player);
-            }
+
         }
 
         Tabuleiro tabuleiro = new Tabuleiro(jungle,tamanho,energiaInicial);
