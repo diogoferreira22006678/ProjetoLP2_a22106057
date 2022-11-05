@@ -17,9 +17,9 @@ public class Celula {
 
      Celula[] adicionarInformacao(Player player,Celula[] arrayCelula, int nrSquare){
 
-
         if(arrayCelula[nrSquare - 1].informacaoCelula.containsKey(nrSquare)){
             arrayCelula[nrSquare - 1].informacaoCelula.get(nrSquare).add(player);
+
             return arrayCelula;
         }
 
@@ -27,6 +27,8 @@ public class Celula {
         arrayPlayers.add(player);
 
         arrayCelula[nrSquare - 1].informacaoCelula.put(nrSquare,arrayPlayers);
+
+
 
         return arrayCelula;
     }
@@ -49,23 +51,20 @@ public class Celula {
 
         int[] idPlayers;
 
-        if(arrayCelula[nrSquare] == null){
-            return new int[0];
-        }
-
         if(nrSquare < 1 || nrSquare > arrayCelula.length){
             return new int[0];
         }
 
-
-
         if(arrayCelula[nrSquare - 1].informacaoCelula.containsKey(nrSquare)){
+
             ArrayList<Player> playersNaCelula = arrayCelula[nrSquare - 1].informacaoCelula.get(nrSquare);
 
             if(playersNaCelula.size() == 0){
                 return new int[0];
             }
+
             idPlayers = new int[playersNaCelula.size()];
+
             for (int i = 0; i < playersNaCelula.size();i++ ){
 
                 idPlayers[i] = playersNaCelula.get(i).id;
