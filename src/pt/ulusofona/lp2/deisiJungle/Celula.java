@@ -18,23 +18,23 @@ public class Celula {
      Celula[] adicionarInformacao(Player player,Celula[] arrayCelula, int nrSquare){
 
 
-        if(arrayCelula[nrSquare].informacaoCelula.containsKey(nrSquare)){
-            arrayCelula[nrSquare].informacaoCelula.get(nrSquare).add(player);
+        if(arrayCelula[nrSquare - 1].informacaoCelula.containsKey(nrSquare)){
+            arrayCelula[nrSquare - 1].informacaoCelula.get(nrSquare).add(player);
             return arrayCelula;
         }
 
         ArrayList<Player> arrayPlayers = new ArrayList<>();
         arrayPlayers.add(player);
 
-        arrayCelula[nrSquare].informacaoCelula.put(nrSquare,arrayPlayers);
+        arrayCelula[nrSquare - 1].informacaoCelula.put(nrSquare,arrayPlayers);
 
         return arrayCelula;
     }
 
      Celula[] removerInformacao(int idPlayer, Celula[] arrayCelula, int nrSquare) {
 
-         if(arrayCelula[nrSquare].informacaoCelula.containsKey(nrSquare)){
-             ArrayList<Player> playersNaCelula = arrayCelula[nrSquare].informacaoCelula.get(nrSquare);
+         if(arrayCelula[nrSquare - 1].informacaoCelula.containsKey(nrSquare)){
+             ArrayList<Player> playersNaCelula = arrayCelula[nrSquare - 1].informacaoCelula.get(nrSquare);
              for (int i = 0; i < playersNaCelula.size();i++ ){
                  if(playersNaCelula.get(i).id == idPlayer){
                      playersNaCelula.remove(i);
@@ -65,7 +65,7 @@ public class Celula {
             if(playersNaCelula.size() == 0){
                 return new int[0];
             }
-            idPlayers = new int[playersNaCelula.size() - 1];
+            idPlayers = new int[playersNaCelula.size()];
             for (int i = 0; i < playersNaCelula.size();i++ ){
 
                 idPlayers[i] = playersNaCelula.get(i).id;
