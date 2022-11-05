@@ -74,7 +74,6 @@ public class GameManager {
                 return false;
             }
 
-
             // validar nome do player
             if(playersInfo[i] == null){
                 return false;
@@ -105,6 +104,13 @@ public class GameManager {
         }
 
         jungle = jungle.criarTabuleiro(jungleSize,initialEnergy);
+
+        for(int i = 0; i < playersInfo.length;i++) {
+
+            Player player = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2]);
+
+            jungle.arrayCelulas[0].adicionarInformacao(player,jungle.arrayCelulas,1);
+        }
 
         return true;
     }
