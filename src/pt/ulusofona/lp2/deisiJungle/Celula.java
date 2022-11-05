@@ -17,13 +17,6 @@ public class Celula {
 
      Celula[] adicionarInformacao(Player player,Celula[] arrayCelula, int nrSquare){
 
-        if(arrayCelula == null){
-            ArrayList arrayPlayers = new ArrayList();
-            arrayPlayers.add(player);
-            arrayCelula[nrSquare - 1].informacaoCelula = arrayPlayers;
-            return arrayCelula;
-        }
-
             arrayCelula[nrSquare - 1].informacaoCelula.add(player);
 
         return arrayCelula;

@@ -23,6 +23,10 @@ public class Tabuleiro {
 
         Celula[] jungle = new Celula[tamanho];
 
+        for(int i = 0; i < jungle.length; i++){
+            jungle[i] = new Celula(new ArrayList<>());
+        }
+
         Tabuleiro tabuleiro = new Tabuleiro(jungle,tamanho,energiaInicial);
         return tabuleiro;
     }
