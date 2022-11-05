@@ -7,9 +7,9 @@ public class Celula {
 
 
 
-    HashMap<Integer,ArrayList<Player>> informacaoCelula;
+    ArrayList<Player> informacaoCelula;
 
-    public Celula(HashMap<Integer,ArrayList<Player>> informacaoCelula){
+    public Celula(ArrayList<Player> informacaoCelula){
 
         this.informacaoCelula = informacaoCelula;
 
@@ -17,32 +17,26 @@ public class Celula {
 
      Celula[] adicionarInformacao(Player player,Celula[] arrayCelula, int nrSquare){
 
-        if(arrayCelula[nrSquare - 1].informacaoCelula.containsKey(nrSquare)){
-            arrayCelula[nrSquare - 1].informacaoCelula.get(nrSquare).add(player);
-
+        if(arrayCelula == null){
+            ArrayList arrayPlayers = new ArrayList();
+            arrayPlayers.add(player);
+            arrayCelula[nrSquare - 1].informacaoCelula = arrayPlayers;
             return arrayCelula;
         }
 
-        ArrayList<Player> arrayPlayers = new ArrayList<>();
-        arrayPlayers.add(player);
-
-        arrayCelula[nrSquare - 1].informacaoCelula.put(nrSquare,arrayPlayers);
-
-
+            arrayCelula[nrSquare - 1].informacaoCelula.add(player);
 
         return arrayCelula;
     }
 
      Celula[] removerInformacao(int idPlayer, Celula[] arrayCelula, int nrSquare) {
 
-         if(arrayCelula[nrSquare - 1].informacaoCelula.containsKey(nrSquare)){
-             ArrayList<Player> playersNaCelula = arrayCelula[nrSquare - 1].informacaoCelula.get(nrSquare);
+             ArrayList<Player> playersNaCelula = arrayCelula[nrSquare - 1].informacaoCelula;
              for (int i = 0; i < playersNaCelula.size();i++ ){
                  if(playersNaCelula.get(i).id == idPlayer){
                      playersNaCelula.remove(i);
                  }
              }
-         }
 
          return arrayCelula;
     }
@@ -55,9 +49,9 @@ public class Celula {
             return new int[0];
         }
 
-        if(arrayCelula[nrSquare - 1].informacaoCelula.containsKey(nrSquare)){
 
-            ArrayList<Player> playersNaCelula = arrayCelula[nrSquare - 1].informacaoCelula.get(nrSquare);
+
+            ArrayList<Player> playersNaCelula = arrayCelula[nrSquare - 1].informacaoCelula;
 
             if(playersNaCelula.size() == 0){
                 return new int[0];
@@ -71,9 +65,6 @@ public class Celula {
 
             }
             return idPlayers;
-        }
-
-        return new int[0];
 
     }
 }

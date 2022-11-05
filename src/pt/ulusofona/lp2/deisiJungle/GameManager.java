@@ -139,7 +139,7 @@ public class GameManager {
         informacao[1] = "Vazio";
 
         String idPlayers = "";
-        ArrayList<Player> players = jungle.arrayCelulas[squareNr - 1].informacaoCelula.get(squareNr);
+        ArrayList<Player> players = jungle.arrayCelulas[squareNr - 1].informacaoCelula;
 
         for (int i = 0; i < players.size(); i++){
             if(i == players.size()){
