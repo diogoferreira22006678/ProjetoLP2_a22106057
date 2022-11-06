@@ -127,7 +127,7 @@ public class GameManager {
     public String[] getSquareInfo(int squareNr){
 
         if(squareNr < 1 || squareNr + 1 > jungle.arrayCelulas.length){
-            return null;
+            return new String[3];
         }
 
         String[] informacao = new String[3];
