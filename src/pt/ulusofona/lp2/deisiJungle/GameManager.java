@@ -79,12 +79,10 @@ public class GameManager {
         }
         // valida numero de players
         if(playersInfo.length < 2 || playersInfo.length > 4){
-            return false;
-        }
+            return false; }
         // valida tamanho do tabuleiro
         if(jungleSize < 2 * playersInfo.length){
-            return false;
-        }
+            return false; }
         jungle = jungle.criarTabuleiro(jungleSize,initialEnergy);
         playersJogo = new Player[playersInfo.length];
         int turno;
@@ -98,9 +96,7 @@ public class GameManager {
                     playersInfo[i][2],initialEnergy,turno,1);
             playersJogo[i] = player;
 
-            jungle.arrayCelulas[0].adicionarInformacao(player,jungle.arrayCelulas,1);
-        }
-
+            jungle.arrayCelulas[0].adicionarInformacao(player,jungle.arrayCelulas,1); }
         return true;
     }
 
@@ -123,14 +119,14 @@ public class GameManager {
 
         String[] informacao = new String[3];
 
-        if(squareNr == jungle.arrayCelulas.length - 1){
+        if(squareNr == jungle.tamanho){
             informacao[0] = "finish.png";
             informacao[1] = "Meta";
+        }else {
+
+            informacao[0] = "blank.png";
+            informacao[1] = "Vazio";
         }
-
-        informacao[0] = "blank.png";
-        informacao[1] = "Vazio";
-
         String idPlayers = "";
         ArrayList<Player> players = jungle.arrayCelulas[squareNr - 1].informacaoCelula;
 
@@ -242,7 +238,7 @@ public class GameManager {
 
                 if(nrSquares + playersJogo.length >= jungle.tamanho ){
                     // ganhou
-                    playersJogo[i].casaAtual = jungle.tamanho - 1;
+                    playersJogo[i].casaAtual = jungle.tamanho ;
 
 
                     jungle.arrayCelulas[jungle.tamanho - 1].informacaoCelula.add(playersJogo[i]);
@@ -270,11 +266,12 @@ public class GameManager {
                 noEnergy += 1;
             }
             //ganhou porque chegou a meta
-            if(playersJogo[i].casaAtual == jungle.tamanho - 1){
+            if(playersJogo[i].casaAtual == jungle.tamanho){
                 playersInfo[0] = String.valueOf(playersJogo[i].id);
                 playersInfo[1] = playersJogo[i].nome;
                 playersInfo[2] = playersJogo[i].especie;
                 playersInfo[3] = String.valueOf(playersJogo[i].currentEnergy);
+
 
                 return playersInfo;
             }
@@ -302,6 +299,7 @@ public class GameManager {
         }
         // ganhou porque n ha energia
         if(noEnergy == 0){
+
             return playersInfo;
         }
 
