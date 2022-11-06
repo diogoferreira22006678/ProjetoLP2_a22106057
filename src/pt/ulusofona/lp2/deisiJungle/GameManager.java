@@ -45,7 +45,6 @@ public class GameManager {
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo){
         ArrayList idJogadores = new ArrayList();
         String[][] especiesList = getSpecies();
-
         //validar energia inicial
         if(initialEnergy <= 0){
             return false;
@@ -54,42 +53,29 @@ public class GameManager {
             // validar o ID dos players
             // esta linha se calhar null
             if(playersInfo[i][0] == null){
-                return false;
-            }
+                return false; }
             boolean isNumeric =  playersInfo[i][0].matches("[+-]?\\d*(\\.\\d+)?");
-
             if(idJogadores.contains(playersInfo[i][0]) || !isNumeric){
-                return false;
-            }
+                return false; }
             idJogadores.add(playersInfo[i][0]);
-
             //validar Nº de Tarzans
             int procurarTarzan = 0;
-
             if (playersInfo[i][0].equals("Z")){
-                procurarTarzan++;
-            }
+                procurarTarzan++; }
             if(procurarTarzan > 1){
-                return false;
-            }
-
+                return false; }
             // validar nome do player
             if(playersInfo[i] == null){
-                return false;
-            }
-
+                return false; }
             //validar  indice da especie
             int valido = 0;
-
             for(int k = 0; k< especiesList.length; k++){
                 if((playersInfo[i][2] == especiesList[k][0])){
                     valido = 1;
-                    break;
-                }
+                    break; }
             }
             if(valido == 0){
-                return false;
-            }
+                return false; }
         }
         // valida numero de players
         if(playersInfo.length < 2 || playersInfo.length > 4){
@@ -156,8 +142,9 @@ public class GameManager {
         for (int i = 0; i < players.size(); i++){
             if(i == players.size() - 1){
                 idPlayers += String.valueOf(players.get(i).id);
-            }
+            }else{
             idPlayers += (players.get(i).id) + ",";
+            }
         }
 
         informacao[2] = idPlayers;
