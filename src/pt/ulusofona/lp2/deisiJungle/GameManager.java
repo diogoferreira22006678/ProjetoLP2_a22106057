@@ -206,6 +206,7 @@ public class GameManager {
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
         for (int i = 0; i < playersJogo.length; i++){
+            boolean jogada = false;
 
             if(playersJogo[i].turno == 1){
                 //Jogador certo
@@ -246,6 +247,9 @@ public class GameManager {
                     playersJogo[i].casaAtual += nrSquares;
                     jungle.arrayCelulas[playersJogo[i].casaAtual - 1].informacaoCelula.add(playersJogo[i]);
                 }
+                jogada = true;
+            }
+            if(jogada){
                 break;
             }
         }
