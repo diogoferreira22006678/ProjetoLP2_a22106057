@@ -311,15 +311,23 @@ public class GameManager {
 
         ArrayList<String> playerInfo = new ArrayList<>();
         ArrayList<String> winnerInfo = new ArrayList<>();
+        String especie = "";
 
         for(int i = 0; i < playersJogo.length ; i++){
-            playerInfo.add(playersJogo[i].nome + ", " + playersJogo[i].especie + ", " + playersJogo[i].casaAtual);
+            if(playersJogo[i].especie == "Z"){especie = "Tarzan";}
+            if(playersJogo[i].especie == "E"){especie = "Elefante";}
+            if(playersJogo[i].especie == "L"){especie = "Leão";}
+            if(playersJogo[i].especie == "P"){especie = "Pássaro";}
+            if(playersJogo[i].especie == "T"){especie = "Tartaruga";}
+
+            playerInfo.add(playersJogo[i].nome + ", " + especie + ", " + playersJogo[i].casaAtual);
         }
 
         Collections.sort(playerInfo);
 
         for(int i = 0; i < playerInfo.size(); i++){
-            winnerInfo.add("#" + i + 1 + " " + playerInfo.get(i));
+            int posicao = i + 1;
+            winnerInfo.add("#" + posicao + " " + playerInfo.get(i));
         }
 
         return winnerInfo;
