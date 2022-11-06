@@ -41,7 +41,6 @@ public class GameManager {
 
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo){
-
         ArrayList idJogadores = new ArrayList();
         String[][] especiesList = getSpecies();
 
@@ -49,9 +48,7 @@ public class GameManager {
         if(initialEnergy <= 0){
             return false;
         }
-
         for(int i = 0; i < playersInfo.length;i++){
-
             // validar o ID dos players
             // esta linha se calhar null
             if(playersInfo[i][0] == null){
@@ -62,7 +59,6 @@ public class GameManager {
             if(idJogadores.contains(playersInfo[i][0]) || !isNumeric){
                 return false;
             }
-
             idJogadores.add(playersInfo[i][0]);
 
             //validar Nº de Tarzans
@@ -93,29 +89,29 @@ public class GameManager {
                 return false;
             }
         }
-
         // valida numero de players
         if(playersInfo.length < 2 || playersInfo.length > 4){
             return false;
         }
-
         // valida tamanho do tabuleiro
         if(jungleSize < 2 * playersInfo.length){
             return false;
         }
-
         jungle = jungle.criarTabuleiro(jungleSize,initialEnergy);
         playersJogo = new Player[playersInfo.length];
-
+        int turno;
         for(int i = 0; i < playersInfo.length;i++) {
-
-            Player player = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2],initialEnergy);
+            if(i == 0){
+                turno = 1;
+            }else{
+                turno = 0;
+            }
+            Player player = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
+                    playersInfo[i][2],initialEnergy,turno,0);
             playersJogo[i] = player;
 
             jungle.arrayCelulas[0].adicionarInformacao(player,jungle.arrayCelulas,1);
         }
-
-        System.out.println(jungleSize + " " + jungle.arrayCelulas.length);
 
         return true;
     }
@@ -147,6 +143,7 @@ public class GameManager {
         ArrayList<Player> players = jungle.arrayCelulas[squareNr - 1].informacaoCelula;
 
         if(players.size() == 0){
+            informacao[2] = idPlayers;
             return informacao;
         }
 
@@ -156,6 +153,8 @@ public class GameManager {
             }
             idPlayers += (players.get(i)) + ",";
         }
+
+        informacao[2] = idPlayers;
 
         return informacao;
     }
@@ -181,14 +180,71 @@ public class GameManager {
     }
 
     public String[] getCurrentPlayerInfo(){
+
+        String[] playerInfo = new String[4];
+
+        for(int i = 0; i < playersJogo.length; i++){
+
+            if(playersJogo[i].turno == 1){
+                playerInfo[0] = String.valueOf(playersJogo[i].id);
+                playerInfo[1] = playersJogo[i].nome;
+                playerInfo[2] = playersJogo[i].especie;
+                playerInfo[3] = String.valueOf(playersJogo[i].currentEnergy);
+
+                return playerInfo;
+            }
+        }
+
         return null;
     }
 
     public String[][] getPlayersInfo(){
-        return null;
+
+        String[][] playersInfo = new String[playersJogo.length][4];
+
+        for(int i = 0; i < playersJogo.length; i++){
+
+                playersInfo[i][0] = String.valueOf(playersJogo[i].id);
+                playersInfo[i][1] = playersJogo[i].nome;
+                playersInfo[i][2] = playersJogo[i].especie;
+                playersInfo[i][3] = String.valueOf(playersJogo[i].currentEnergy);
+
+        }
+
+        return playersInfo;
     }
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
+
+        for (int i = 0; i < playersJogo.length; i++){
+
+            if(playersJogo[i].turno == 1){
+                //Jogador certo
+                playersJogo[i].turno = 0;
+                playersJogo[i].currentEnergy -= 2;
+                // acertar o proximo jogador
+                if(i + 1 == playersJogo.length){
+                    playersJogo[0].turno = 1;
+                }else{
+                    playersJogo[i + 1].turno = 1;
+                }
+
+                if (!bypassValidations){
+                    if(nrSquares < 1 || nrSquares > 6){
+                        return false;
+                    }
+                }
+
+                // jogada Atual
+                if(nrSquares + playersJogo.length >= jungle.tamanho){
+                    // ganhou
+                    playersJogo[i].casaAtual = jungle.tamanho;
+                }else{
+                    playersJogo[i].casaAtual += nrSquares;
+                }
+                break;
+            }
+        }
 
         return true;
     }
