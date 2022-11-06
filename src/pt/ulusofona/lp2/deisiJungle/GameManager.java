@@ -2,6 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class GameManager {
@@ -117,6 +118,10 @@ public class GameManager {
     }
 
     public int[] getPlayerIds(int squareNr){
+
+        if(squareNr < 1 || squareNr > jungle.arrayCelulas.length){
+            return new int[0];
+        }
 
         int[] arrayids = jungle.arrayCelulas[squareNr - 1].getPlayersIdCelula(jungle.arrayCelulas, squareNr);
 
@@ -249,7 +254,7 @@ public class GameManager {
 
                 if(nrSquares + playersJogo.length >= jungle.tamanho){
                     // ganhou
-                    playersJogo[i].casaAtual = jungle.tamanho;
+                    playersJogo[i].casaAtual = jungle.tamanho - 1;
 
 
                     jungle.arrayCelulas[jungle.tamanho - 1].informacaoCelula.add(playersJogo[i]);
@@ -265,7 +270,55 @@ public class GameManager {
     }
 
     public String[] getWinnerInfo(){
+
+        int noEnergy = 0;
+        Player playerWinnerInfo = new Player();
+        String[] playersInfo = new String[4];
+        int maiorCasa = 0;
+
+        for(int i = 0; i < playersJogo.length;i++){
+
+            if(playersJogo[i].currentEnergy != 0){
+                noEnergy += 1;
+            }
+            //ganhou porque chegou a meta
+            if(playersJogo[i].casaAtual == jungle.tamanho - 1){
+                playersInfo[0] = String.valueOf(playersJogo[i].id);
+                playersInfo[1] = playersJogo[i].nome;
+                playersInfo[2] = playersJogo[i].especie;
+                playersInfo[3] = String.valueOf(playersJogo[i].currentEnergy);
+
+                return playersInfo;
+            }
+
+            if (maiorCasa <= playersJogo[i].casaAtual) {
+                if(maiorCasa == playersJogo[i].casaAtual && maiorCasa != 0){
+
+                    if(playersJogo[i].id < playersJogo[i - 1].id ){
+                        playersInfo[0] = String.valueOf(playersJogo[i].id);
+                        playersInfo[1] = playersJogo[i].nome;
+                        playersInfo[2] = playersJogo[i].especie;
+                        playersInfo[3] = String.valueOf(playersJogo[i].currentEnergy);
+
+                    }else{
+                        playersInfo[0] = String.valueOf(playersJogo[i - 1].id);
+                        playersInfo[1] = playersJogo[i - 1].nome;
+                        playersInfo[2] = playersJogo[i - 1].especie;
+                        playersInfo[3] = String.valueOf(playersJogo[i - 1].currentEnergy);
+
+                    }
+                }
+
+            }
+
+        }
+        // ganhou porque n ha energia
+        if(noEnergy == 0){
+            return playersInfo;
+        }
+
         return null;
+
     }
 
     public ArrayList<String> getGameResults(){
