@@ -312,23 +312,48 @@ public class GameManager {
         ArrayList<String> playerInfo = new ArrayList<>();
         ArrayList<String> winnerInfo = new ArrayList<>();
         String especie = "";
+        ArrayList<Player> transitionInfo = new ArrayList<>();
+        ArrayList<Player> sortedInfo = new ArrayList<>();
 
         for(int i = 0; i < playersJogo.length ; i++){
-            if(playersJogo[i].especie == "Z"){especie = "Tarzan";}
-            if(playersJogo[i].especie == "E"){especie = "Elefante";}
-            if(playersJogo[i].especie == "L"){especie = "Leão";}
-            if(playersJogo[i].especie == "P"){especie = "Pássaro";}
-            if(playersJogo[i].especie == "T"){especie = "Tartaruga";}
-
-            playerInfo.add(playersJogo[i].nome + ", " + especie + ", " + playersJogo[i].casaAtual);
+            transitionInfo.add(playersJogo[i]);
+        }
+        Player playerVencedor = new Player();
+        while(transitionInfo.size() != 0){
+            int nrVencedor = 0;
+            for (int i = 0; i < transitionInfo.size();i++){
+                if(playerVencedor.casaAtual < transitionInfo.get(i).casaAtual){
+                    playerVencedor = transitionInfo.get(i);
+                    nrVencedor = i;
+                }else{
+                    if(playerVencedor.casaAtual == transitionInfo.get(i).casaAtual){
+                        if(playerVencedor.id > transitionInfo.get(i).id){
+                            playerVencedor = transitionInfo.get(i);
+                            nrVencedor = i;
+                        }
+                    }
+                }
+            }
+            sortedInfo.add(playerVencedor);
+            transitionInfo.remove(nrVencedor);
         }
 
-        Collections.sort(playerInfo);
 
-        for(int i = 0; i < playerInfo.size(); i++){
+        for(int i = 0; i < sortedInfo.size() ; i++){
+            if(sortedInfo.get(i).especie == "Z"){especie = "Tarzan";}
+            if(sortedInfo.get(i).especie == "E"){especie = "Elefante";}
+            if(sortedInfo.get(i).especie == "L"){especie = "Leão";}
+            if(sortedInfo.get(i).especie == "P"){especie = "Pássaro";}
+            if(sortedInfo.get(i).especie == "T"){especie = "Tartaruga";}
+
             int posicao = i + 1;
-            winnerInfo.add("#" + posicao + " " + playerInfo.get(i));
+
+           winnerInfo.add("#" + posicao + sortedInfo.get(i).nome + ", " + especie + ", " + sortedInfo.get(i).casaAtual);
         }
+
+
+
+
 
         return winnerInfo;
     }
