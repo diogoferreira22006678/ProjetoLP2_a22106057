@@ -107,7 +107,7 @@ public class GameManager {
                 turno = 0;
             }
             Player player = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
-                    playersInfo[i][2],initialEnergy,turno,0);
+                    playersInfo[i][2],initialEnergy,turno,1);
             playersJogo[i] = player;
 
             jungle.arrayCelulas[0].adicionarInformacao(player,jungle.arrayCelulas,1);
@@ -149,9 +149,9 @@ public class GameManager {
 
         for (int i = 0; i < players.size(); i++){
             if(i == players.size()){
-                idPlayers += String.valueOf(players.get(i));
+                idPlayers += String.valueOf(players.get(i).id);
             }
-            idPlayers += (players.get(i)) + ",";
+            idPlayers += (players.get(i).id) + ",";
         }
 
         informacao[2] = idPlayers;
@@ -220,14 +220,20 @@ public class GameManager {
 
             if(playersJogo[i].turno == 1){
                 //Jogador certo
-                playersJogo[i].turno = 0;
-                playersJogo[i].currentEnergy -= 2;
+
                 // acertar o proximo jogador
                 if(i + 1 == playersJogo.length){
                     playersJogo[0].turno = 1;
                 }else{
                     playersJogo[i + 1].turno = 1;
                 }
+                playersJogo[i].turno = 0;
+
+                if(playersJogo[i].currentEnergy == 0){
+                    return false;
+                }
+
+                playersJogo[i].currentEnergy -= 2;
 
                 if (!bypassValidations){
                     if(nrSquares < 1 || nrSquares > 6){
@@ -236,11 +242,20 @@ public class GameManager {
                 }
 
                 // jogada Atual
+
+
+                jungle.arrayCelulas =jungle.arrayCelulas[playersJogo[i].casaAtual ].removerInformacao(playersJogo[i].id,
+                        jungle.arrayCelulas, playersJogo[i].casaAtual );
+
                 if(nrSquares + playersJogo.length >= jungle.tamanho){
                     // ganhou
                     playersJogo[i].casaAtual = jungle.tamanho;
+
+
+                    jungle.arrayCelulas[jungle.tamanho - 1].informacaoCelula.add(playersJogo[i]);
                 }else{
                     playersJogo[i].casaAtual += nrSquares;
+                    jungle.arrayCelulas[playersJogo[i].casaAtual - 1].informacaoCelula.add(playersJogo[i]);
                 }
                 break;
             }
