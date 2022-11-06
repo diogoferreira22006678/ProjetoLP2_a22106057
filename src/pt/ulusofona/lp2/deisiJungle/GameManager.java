@@ -259,7 +259,8 @@ public class GameManager {
         Player playerWinnerInfo = new Player();
         String[] playersInfo = new String[4];
         int maiorCasa = 0;
-
+        Player playerVencedor = new Player();
+        int nrVencedor = 0;
         for(int i = 0; i < playersJogo.length;i++){
 
             if(playersJogo[i].currentEnergy != 0){
@@ -276,29 +277,26 @@ public class GameManager {
                 return playersInfo;
             }
 
-            if (maiorCasa <= playersJogo[i].casaAtual) {
-                if(maiorCasa == playersJogo[i].casaAtual && maiorCasa != 0){
+            if(playerVencedor.casaAtual < playersJogo[i].casaAtual){
+                playerVencedor = playersJogo[i];
 
-                    if(playersJogo[i].id < playersJogo[i - 1].id ){
-                        playersInfo[0] = String.valueOf(playersJogo[i].id);
-                        playersInfo[1] = playersJogo[i].nome;
-                        playersInfo[2] = playersJogo[i].especie;
-                        playersInfo[3] = String.valueOf(playersJogo[i].currentEnergy);
-
-                    }else{
-                        playersInfo[0] = String.valueOf(playersJogo[i - 1].id);
-                        playersInfo[1] = playersJogo[i - 1].nome;
-                        playersInfo[2] = playersJogo[i - 1].especie;
-                        playersInfo[3] = String.valueOf(playersJogo[i - 1].currentEnergy);
+            }else{
+                if(playerVencedor.casaAtual == playersJogo[i].casaAtual){
+                    if(playerVencedor.id > playersJogo[i].id){
+                        playerVencedor = playersJogo[i];
 
                     }
                 }
-
             }
 
         }
         // ganhou porque n ha energia
         if(noEnergy == 0){
+            playersInfo[0] = String.valueOf(playerVencedor.id);
+            playersInfo[1] = playerVencedor.nome;
+            playersInfo[2] = playerVencedor.especie;
+            playersInfo[3] = String.valueOf(playerVencedor.currentEnergy);
+
 
             return playersInfo;
         }
