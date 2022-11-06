@@ -123,7 +123,7 @@ public class GameManager {
 
         String[] informacao = new String[3];
 
-        if(squareNr == jungle.arrayCelulas.length){
+        if(squareNr == jungle.arrayCelulas.length - 1){
             informacao[0] = "finish.png";
             informacao[1] = "Meta";
         }
