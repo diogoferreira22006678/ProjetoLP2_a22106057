@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.deisiJungle;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 
 public class GameManager {
@@ -153,7 +154,7 @@ public class GameManager {
         }
 
         for (int i = 0; i < players.size(); i++){
-            if(i == players.size()){
+            if(i == players.size() - 1){
                 idPlayers += String.valueOf(players.get(i).id);
             }
             idPlayers += (players.get(i).id) + ",";
@@ -252,7 +253,7 @@ public class GameManager {
                 jungle.arrayCelulas =jungle.arrayCelulas[playersJogo[i].casaAtual ].removerInformacao(playersJogo[i].id,
                         jungle.arrayCelulas, playersJogo[i].casaAtual );
 
-                if(nrSquares + playersJogo.length >= jungle.tamanho){
+                if(nrSquares + playersJogo.length >= jungle.tamanho ){
                     // ganhou
                     playersJogo[i].casaAtual = jungle.tamanho - 1;
 
@@ -322,7 +323,21 @@ public class GameManager {
     }
 
     public ArrayList<String> getGameResults(){
-        return null;
+
+        ArrayList<String> playerInfo = new ArrayList<>();
+        ArrayList<String> winnerInfo = new ArrayList<>();
+
+        for(int i = 0; i < playersJogo.length ; i++){
+            playerInfo.add(playersJogo[i].nome + ", " + playersJogo[i].especie + ", " + playersJogo[i].casaAtual);
+        }
+
+        Collections.sort(playerInfo);
+
+        for(int i = 0; i < playerInfo.size(); i++){
+            winnerInfo.add("#" + i + 1 + " " + playerInfo.get(i));
+        }
+
+        return winnerInfo;
     }
 
     public JPanel getAuthorsPanel(){
