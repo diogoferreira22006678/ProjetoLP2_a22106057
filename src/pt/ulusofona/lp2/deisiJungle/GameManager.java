@@ -211,6 +211,12 @@ public class GameManager {
             if(playersJogo[i].turno == 1){
                 //Jogador certo
 
+                if (!bypassValidations){
+                    if(nrSquares < 1 || nrSquares > 6){
+                        return false;
+                    }
+                }
+
                 // acertar o proximo jogador
                 if(i + 1 == playersJogo.length){
                     playersJogo[0].turno = 1;
