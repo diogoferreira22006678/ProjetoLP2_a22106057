@@ -126,8 +126,8 @@ public class GameManager {
 
     public String[] getSquareInfo(int squareNr){
 
-        if(squareNr < 1 || squareNr + 1 > jungle.arrayCelulas.length){
-            return new String[3];
+        if(squareNr < 1 || squareNr > jungle.arrayCelulas.length){
+            return null;
         }
 
         String[] informacao = new String[3];
@@ -142,6 +142,10 @@ public class GameManager {
 
         String idPlayers = "";
         ArrayList<Player> players = jungle.arrayCelulas[squareNr - 1].informacaoCelula;
+
+        if(players.size() == 0){
+            return informacao;
+        }
 
         for (int i = 0; i < players.size(); i++){
             if(i == players.size()){
