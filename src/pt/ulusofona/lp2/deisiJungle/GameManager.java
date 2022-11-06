@@ -112,6 +112,8 @@ public class GameManager {
             jungle.arrayCelulas[0].adicionarInformacao(player,jungle.arrayCelulas,1);
         }
 
+        System.out.println(jungleSize + " " + jungle.arrayCelulas.length);
+
         return true;
     }
 
@@ -124,7 +126,7 @@ public class GameManager {
 
     public String[] getSquareInfo(int squareNr){
 
-        if(squareNr < 1 || squareNr > jungle.arrayCelulas.length){
+        if(squareNr < 1 || squareNr > jungle.arrayCelulas.length - 1){
             return null;
         }
 
