@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class GameManager {
 
     Tabuleiro jungle = new Tabuleiro();
+    Player[] playersJogo;
 
 
     public GameManager(){}
@@ -104,10 +105,12 @@ public class GameManager {
         }
 
         jungle = jungle.criarTabuleiro(jungleSize,initialEnergy);
+        playersJogo = new Player[playersInfo.length];
 
         for(int i = 0; i < playersInfo.length;i++) {
 
-            Player player = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2]);
+            Player player = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2],initialEnergy);
+            playersJogo[i] = player;
 
             jungle.arrayCelulas[0].adicionarInformacao(player,jungle.arrayCelulas,1);
         }
@@ -161,6 +164,18 @@ public class GameManager {
 
         String[] playerInfo = new String[4];
 
+        for(int i = 0; i < playersJogo.length; i++){
+
+            if(playersJogo[i].id == playerId){
+
+                playerInfo[0] = String.valueOf(playersJogo[i].id);
+                playerInfo[1] = playersJogo[i].nome;
+                playerInfo[2] = playersJogo[i].especie;
+                playerInfo[3] = String.valueOf(playersJogo[i].currentEnergy);
+
+                return playerInfo;
+            }
+        }
 
         return null;
     }
