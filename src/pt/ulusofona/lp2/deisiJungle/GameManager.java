@@ -309,7 +309,6 @@ public class GameManager {
 
     public ArrayList<String> getGameResults(){
 
-        ArrayList<String> playerInfo = new ArrayList<>();
         ArrayList<String> winnerInfo = new ArrayList<>();
         String especie = "";
         ArrayList<Player> transitionInfo = new ArrayList<>();
@@ -321,6 +320,7 @@ public class GameManager {
         Player playerVencedor = new Player();
         while(transitionInfo.size() != 0){
             int nrVencedor = 0;
+            playerVencedor = new Player();
             for (int i = 0; i < transitionInfo.size();i++){
                 if(playerVencedor.casaAtual < transitionInfo.get(i).casaAtual){
                     playerVencedor = transitionInfo.get(i);
@@ -348,7 +348,7 @@ public class GameManager {
 
             int posicao = i + 1;
 
-           winnerInfo.add("#" + posicao + sortedInfo.get(i).nome + ", " + especie + ", " + sortedInfo.get(i).casaAtual);
+           winnerInfo.add("#" + posicao + " " + sortedInfo.get(i).nome + ", " + especie + ", " + sortedInfo.get(i).casaAtual);
         }
 
 
