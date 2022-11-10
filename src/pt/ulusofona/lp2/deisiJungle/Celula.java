@@ -1,6 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 
 public class Celula {
@@ -41,9 +41,6 @@ public class Celula {
         if(nrSquare < 1 || nrSquare > arrayCelula.length){
             return new int[0];
         }
-
-
-
             ArrayList<Player> playersNaCelula = arrayCelula[nrSquare - 1].informacaoCelula;
 
             if(playersNaCelula.size() == 0){

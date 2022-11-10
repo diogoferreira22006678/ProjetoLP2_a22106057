@@ -235,7 +235,8 @@ public class GameManager {
                 // jogada Atual
 
 
-                jungle.arrayCelulas =jungle.arrayCelulas[playersJogo[i].casaAtual ].removerInformacao(playersJogo[i].id,
+                jungle.arrayCelulas =jungle.arrayCelulas[playersJogo[i].casaAtual ].
+                        removerInformacao(playersJogo[i].id,
                         jungle.arrayCelulas, playersJogo[i].casaAtual );
 
                 if(nrSquares + playersJogo.length >= jungle.tamanho ){
@@ -340,8 +341,6 @@ public class GameManager {
             sortedInfo.add(playerVencedor);
             transitionInfo.remove(nrVencedor);
         }
-
-
         for(int i = 0; i < sortedInfo.size() ; i++){
             if(sortedInfo.get(i).especie == "Z"){especie = "Tarzan";}
             if(sortedInfo.get(i).especie == "E"){especie = "Elefante";}
@@ -353,11 +352,6 @@ public class GameManager {
 
            winnerInfo.add("#" + posicao + " " + sortedInfo.get(i).nome + ", " + especie + ", " + sortedInfo.get(i).casaAtual);
         }
-
-
-
-
-
         return winnerInfo;
     }
 
