@@ -4,7 +4,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestGameManager  {
+
+
+
+public class TestGameManager {
+
 
     @Test
     public void TestMoveCurrentPlayer() {
