@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,6 +11,7 @@ public class GameManager {
 
     Tabuleiro jungle = new Tabuleiro();
     Player[] playersJogo;
+    String[] idsEspecie;
 
 
     public GameManager(){}
@@ -97,7 +99,7 @@ public class GameManager {
                 turno = 0;
             }
             Player player = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
-                    playersInfo[i][2],initialEnergy,turno,1);
+                    playersInfo[i][2],initialEnergy,turno,1,idsEspecie[i]);
             playersJogo[i] = player;
 
             jungle.arrayCelulas[0].adicionarInformacao(player,jungle.arrayCelulas,1); }
@@ -108,10 +110,18 @@ public class GameManager {
 
 
         ArrayList<String> idsPlayers = new ArrayList<>();
-        String[][] playersInfoSorted = new String[playersInfo.length][3];
+        String[][] playersInfoSorted = new String[playersInfo.length][4];
+        idsEspecie = new String[playersInfo.length];
 
+        String especie = "";
         for(int i = 0; i < playersInfo.length;i++){
-            idsPlayers.add(playersInfo[i][0] + "@@" + playersInfo[i][1] + "@@" +  playersInfo[i][2]);
+            if( playersInfo[i][2] == "Z"){especie = "Tarzan";}
+            if( playersInfo[i][2] == "E"){especie = "Elefante";}
+            if( playersInfo[i][2] == "L"){especie = "Leão";}
+            if( playersInfo[i][2] == "P"){especie = "Pássaro";}
+            if( playersInfo[i][2] == "T"){especie = "Tartaruga";}
+            idsPlayers.add(playersInfo[i][0] + "@@" + playersInfo[i][1] + "@@" +  playersInfo[i][2] );
+            idsEspecie[i] = especie;
         }
 
         Collections.sort(idsPlayers);
@@ -122,6 +132,7 @@ public class GameManager {
             playersInfoSorted[i][0] = campos[0];
             playersInfoSorted[i][1] = campos[1];
             playersInfoSorted[i][2] = campos[2];
+
 
         }
 
@@ -371,15 +382,11 @@ public class GameManager {
             transitionInfo.remove(nrVencedor);
         }
         for(int i = 0; i < sortedInfo.size() ; i++){
-            if(sortedInfo.get(i).especie == "Z"){especie = "Tarzan";}
-            if(sortedInfo.get(i).especie == "E"){especie = "Elefante";}
-            if(sortedInfo.get(i).especie == "L"){especie = "Leão";}
-            if(sortedInfo.get(i).especie == "P"){especie = "Pássaro";}
-            if(sortedInfo.get(i).especie == "T"){especie = "Tartaruga";}
+
 
             int posicao = i + 1;
 
-           winnerInfo.add("#" + posicao + " " + sortedInfo.get(i).nome + ", " + especie + ", " + sortedInfo.get(i).casaAtual);
+           winnerInfo.add("#" + posicao + " " + sortedInfo.get(i).nome + ", " + sortedInfo.get(i).especieTotal + ", " + sortedInfo.get(i).casaAtual);
         }
         return winnerInfo;
     }
