@@ -238,12 +238,12 @@ public class GameManager {
                         removerInformacao(playersJogo[i].id,
                         jungle.arrayCelulas, playersJogo[i].casaAtual);
 
-                if(nrSquares + playersJogo.length >= jungle.tamanho ){
+                if(nrSquares + playersJogo[i].casaAtual >= jungle.tamanho ){
                     // ganhou
                     playersJogo[i].casaAtual = jungle.tamanho ;
 
 
-                    jungle.arrayCelulas[jungle.tamanho - 2].informacaoCelula.add(playersJogo[i]);
+                    jungle.arrayCelulas[jungle.tamanho - 1].informacaoCelula.add(playersJogo[i]);
                 }else{
                     playersJogo[i].casaAtual += nrSquares;
                     jungle.arrayCelulas[playersJogo[i].casaAtual - 1].informacaoCelula.add(playersJogo[i]);
