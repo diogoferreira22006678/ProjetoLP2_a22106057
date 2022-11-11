@@ -24,7 +24,7 @@ public class TestGameManager {
 
 
         gameManager.createInitialJungle(47, 20, playerInfo);
-        Boolean resultadoEsperado = gameManager.moveCurrentPlayer(3,true);
+        Boolean resultadoEsperado = gameManager.moveCurrentPlayer(5,false);
 
         assertEquals("O resultado do método devia ser: ", resultadoEsperado, true);
     }
@@ -64,7 +64,7 @@ public class TestGameManager {
 
 
         gameManager.createInitialJungle(47, 20, playerInfo);
-        Boolean resultadoEsperado = gameManager.moveCurrentPlayer(348,true);
+        Boolean resultadoEsperado = gameManager.moveCurrentPlayer(7,true);
 
         assertEquals("O resultado do método devia ser: ", resultadoEsperado, true);
     }
@@ -83,7 +83,7 @@ public class TestGameManager {
 
 
         gameManager.createInitialJungle(10, 20, playerInfo);
-        Boolean resultadoEsperado = gameManager.moveCurrentPlayer(11,true);
+        Boolean resultadoEsperado = gameManager.moveCurrentPlayer(0,true);
 
         assertEquals("O resultado do método devia ser: ", resultadoEsperado, true);
     }

@@ -259,13 +259,13 @@ public class GameManager {
                 }
                 playersJogo[i].turno = 0;
 
-                if(playersJogo[i].currentEnergy != 0){
-                    playersJogo[i].currentEnergy -= 2;
+                if(playersJogo[i].currentEnergy == 0){
+                   return false;
                 }
+                playersJogo[i].currentEnergy -= 2;
 
 
-
-                if (!bypassValidations){
+                if (bypassValidations == false){
                     if(nrSquares < 1 || nrSquares > 6){
                         return false;
                     }
