@@ -220,10 +220,6 @@ public class GameManager {
                 }
                 playersJogo[i].turno = 0;
 
-                if(playersJogo[i].currentEnergy == 0){
-                    return false;
-                }
-
                 playersJogo[i].currentEnergy -= 2;
 
                 if (!bypassValidations){
