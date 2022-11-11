@@ -111,14 +111,14 @@ public class GameManager {
         String[][] playersInfoSorted = new String[playersInfo.length][3];
 
         for(int i = 0; i < playersInfo.length;i++){
-            idsPlayers.add(playersInfo[i][0] + " " + playersInfo[i][1] + " " +  playersInfo[i][2]);
+            idsPlayers.add(playersInfo[i][0] + "@@" + playersInfo[i][1] + "@@" +  playersInfo[i][2]);
         }
 
         Collections.sort(idsPlayers);
 
         for(int i = 0; i < idsPlayers.size();i++) {
             String currentLine = idsPlayers.get(i);
-            String[] campos = currentLine.split(" ");
+            String[] campos = currentLine.split("@@");
             playersInfoSorted[i][0] = campos[0];
             playersInfoSorted[i][1] = campos[1];
             playersInfoSorted[i][2] = campos[2];
