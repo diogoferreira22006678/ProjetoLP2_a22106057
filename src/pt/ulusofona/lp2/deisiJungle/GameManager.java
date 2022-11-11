@@ -108,7 +108,7 @@ public class GameManager {
 
 
         ArrayList<String> idsPlayers = new ArrayList<>();
-        String[][] playersInfoSorted = new String[playersInfo.length][];
+        String[][] playersInfoSorted = new String[playersInfo.length][3];
 
         for(int i = 0; i < playersInfo.length;i++){
             idsPlayers.add(playersInfo[i][0] + "@" + playersInfo[i][1] + "@" +  playersInfo[i][2]);
