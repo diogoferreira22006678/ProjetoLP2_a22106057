@@ -120,8 +120,8 @@ public class GameManager {
             if( playersInfo[i][2] == "L"){especie = "Leão";}
             if( playersInfo[i][2] == "P"){especie = "Pássaro";}
             if( playersInfo[i][2] == "T"){especie = "Tartaruga";}
-            idsPlayers.add(playersInfo[i][0] + "@@" + playersInfo[i][1] + "@@" +  playersInfo[i][2] );
-            idsEspecie[i] = especie;
+            idsPlayers.add(playersInfo[i][0] + "@@" + playersInfo[i][1] + "@@" +  playersInfo[i][2] + "@@" + especie);
+
         }
 
         Collections.sort(idsPlayers);
@@ -132,7 +132,7 @@ public class GameManager {
             playersInfoSorted[i][0] = campos[0];
             playersInfoSorted[i][1] = campos[1];
             playersInfoSorted[i][2] = campos[2];
-
+            idsEspecie[i] = campos[3];
 
         }
 
@@ -259,19 +259,17 @@ public class GameManager {
                 }
                 playersJogo[i].turno = 0;
 
-                if(playersJogo[i].currentEnergy == 0){
-                    return false;
+                if(playersJogo[i].currentEnergy != 0){
+                    playersJogo[i].currentEnergy -= 2;
                 }
 
-                playersJogo[i].currentEnergy -= 2;
+
 
                 if (!bypassValidations){
                     if(nrSquares < 1 || nrSquares > 6){
                         return false;
                     }
                 }
-
-
 
                 // jogada Atual
 
