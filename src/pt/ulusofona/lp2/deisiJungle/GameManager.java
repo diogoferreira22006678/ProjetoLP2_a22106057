@@ -87,6 +87,9 @@ public class GameManager {
         jungle = jungle.criarTabuleiro(jungleSize,initialEnergy);
         playersJogo = new Player[playersInfo.length];
         int turno;
+
+        playersInfo = sortPlayer(playersInfo);
+
         for(int i = 0; i < playersInfo.length;i++) {
             if(i == 0){
                 turno = 1;
@@ -99,6 +102,30 @@ public class GameManager {
 
             jungle.arrayCelulas[0].adicionarInformacao(player,jungle.arrayCelulas,1); }
         return true;
+    }
+
+    public String[][] sortPlayer(String[][] playersInfo){
+
+
+        ArrayList<String> idsPlayers = new ArrayList<>();
+        String[][] playersInfoSorted = new String[playersInfo.length][];
+
+        for(int i = 0; i < playersInfo.length;i++){
+            idsPlayers.add(playersInfo[i][0] + "@" + playersInfo[i][1] + "@" +  playersInfo[i][2]);
+        }
+
+        Collections.sort(idsPlayers);
+
+        for(int i = 0; i < idsPlayers.size();i++) {
+            String currentLine = idsPlayers.get(i);
+            String[] campos = currentLine.split("@");
+            playersInfoSorted[i][0] = campos[0];
+            playersInfoSorted[i][1] = campos[1];
+            playersInfoSorted[i][2] = campos[2];
+
+        }
+
+        return playersInfoSorted;
     }
 
     public int[] getPlayerIds(int squareNr){
@@ -176,6 +203,7 @@ public class GameManager {
         for(int i = 0; i < playersJogo.length; i++){
 
             if(playersJogo[i].turno == 1){
+
                 playerInfo[0] = String.valueOf(playersJogo[i].id);
                 playerInfo[1] = playersJogo[i].nome;
                 playerInfo[2] = playersJogo[i].especie;
@@ -231,6 +259,8 @@ public class GameManager {
                         return false;
                     }
                 }
+
+
 
                 // jogada Atual
 
