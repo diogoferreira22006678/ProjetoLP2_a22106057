@@ -18,7 +18,7 @@ public class GameManager {
 
     public String[][] getSpecies(){
 
-        String[][] especiesList = new String[5][6];
+        String[][] especiesList = new String[5][7];
 
         especiesList[0][0] = "E";
         especiesList[0][1] = "Elefante";
