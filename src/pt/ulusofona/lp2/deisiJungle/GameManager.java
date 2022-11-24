@@ -18,30 +18,77 @@ public class GameManager {
 
     public String[][] getSpecies(){
 
-        String[][] especiesList = new String[5][3];
+        String[][] especiesList = new String[5][6];
 
         especiesList[0][0] = "E";
         especiesList[0][1] = "Elefante";
         especiesList[0][2] = "elephant.png";
+        especiesList[0][3] = "180";//EI
+        especiesList[0][4] = "4";//CE
+        especiesList[0][5] = "10";//GED
+        especiesList[0][6] = "1..6";//V(X..Y)
 
         especiesList[1][0] = "L";
         especiesList[1][1] = "Leão";
         especiesList[1][2] = "lion.png";
+        especiesList[1][3] = "80";
+        especiesList[1][4] = "2";
+        especiesList[1][5] = "10";
+        especiesList[1][6] = "4..6";
 
         especiesList[2][0] = "P";
         especiesList[2][1] = "Pássaro";
         especiesList[2][2] = "bird.png";
+        especiesList[2][3] = "70";
+        especiesList[2][4] = "4";
+        especiesList[2][5] = "50";
+        especiesList[2][6] = "5..6";
 
         especiesList[3][0] = "Z";
         especiesList[3][1] = "Tarzan";
         especiesList[3][2] = "tarzan.png";
+        especiesList[3][3] = "70";
+        especiesList[3][4] = "2";
+        especiesList[3][5] = "20";
+        especiesList[3][6] = "1..6";
 
         especiesList[4][0] = "T";
         especiesList[4][1] = "Tartaruga";
         especiesList[4][2] = "turtle.png";
+        especiesList[4][3] = "150";
+        especiesList[4][4] = "1";
+        especiesList[4][5] = "5";
+        especiesList[4][6] = "1..3";
 
         return especiesList;
     }
+
+    public String[][] getFoodTypes(){
+        String[][] foodTypesList = new String[5][3];
+
+        foodTypesList[0][0] = "e";//id
+        foodTypesList[0][1] = "Erva";//nome
+        foodTypesList[0][2] = "grass.png";//nome ficheiro
+
+        foodTypesList[1][0] = "a";
+        foodTypesList[1][1] = "Agua";
+        foodTypesList[1][2] = "water.png";
+
+        foodTypesList[2][0] = "b";
+        foodTypesList[2][1] = "Cacho de bananas";
+        foodTypesList[2][2] = "bananas.png";
+
+        foodTypesList[3][0] = "c";
+        foodTypesList[3][1] = "Carne";
+        foodTypesList[3][2] = "meat.png";
+
+        foodTypesList[4][0] = "m";
+        foodTypesList[4][1] = "Congumelos magicos";
+        foodTypesList[4][2] = "mushroom.png";
+
+        return foodTypesList;
+    }
+
 
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo){
@@ -393,10 +440,12 @@ public class GameManager {
     }
 
     public JPanel getAuthorsPanel(){
+
         return null;
     }
 
     public String whoIsTaborda() {
+
         return "Wrestling";
     }
 

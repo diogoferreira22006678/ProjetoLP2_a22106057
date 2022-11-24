@@ -1,6 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 
- class Player {
+ public class Player {
 
      int id;
      String nome;
