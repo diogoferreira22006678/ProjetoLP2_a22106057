@@ -1,7 +1,4 @@
 package pt.ulusofona.lp2.deisiJungle;
-
-import org.junit.runners.model.InitializationError;
-
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -97,21 +94,21 @@ public class GameManager {
             // validar o ID dos players
             // esta linha se calhar null
             if(playersInfo[i][0] == null || playersInfo[i][1] == null){
-                return new InitializationError("ID Food or ID Player NULL");
+                return new InitializationError();
             }
             boolean isNumeric =  playersInfo[i][0].matches("[+-]?\\d*(\\.\\d+)?");
             if(idJogadores.contains(playersInfo[i][0]) || !isNumeric){
-                return new InitializationError("ID PLAYER NOT NUMERIC"); }
+                return new InitializationError(); }
             idJogadores.add(playersInfo[i][0]);
             //validar Nº de Tarzans
             int procurarTarzan = 0;
             if (playersInfo[i][0].equals("Z")){
                 procurarTarzan++; }
             if(procurarTarzan > 1){
-                return new InitializationError("ERROR TARZAN"); }
+                return new InitializationError(); }
             // validar nome do player
             if(playersInfo[i] == null){
-                return new InitializationError("NULL PLAYER"); }
+                return new InitializationError(); }
             //validar  indice da especie
             int valido = 0;
             for(int k = 0; k< especiesList.length; k++){
@@ -120,14 +117,14 @@ public class GameManager {
                     break; }
             }
             if(valido == 0){
-                return new InitializationError("INVALID SPECIES"); }
+                return new InitializationError(); }
         }
         // valida numero de players
         if(playersInfo.length < 2 || playersInfo.length > 4){
-            return new InitializationError("INVALID NUMBER OF PLAYERS"); }
+            return new InitializationError(); }
         // valida tamanho do tabuleiro
         if(jungleSize < 2 * playersInfo.length){
-            return new InitializationError("INVALID SIZE OF BOARD"); }
+            return new InitializationError(); }
         jungle = jungle.criarTabuleiro(jungleSize);
         playersJogo = new Player[playersInfo.length];
         int turno;
@@ -151,13 +148,13 @@ public class GameManager {
             // esta linha se calhar null
             if (foodsInfo[i][0] == null || foodsInfo[i][1] == null ||
                     Integer.parseInt(foodsInfo[i][1]) < 0 || Integer.parseInt(foodsInfo[i][1]) > jungleSize) {
-                return new InitializationError("FOOD ERROR");
+                return new InitializationError();
             }
             boolean isNumeric =  foodsInfo[i][0].matches("[+-]?\\d*(\\.\\d+)?");
             if(!isNumeric){
-                return new InitializationError("ID FOOD NOT NUMERIC"); }
+                return new InitializationError(); }
             if(foodsInfo[i] == null){
-                return new InitializationError("NULL PLAYER"); }
+                return new InitializationError(); }
             int valido = 0;
             for(int k = 0; k< foodList.length; k++){
                 if((foodsInfo[i][0] == foodList[k][0])){
@@ -165,7 +162,7 @@ public class GameManager {
                     break; }
             }
             if(valido == 0){
-                return new InitializationError("INVALID SPECIES"); }
+                return new InitializationError(); }
         }
 
         return null;
@@ -182,21 +179,21 @@ public class GameManager {
             // validar o ID dos players
             // esta linha se calhar null
             if(playersInfo[i][0] == null || playersInfo[i][1] == null){
-                return new InitializationError("ID Food or ID Player NULL");
+                return new InitializationError();
             }
             boolean isNumeric =  playersInfo[i][0].matches("[+-]?\\d*(\\.\\d+)?");
             if(idJogadores.contains(playersInfo[i][0]) || !isNumeric){
-                return new InitializationError("ID PLAYER NOT NUMERIC"); }
+                return new InitializationError(); }
             idJogadores.add(playersInfo[i][0]);
             //validar Nº de Tarzans
             int procurarTarzan = 0;
             if (playersInfo[i][0].equals("Z")){
                 procurarTarzan++; }
             if(procurarTarzan > 1){
-                return new InitializationError("ERROR TARZAN"); }
+                return new InitializationError(); }
             // validar nome do player
             if(playersInfo[i] == null){
-                return new InitializationError("NULL PLAYER"); }
+                return new InitializationError(); }
             //validar  indice da especie
             int valido = 0;
             for(int k = 0; k< especiesList.length; k++){
@@ -205,14 +202,14 @@ public class GameManager {
                     break; }
             }
             if(valido == 0){
-                return new InitializationError("INVALID SPECIES"); }
+                return new InitializationError(); }
         }
         // valida numero de players
         if(playersInfo.length < 2 || playersInfo.length > 4){
-            return new InitializationError("INVALID NUMBER OF PLAYERS"); }
+            return new InitializationError(); }
         // valida tamanho do tabuleiro
         if(jungleSize < 2 * playersInfo.length){
-            return new InitializationError("INVALID SIZE OF BOARD"); }
+            return new InitializationError(); }
         jungle = jungle.criarTabuleiro(jungleSize);
         playersJogo = new Player[playersInfo.length];
         int turno;
