@@ -9,6 +9,8 @@ package pt.ulusofona.lp2.deisiJungle;
      int turno;
      int casaAtual;
      String especieTotal;
+     int distanciaPercorrida = 0;
+     int nrAlimentos = 0;
 
     public Player(int id, String nome, String especie){
         this.id = id;
