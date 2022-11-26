@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class InitializationError {
 
-    void getMessage(){
-
+    String getMessage(){
+        return "ERRO";
     }
 }
