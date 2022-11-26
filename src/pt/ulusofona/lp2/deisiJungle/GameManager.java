@@ -372,6 +372,8 @@ public class GameManager {
 
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
+        MovementResultCode code;
+
         for (int i = 0; i < playersJogo.length; i++){
             boolean jogada = false;
 
@@ -388,10 +390,11 @@ public class GameManager {
 
                 if (bypassValidations == false){
                     if(nrSquares < 1 || nrSquares > 6){
-                        return new MovementResult();
+                        code = MovementResultCode.INVALID_MOVEMENT;
+                        return new MovementResult(MovementResultCode.INVALID_MOVEMENT,"INVALID PLAY");
                     }
                     if(playersJogo[i].currentEnergy == 0){
-                        return new MovementResult();
+                        return new MovementResult(MovementResultCode.NO_ENERGY,"INVALID PLAY");
                     }
                 }
 
@@ -424,7 +427,7 @@ public class GameManager {
             }
         }
 
-        return new MovementResult();
+        return new MovementResult(MovementResultCode.VALID_MOVEMENT,"VALID MOVIMENT");
     }
 
     public String[] getWinnerInfo(){
