@@ -88,7 +88,6 @@ public class GameManager {
         ArrayList idJogadores = new ArrayList();
         String[][] especiesList = getSpecies();
         String [][] foodList = getFoodTypes();
-
         //validar energia inicial
         for(int i = 0; i < playersInfo.length;i++){
             // validar o ID dos players
