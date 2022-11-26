@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 
 public class GameManager {
@@ -392,9 +393,6 @@ public class GameManager {
                     if(nrSquares < 1 || nrSquares > 6){
                         code = MovementResultCode.INVALID_MOVEMENT;
                         return new MovementResult(MovementResultCode.INVALID_MOVEMENT,"INVALID PLAY");
-                    }
-                    if(playersJogo[i].currentEnergy == 0){
-                        return new MovementResult(MovementResultCode.NO_ENERGY,"INVALID PLAY");
                     }
                 }
 
