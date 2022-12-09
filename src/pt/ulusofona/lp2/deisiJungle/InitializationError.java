@@ -2,7 +2,19 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class InitializationError {
 
-    String getMessage(){
-        return "ERRO DE SINTAX";
+    String message;
+
+
+
+    public InitializationError(String message) {
+        this.message = message;
+    }
+
+    public void setMessage(String message){
+        this.message = message;
+    }
+
+    public String getMessage(){
+        return message;
     }
 }
