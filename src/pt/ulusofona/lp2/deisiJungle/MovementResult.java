@@ -4,6 +4,6 @@ public record MovementResult(MovementResultCode code, String message){
 
 
     public String message(){
-        return "ERRO";
+        return "ERROR";
     }
 }

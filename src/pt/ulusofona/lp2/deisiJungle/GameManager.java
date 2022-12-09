@@ -1,9 +1,11 @@
 package pt.ulusofona.lp2.deisiJungle;
+import kotlin.comparisons.UComparisonsKt;
+
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
+
 
 
 public class GameManager {
@@ -129,6 +131,7 @@ public class GameManager {
         playersJogo = new Player[playersInfo.length];
 
         playersInfo = sortPlayer(playersInfo);
+
         createPlayerSpecie(playersInfo);
 
         for(int i = 0; i < foodsInfo.length;i++) {
@@ -397,6 +400,7 @@ public class GameManager {
 
     public String[][] getPlayersInfo(){
 
+
         String[][] playersInfo = new String[playersJogo.length][4];
 
         for(int i = 0; i < playersJogo.length; i++){
@@ -419,6 +423,7 @@ public class GameManager {
             if(playersJogo[i].turno == 1){
                 //Jogador certo
 
+
                 // acertar o proximo jogador
                 if(i + 1 == playersJogo.length){
                     playersJogo[0].turno = 1;
@@ -427,8 +432,33 @@ public class GameManager {
                 }
                 playersJogo[i].turno = 0;
 
+                int[] speed = new int[2];
+
+                if(playersJogo[i].getClass() == Tarzan.class){
+                    Tarzan player = (Tarzan) playersJogo[i];
+                    speed = player.getSpeed();
+                }
+                if(playersJogo[i].getClass() == Elefante.class){
+                    Elefante player = (Elefante) playersJogo[i];
+                    speed = player.getSpeed();
+                }
+                if(playersJogo[i].getClass() == Passaro.class){
+                    Passaro player = (Passaro) playersJogo[i];
+                    speed = player.getSpeed();
+                }
+                if(playersJogo[i].getClass() == Leao.class){
+                    Leao player = (Leao) playersJogo[i];
+                    speed = player.getSpeed();
+                }
+                if(playersJogo[i].getClass() == Tartaruga.class){
+                    Tartaruga player = (Tartaruga) playersJogo[i];
+                    speed = player.getSpeed();
+                }
+
+
                 if (bypassValidations == false){
-                    if(nrSquares < 1 || nrSquares > 6){
+
+                    if(nrSquares < speed[0] || nrSquares > speed[1]){
                         return new MovementResult(MovementResultCode.INVALID_MOVEMENT,"INVALID PLAY");
                     }
                 }
