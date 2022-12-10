@@ -1,12 +1,10 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import kotlin.Pair;
-
 public class Passaro extends Player {
     int energiaInicial = 70;
     int consumoEnergia = 4;
     int descanso = 50;
-    Pair<Integer, Integer> velocidade = new Pair<>(5, 6);
+    int[] velocidade = new int[2];
 
     public Passaro(int id, String nome, String especie,int currentEnergy, int turno,int casaAtual,String especieTotal){
         this.id = id;
@@ -16,6 +14,8 @@ public class Passaro extends Player {
         this.turno = turno;
         this.casaAtual = casaAtual;
         this.especieTotal = especieTotal;
+        this.velocidade[0] = 5;
+        this.velocidade[1] = 6;
     }
 
     void moveCost(Passaro player){
@@ -27,9 +27,6 @@ public class Passaro extends Player {
     }
 
     int[] getSpeed(){
-        int[] speeds = new int[2];
-        speeds[1] = velocidade.getFirst();
-        speeds[2] = velocidade.getSecond();
-        return speeds;
+        return velocidade;
     }
 }

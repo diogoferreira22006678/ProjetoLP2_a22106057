@@ -465,7 +465,7 @@ public class GameManager {
 
 
                 if(bypassValidations == false){
-                    if(nrSquares < 1 || nrSquares > 6){
+                    if(nrSquares < speed[0] || nrSquares > speed[1]){
                         return new MovementResult(MovementResultCode.INVALID_MOVEMENT,"INVALID PLAY");
                     }
                 }
