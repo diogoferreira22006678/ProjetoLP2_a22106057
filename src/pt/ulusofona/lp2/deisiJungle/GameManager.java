@@ -191,13 +191,13 @@ public class GameManager {
                     break;
                 case "E":
                     Elefante elefante = new Elefante(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
-                            playersInfo[i][2],70,turno,1,idsEspecie[i]);
+                            playersInfo[i][2],180,turno,1,idsEspecie[i]);
                     playersJogo[i] = elefante;
                     jungle.arrayCelulas[0].adicionarInformacao(elefante,jungle.arrayCelulas,1);
                     break;
                 case "L":
                     Leao leao = new Leao(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
-                            playersInfo[i][2],180,turno,1,idsEspecie[i]);
+                            playersInfo[i][2],70,turno,1,idsEspecie[i]);
                     playersJogo[i] = leao;
                     jungle.arrayCelulas[0].adicionarInformacao(leao,jungle.arrayCelulas,1);
                     break;
@@ -465,7 +465,7 @@ public class GameManager {
 
 
                 if(bypassValidations == false){
-                    if(nrSquares < speed[0] || nrSquares > speed[1]){
+                    if(nrSquares < 1 || nrSquares > 6){
                         return new MovementResult(MovementResultCode.INVALID_MOVEMENT,"INVALID PLAY");
                     }
                 }
