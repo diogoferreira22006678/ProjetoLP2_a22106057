@@ -4,8 +4,9 @@ package pt.ulusofona.lp2.deisiJungle;
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-
+import java.util.Comparator;
 
 
 public class GameManager {
@@ -135,9 +136,9 @@ public class GameManager {
         jungle = jungle.criarTabuleiro(jungleSize);
         playersJogo = new Player[playersInfo.length];
 
-        playersInfo = sortPlayer(playersInfo);
-
         createPlayerSpecie(playersInfo);
+        Arrays.sort(playersJogo, Comparator.comparingInt(p -> p.id));
+        playersJogo[0].turno = 1;
 
         for(int i = 0; i < foodsInfo.length;i++) {
             // validar o ID dos players
@@ -146,10 +147,6 @@ public class GameManager {
                     Integer.parseInt(foodsInfo[i][1]) < 0 || Integer.parseInt(foodsInfo[i][1]) > jungleSize) {
                 return new InitializationError("FOODINFO NULL");
             }
-           /* boolean isNumeric =  foodsInfo[i][0].matches("[+-]?\\d*(\\.\\d+)?");
-            if(!isNumeric){
-                return new InitializationError("INVALID FOOD ID");
-            }*/
             if(foodsInfo[i] == null){
 
                 return new InitializationError("FOODINFO NULL"); }
@@ -169,47 +166,38 @@ public class GameManager {
 
     public void createPlayerSpecie(String[][] playersInfo){
 
-        int turno;
-
         for(int i = 0; i < playersInfo.length;i++) {
-            if(i == 0){
-                turno = 1;
-            }else{
-                turno = 0;
-            }
 
             String especie = playersInfo[i][2];
-
-
 
             switch (especie){
                 case "Z":
                     Tarzan tarzan = new Tarzan(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
-                            playersInfo[i][2],70,turno,1,idsEspecie[i]);
+                            playersInfo[i][2],70,0,1,"Tarzan");
                     playersJogo[i] = tarzan;
                     jungle.arrayCelulas[0].adicionarInformacao(tarzan,jungle.arrayCelulas,1);
                     break;
                 case "E":
                     Elefante elefante = new Elefante(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
-                            playersInfo[i][2],180,turno,1,idsEspecie[i]);
+                            playersInfo[i][2],180,0,1,"Elefante");
                     playersJogo[i] = elefante;
                     jungle.arrayCelulas[0].adicionarInformacao(elefante,jungle.arrayCelulas,1);
                     break;
                 case "L":
                     Leao leao = new Leao(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
-                            playersInfo[i][2],70,turno,1,idsEspecie[i]);
+                            playersInfo[i][2],70,0,1,"Leao");
                     playersJogo[i] = leao;
                     jungle.arrayCelulas[0].adicionarInformacao(leao,jungle.arrayCelulas,1);
                     break;
                 case "P":
                     Passaro passaro = new Passaro(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
-                            playersInfo[i][2],70,turno,1,idsEspecie[i]);
+                            playersInfo[i][2],70,0,1,"Passaro");
                     playersJogo[i] = passaro;
                     jungle.arrayCelulas[0].adicionarInformacao(passaro,jungle.arrayCelulas,1);
                     break;
                 case "T":
                     Tartaruga tartaruga = new Tartaruga(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
-                            playersInfo[i][2],150,turno,1,idsEspecie[i]);
+                            playersInfo[i][2],150,0,1,"Tartaruga");
                     playersJogo[i] = tartaruga;
                     jungle.arrayCelulas[0].adicionarInformacao(tartaruga,jungle.arrayCelulas,1);
                     break;
@@ -263,22 +251,16 @@ public class GameManager {
             return new InitializationError("INVALID LENGTH"); }
         jungle = jungle.criarTabuleiro(jungleSize);
         playersJogo = new Player[playersInfo.length];
-        int turno;
-
-        playersInfo = sortPlayer(playersInfo);
+        int turno = 0;
 
         for(int i = 0; i < playersInfo.length;i++) {
-            if(i == 0){
-                turno = 1;
-            }else{
-                turno = 0;
-            }
             Player player = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
                     playersInfo[i][2],100,turno,1,idsEspecie[i]);
             playersJogo[i] = player;
-
             jungle.arrayCelulas[0].adicionarInformacao(player,jungle.arrayCelulas,1); }
 
+        Arrays.sort(playersJogo, Comparator.comparingInt(p -> p.id));
+        playersJogo[0].turno = 1;
         return null;
     }
 
