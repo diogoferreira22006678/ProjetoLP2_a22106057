@@ -476,10 +476,18 @@ public class GameManager {
 
         //BYPASS
         if(!bypassValidations){
+            //WITHBYPASS
             if(Math.abs(nrSquares) >= specie.getMinVelocity() && Math.abs(nrSquares) <= 6){
 
             }else{
                 return new MovementResult( MovementResultCode.INVALID_MOVEMENT,"");
+            }
+        }else{
+            //WITHOUTBYPASS
+            if(playerCurrentHouse +nrSquares > jungle.length){
+
+            }else{
+
             }
         }
         return new MovementResult( MovementResultCode.INVALID_MOVEMENT,"");
