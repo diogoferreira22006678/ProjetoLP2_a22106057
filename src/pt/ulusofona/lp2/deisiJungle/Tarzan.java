@@ -1,32 +1,54 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-public class Tarzan extends Player {
-    final int energiaInicial = 70;
-    final int consumoEnergia = 2;
-    final int descanso = 20;
-    int[] velocidade = new int[2];
+public class Tarzan extends Specie {
 
-    public Tarzan(int id, String nome, String especie,int currentEnergy, int turno,int casaAtual,String especieTotal){
-        this.id = id;
-        this.nome = nome;
-        this.especie = especie;
-        this.currentEnergy = currentEnergy;
-        this.turno = turno;
-        this.casaAtual = casaAtual;
-        this.especieTotal = especieTotal;
-        this.velocidade[0] = 1;
-        this.velocidade[1] = 6;
+    private int TypeOfFood = 3;
+    int maxVelocity = 6;
+    int minVelocity = 1;
+    private int energyPerCell = 2;
+    private int recoveryEnergy = 20;
+
+    public Tarzan() {
+
     }
 
-    void moveCost(Passaro player){
-        player.currentEnergy -= consumoEnergia;
+    @Override
+    public int getRecoveryEnergy(){
+        return recoveryEnergy;
     }
 
-    void sleep(Passaro player){
-        player.currentEnergy += descanso;
+    @Override
+    public int getEnergyPerCell(){
+        return energyPerCell;
     }
 
-    int[] getSpeed(){
-        return velocidade;
+    @Override
+    public int getTypeOfFood() {
+        return TypeOfFood;
+    }
+
+    @Override
+    public int getMaxVelocity(){
+        return maxVelocity;
+    }
+
+    @Override
+    public int getMinVelocity(){
+        return minVelocity;
+    }
+
+    @Override
+    public void eat() {
+
+    }
+
+    @Override
+    public void sleep() {
+
+    }
+
+    @Override
+    public void move() {
+
     }
 }

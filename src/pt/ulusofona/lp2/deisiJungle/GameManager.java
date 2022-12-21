@@ -1,24 +1,15 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
-
 
 public class GameManager {
 
-    Tabuleiro jungle = new Tabuleiro();
+    Board jungle = new Board();
     Player[] playersJogo;
-    String[] idsEspecie;
-
-
-    public GameManager(){}
-
-
 
     public String[][] getSpecies(){
 
@@ -87,142 +78,70 @@ public class GameManager {
         return foodTypesList;
     }
 
-    public InitializationError createInitialJungle(int jungleSize, String[][]
-            playersInfo, String[][] foodsInfo){
-
-        ArrayList idJogadores = new ArrayList();
-        String[][] especiesList = getSpecies();
-        String [][] foodList = getFoodTypes();
-        //validar energia inicial
-
-        for(int i = 0; i < playersInfo.length;i++){
-
-            // validar o ID dos players
-            // esta linha se calhar null
-            if(playersInfo[i][0] == null || playersInfo[i][1] == null){
-
-                return new InitializationError("PLAYERINFO NULL");
-            }
-            boolean isNumeric =  playersInfo[i][0].matches("[+-]?\\d*(\\.\\d+)?");
-            if(idJogadores.contains(playersInfo[i][0]) || !isNumeric){
-                return new InitializationError("INVALID PLAYER ID"); }
-            idJogadores.add(playersInfo[i][0]);
-            //validar Nº de Tarzans
-            int procurarTarzan = 0;
-
-            if (playersInfo[i][0].equals("Z")){
-                procurarTarzan++; }
-            if(procurarTarzan > 1){
-                return new InitializationError("MORE THEN ONE TARZAN"); }
-            // validar nome do player
-            if(playersInfo[i] == null){
-                return new InitializationError("PLAYER NULL"); }
-            //validar  indice da especie
-            int valido = 0;
-            for(int k = 0; k< especiesList.length; k++){
-                if((playersInfo[i][2] == especiesList[k][0])){
-                    valido = 1;
-                    break; }
-            }
-            if(valido == 0){
-                return new InitializationError("NOT VALID SPECIE"); }
-        }
-        // valida numero de players
-        if(playersInfo.length < 2 || playersInfo.length > 4){
-            return new InitializationError("INVALID NUMBER OF PLAYERS"); }
-        // valida tamanho do tabuleiro
-        if(jungleSize < 2 * playersInfo.length){
-            return new InitializationError("INVALID LENGTH"); }
-        jungle = jungle.criarTabuleiro(jungleSize);
-        playersJogo = new Player[playersInfo.length];
-
-        createPlayerSpecie(playersInfo);
-        Arrays.sort(playersJogo, Comparator.comparingInt(p -> p.id));
-        playersJogo[0].turno = 1;
-
-        for(int i = 0; i < foodsInfo.length;i++) {
-            // validar o ID dos players
-            // esta linha se calhar null
-            if (foodsInfo[i][0] == null || foodsInfo[i][1] == null ||
-                    Integer.parseInt(foodsInfo[i][1]) < 0 || Integer.parseInt(foodsInfo[i][1]) > jungleSize) {
-                return new InitializationError("FOODINFO NULL");
-            }
-            if(foodsInfo[i] == null){
-
-                return new InitializationError("FOODINFO NULL"); }
-            int valido = 0;
-            for(int k = 0; k< foodList.length; k++){
-                if((foodsInfo[i][0] == foodList[k][0])){
-                    valido = 1;
-                    break; }
-            }
-            if(valido == 0){
-
-                return new InitializationError("INVALID FOOD NAME"); }
-        }
-
-        return null;
-    }
-
     public void createPlayerSpecie(String[][] playersInfo){
 
         for(int i = 0; i < playersInfo.length;i++) {
 
             String especie = playersInfo[i][2];
 
-            switch (especie){
-                case "Z":
-                    Tarzan tarzan = new Tarzan(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
-                            playersInfo[i][2],70,0,1,"Tarzan");
+            switch (especie) {
+                case "Z" -> {
+                    Player tarzan = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
+                            playersInfo[i][2], 70, 0, 1, "Tarzan", 0, 0);
+                    tarzan.setSpecie(new Tarzan());
                     playersJogo[i] = tarzan;
-                    jungle.arrayCelulas[0].adicionarInformacao(tarzan,jungle.arrayCelulas,1);
-                    break;
-                case "E":
-                    Elefante elefante = new Elefante(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
-                            playersInfo[i][2],180,0,1,"Elefante");
-                    playersJogo[i] = elefante;
-                    jungle.arrayCelulas[0].adicionarInformacao(elefante,jungle.arrayCelulas,1);
-                    break;
-                case "L":
-                    Leao leao = new Leao(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
-                            playersInfo[i][2],70,0,1,"Leao");
-                    playersJogo[i] = leao;
-                    jungle.arrayCelulas[0].adicionarInformacao(leao,jungle.arrayCelulas,1);
-                    break;
-                case "P":
-                    Passaro passaro = new Passaro(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
-                            playersInfo[i][2],70,0,1,"Passaro");
-                    playersJogo[i] = passaro;
-                    jungle.arrayCelulas[0].adicionarInformacao(passaro,jungle.arrayCelulas,1);
-                    break;
-                case "T":
-                    Tartaruga tartaruga = new Tartaruga(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
-                            playersInfo[i][2],150,0,1,"Tartaruga");
-                    playersJogo[i] = tartaruga;
-                    jungle.arrayCelulas[0].adicionarInformacao(tartaruga,jungle.arrayCelulas,1);
-                    break;
+                    jungle.arrayCells[0].addInformation(tarzan, jungle.arrayCells, 1);
+                }
+                case "E" -> {
+                    Player elephant = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
+                            playersInfo[i][2], 180, 0, 1, "Elefante", 0, 0);
+                    elephant.setSpecie(new Elephant());
+                    playersJogo[i] = elephant;
+                    jungle.arrayCells[0].addInformation(elephant, jungle.arrayCells, 1);
+                }
+                case "L" -> {
+                    Player lion = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
+                            playersInfo[i][2], 70, 0, 1, "Leao", 0, 0);
+                    lion.setSpecie(new Lion());
+                    playersJogo[i] = lion;
+                    jungle.arrayCells[0].addInformation(lion, jungle.arrayCells, 1);
+                }
+                case "P" -> {
+                    Player bird = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
+                            playersInfo[i][2], 70, 0, 1, "Passaro", 0, 0);
+                    bird.setSpecie(new Bird());
+                    playersJogo[i] = bird;
+                    jungle.arrayCells[0].addInformation(bird, jungle.arrayCells, 1);
+                }
+                case "T" -> {
+                    Player turtle = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
+                            playersInfo[i][2], 150, 0, 1, "Tartaruga", 0, 0);
+                    turtle.setSpecie(new Turtle());
+                    playersJogo[i] = turtle;
+                    jungle.arrayCells[0].addInformation(turtle, jungle.arrayCells, 1);
+                }
             }
 
 
         }
     }
 
-
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
         ArrayList idJogadores = new ArrayList();
         String[][] especiesList = getSpecies();
-        String [][] foodList = getFoodTypes();
 
         //validar energia inicial
         for(int i = 0; i < playersInfo.length;i++){
-            // validar o ID dos players
-            // esta linha se calhar null
+
             if(playersInfo[i][0] == null || playersInfo[i][1] == null){
                 return new InitializationError("PLAYERINFO NULL");
             }
+
             boolean isNumeric =  playersInfo[i][0].matches("[+-]?\\d*(\\.\\d+)?");
+
             if(idJogadores.contains(playersInfo[i][0]) || !isNumeric){
                 return new InitializationError("INVAlID PLAYER ID"); }
+
             idJogadores.add(playersInfo[i][0]);
             //validar Nº de Tarzans
             int procurarTarzan = 0;
@@ -236,7 +155,7 @@ public class GameManager {
             //validar  indice da especie
             int valido = 0;
             for(int k = 0; k< especiesList.length; k++){
-                if((playersInfo[i][2] == especiesList[k][0])){
+                if((playersInfo[i][2].equals(especiesList[k][0]))){
                     valido = 1;
                     break; }
             }
@@ -249,75 +168,110 @@ public class GameManager {
         // valida tamanho do tabuleiro
         if(jungleSize < 2 * playersInfo.length){
             return new InitializationError("INVALID LENGTH"); }
-        jungle = jungle.criarTabuleiro(jungleSize);
+
+        jungle = jungle.createBoard(jungleSize);
         playersJogo = new Player[playersInfo.length];
-        int turno = 0;
+        createPlayerSpecie(playersInfo);
+        Arrays.sort(playersJogo, Comparator.comparingInt(p -> p.getId()));
+        playersJogo[0].setTurn(1);
 
-        for(int i = 0; i < playersInfo.length;i++) {
-            Player player = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
-                    playersInfo[i][2],100,turno,1,idsEspecie[i]);
-            playersJogo[i] = player;
-            jungle.arrayCelulas[0].adicionarInformacao(player,jungle.arrayCelulas,1); }
-
-        Arrays.sort(playersJogo, Comparator.comparingInt(p -> p.id));
-        playersJogo[0].turno = 1;
         return null;
     }
 
+    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodInfo){
+        ArrayList idJogadores = new ArrayList();
+        String[][] especiesList = getSpecies();
+        String [][] foodList = getFoodTypes();
 
-    public String[][] sortPlayer(String[][] playersInfo){
-
-
-        ArrayList<String> idsPlayers = new ArrayList<>();
-        String[][] playersInfoSorted = new String[playersInfo.length][4];
-        idsEspecie = new String[playersInfo.length];
-
-        String especie = "";
+        //validar energia inicial
         for(int i = 0; i < playersInfo.length;i++){
-            if( playersInfo[i][2] == "Z"){especie = "Tarzan";}
-            if( playersInfo[i][2] == "E"){especie = "Elefante";}
-            if( playersInfo[i][2] == "L"){especie = "Leão";}
-            if( playersInfo[i][2] == "P"){especie = "Pássaro";}
-            if( playersInfo[i][2] == "T"){especie = "Tartaruga";}
-            idsPlayers.add(playersInfo[i][0] + "@@" + playersInfo[i][1] + "@@" +  playersInfo[i][2] + "@@" + especie);
 
+            if(playersInfo[i][0] == null || playersInfo[i][1] == null){
+                return new InitializationError("PLAYERINFO NULL");
+            }
+
+            boolean isNumeric =  playersInfo[i][0].matches("[+-]?\\d*(\\.\\d+)?");
+
+            if(idJogadores.contains(playersInfo[i][0]) || !isNumeric){
+                return new InitializationError("INVAlID PLAYER ID"); }
+
+            idJogadores.add(playersInfo[i][0]);
+            //validar Nº de Tarzans
+            int procurarTarzan = 0;
+            if (playersInfo[i][0].equals("Z")){
+                procurarTarzan++; }
+            if(procurarTarzan > 1){
+                return new InitializationError("MORE THEN ONE TARZAN"); }
+            // validar nome do player
+            if(playersInfo[i] == null){
+                return new InitializationError("PLAYERINFO NULL"); }
+            //validar  indice da especie
+            int valido = 0;
+            for(int k = 0; k< especiesList.length; k++){
+                if((playersInfo[i][2].equals(especiesList[k][0]))){
+                    valido = 1;
+                    break; }
+            }
+            if(valido == 0){
+                return new InitializationError("INVALID PLAYER SPECIE"); }
+        }
+        // valida numero de players
+        if(playersInfo.length < 2 || playersInfo.length > 4){
+            return new InitializationError("INVALID NUMBER OF PLAYERS"); }
+        // valida tamanho do tabuleiro
+        if(jungleSize < 2 * playersInfo.length){
+            return new InitializationError("INVALID LENGTH"); }
+
+        int valid = 0;
+
+        for(int i = 0; i < foodInfo.length; i++){
+
+            for(int k = 0; k < foodList.length; k++){
+                if(foodInfo[i][0].equals(foodList[k][0])){
+                    valid = 1;
+                    break;
+                }
+            }
+            if(valid == 0){
+                return new InitializationError("Invalid ID");
+            }
+
+            if(Integer.parseInt(foodInfo[i][1]) < 1 || Integer.parseInt(foodInfo[i][1]) > jungleSize){
+                return new InitializationError("Invalid Food Positioning");
+            }
         }
 
-        Collections.sort(idsPlayers);
+        jungle = jungle.createBoard(jungleSize);
+        playersJogo = new Player[playersInfo.length];
 
-        for(int i = 0; i < idsPlayers.size();i++) {
-            String currentLine = idsPlayers.get(i);
-            String[] campos = currentLine.split("@@");
-            playersInfoSorted[i][0] = campos[0];
-            playersInfoSorted[i][1] = campos[1];
-            playersInfoSorted[i][2] = campos[2];
-            idsEspecie[i] = campos[3];
 
-        }
+        createPlayerSpecie(playersInfo);
+        Arrays.sort(playersJogo, Comparator.comparingInt(p -> p.getId()));
+        playersJogo[0].setTurn(1);
 
-        return playersInfoSorted;
+        return null;
     }
 
     public int[] getPlayerIds(int squareNr){
 
-        if(squareNr < 1 || squareNr > jungle.arrayCelulas.length){
+        if(squareNr < 1 || squareNr > jungle.arrayCells.length){
             return new int[0];
         }
 
-        int[] arrayids = jungle.arrayCelulas[squareNr - 1].getPlayersIdCelula(jungle.arrayCelulas, squareNr);
+        int[] arrayids = jungle.arrayCells[squareNr - 1].getPlayersIdCell(jungle.arrayCells, squareNr);
 
         return arrayids;
     }
 
     public String[] getSquareInfo(int squareNr){
 
-        if(squareNr < 1 || squareNr > jungle.arrayCelulas.length){
+        if(squareNr < 1 || squareNr > jungle.arrayCells.length){
             return null;
         }
 
         String[] informacao = new String[3];
 
-        if(squareNr == jungle.tamanho){
+        if(squareNr == jungle.length){
             informacao[0] = "finish.png";
             informacao[1] = "Meta";
         }else {
@@ -326,7 +280,7 @@ public class GameManager {
             informacao[1] = "Vazio";
         }
         String idPlayers = "";
-        ArrayList<Player> players = jungle.arrayCelulas[squareNr - 1].informacaoCelula;
+        ArrayList<Player> players = jungle.arrayCells[squareNr - 1].CellInformationPlayer;
 
         if(players.size() == 0){
             informacao[2] = idPlayers;
@@ -335,9 +289,9 @@ public class GameManager {
 
         for (int i = 0; i < players.size(); i++){
             if(i == players.size() - 1){
-                idPlayers += String.valueOf(players.get(i).id);
+                idPlayers += String.valueOf(players.get(i).getId());
             }else{
-            idPlayers += (players.get(i).id) + ",";
+                idPlayers += (players.get(i).getId()) + ",";
             }
         }
 
@@ -348,17 +302,18 @@ public class GameManager {
 
     public String[] getPlayerInfo(int playerId){
 
-        String[] playerInfo = new String[4];
+        String[] playerInfo = new String[5];
 
         for(int i = 0; i < playersJogo.length; i++){
 
-            if(playersJogo[i].id == playerId){
+            if(playersJogo[i].getId() == playerId){
 
-                playerInfo[0] = String.valueOf(playersJogo[i].id);
-                playerInfo[1] = playersJogo[i].nome;
-                playerInfo[2] = playersJogo[i].especie;
-                playerInfo[3] = String.valueOf(playersJogo[i].currentEnergy);
-
+                playerInfo[0] = String.valueOf(playersJogo[i].getId());
+                playerInfo[1] = playersJogo[i].getName();
+                playerInfo[2] = playersJogo[i].getSpecies();
+                playerInfo[3] = String.valueOf(playersJogo[i].getCurrentEnergy());
+                playerInfo[4] = playersJogo[i].getSpecie().getMinVelocity() + ".."
+                        + playersJogo[i].getSpecie().getMaxVelocity();
                 return playerInfo;
             }
         }
@@ -368,16 +323,18 @@ public class GameManager {
 
     public String[] getCurrentPlayerInfo(){
 
-        String[] playerInfo = new String[4];
+        String[] playerInfo = new String[5];
 
         for(int i = 0; i < playersJogo.length; i++){
 
-            if(playersJogo[i].turno == 1){
+            if(playersJogo[i].getTurn() == 1){
 
-                playerInfo[0] = String.valueOf(playersJogo[i].id);
-                playerInfo[1] = playersJogo[i].nome;
-                playerInfo[2] = playersJogo[i].especie;
-                playerInfo[3] = String.valueOf(playersJogo[i].currentEnergy);
+                playerInfo[0] = String.valueOf(playersJogo[i].getId());
+                playerInfo[1] = playersJogo[i].getName();
+                playerInfo[2] = playersJogo[i].getSpecies();
+                playerInfo[3] = String.valueOf(playersJogo[i].getCurrentEnergy());
+                playerInfo[4] = playersJogo[i].getSpecie().getMinVelocity() + ".."
+                        + playersJogo[i].getSpecie().getMaxVelocity();
 
                 return playerInfo;
             }
@@ -386,19 +343,34 @@ public class GameManager {
         return null;
     }
 
+    public String[] getCurrentPlayerEnergyInfo(int nrPositions){
 
+        String[] playerInfo = new String[2];
+
+        for(int i = 0; i < playersJogo.length; i++){
+            if (playersJogo[i].getTurn() == 1){
+                Player player = playersJogo[i];
+
+                playerInfo[0] = String.valueOf(player.getSpecie().getEnergyPerCell() * nrPositions);
+                playerInfo[1] = String.valueOf(player.getSpecie().getRecoveryEnergy());
+            }
+        }
+        return playerInfo;
+    }
 
     public String[][] getPlayersInfo(){
 
 
-        String[][] playersInfo = new String[playersJogo.length][4];
+        String[][] playersInfo = new String[playersJogo.length][5];
 
         for(int i = 0; i < playersJogo.length; i++){
 
-                playersInfo[i][0] = String.valueOf(playersJogo[i].id);
-                playersInfo[i][1] = playersJogo[i].nome;
-                playersInfo[i][2] = playersJogo[i].especie;
-                playersInfo[i][3] = String.valueOf(playersJogo[i].currentEnergy);
+            playersInfo[i][0] = String.valueOf(playersJogo[i].getId());
+            playersInfo[i][1] = playersJogo[i].getName();
+            playersInfo[i][2] = playersJogo[i].getSpecies();
+            playersInfo[i][3] = String.valueOf(playersJogo[i].getCurrentEnergy());
+            playersInfo[i][4] = playersJogo[i].getSpecie().getMinVelocity() + ".."
+                    + playersJogo[i].getSpecie().getMaxVelocity();
 
         }
 
@@ -406,108 +378,36 @@ public class GameManager {
     }
 
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations){
-
-        for (int i = 0; i < playersJogo.length; i++){
-            boolean jogada = false;
-
-            if(playersJogo[i].turno == 1){
-                //Jogador certo
-
-
-                // acertar o proximo jogador
-                if(i + 1 == playersJogo.length){
-                    playersJogo[0].turno = 1;
-                }else{
-                    playersJogo[i + 1].turno = 1;
-                }
-                playersJogo[i].turno = 0;
-
-                int[] speed = new int[2];
-
-                if(playersJogo[i].getClass() == Tarzan.class){
-                    Tarzan player = (Tarzan) playersJogo[i];
-                    speed = player.getSpeed();
-                }
-                if(playersJogo[i].getClass() == Elefante.class){
-                    Elefante player = (Elefante) playersJogo[i];
-                    speed = player.getSpeed();
-                }
-                if(playersJogo[i].getClass() == Passaro.class){
-                    Passaro player = (Passaro) playersJogo[i];
-                    speed = player.getSpeed();
-                }
-                if(playersJogo[i].getClass() == Leao.class){
-                    Leao player = (Leao) playersJogo[i];
-                    speed = player.getSpeed();
-                }
-                if(playersJogo[i].getClass() == Tartaruga.class){
-                    Tartaruga player = (Tartaruga) playersJogo[i];
-                    speed = player.getSpeed();
-                }
-
-
-                if(bypassValidations == false){
-                    if(nrSquares < speed[0] || nrSquares > speed[1]){
-                        return new MovementResult(MovementResultCode.INVALID_MOVEMENT,"INVALID PLAY");
-                    }
-                }
-
-                playersJogo[i].currentEnergy -= 2;
-
-                // jogada Atual
-
-                jungle.arrayCelulas =jungle.arrayCelulas[playersJogo[i].casaAtual].
-                        removerInformacao(playersJogo[i].id,
-                        jungle.arrayCelulas, playersJogo[i].casaAtual);
-
-                if(nrSquares + playersJogo[i].casaAtual >= jungle.tamanho ){
-                    // ganhou
-                    playersJogo[i].casaAtual = jungle.tamanho;
-                    jungle.arrayCelulas[jungle.tamanho - 1].informacaoCelula.add(playersJogo[i]);
-                }else{
-                    playersJogo[i].casaAtual += nrSquares;
-                    jungle.arrayCelulas[playersJogo[i].casaAtual - 1].informacaoCelula.add(playersJogo[i]);
-                }
-                jogada = true;
-            }
-            if(jogada){
-                break;
-            }
-        }
-
-        return new MovementResult(MovementResultCode.VALID_MOVEMENT,"VALID MOVIMENT");
+        return new MovementResult( MovementResultCode.INVALID_MOVEMENT,"");
     }
 
-    public String[] getWinnerInfo(){
+    public String[] getWinnerInfo() {
 
-        int noEnergy = 0;
-      
+        int halfTheMap = jungle.length / 2;
+
         String[] playersInfo = new String[4];
 
         Player playerVencedor = new Player();
 
-        for(int i = 0; i < playersJogo.length;i++){
+        for (int i = 0; i < playersJogo.length; i++) {
 
-            if(playersJogo[i].currentEnergy != 0){
-                noEnergy += 1;
-            }
             //ganhou porque chegou a meta
-            if(playersJogo[i].casaAtual == jungle.tamanho){
-                playersInfo[0] = String.valueOf(playersJogo[i].id);
-                playersInfo[1] = playersJogo[i].nome;
-                playersInfo[2] = playersJogo[i].especie;
-                playersInfo[3] = String.valueOf(playersJogo[i].currentEnergy);
+            if (playersJogo[i].getCurrentHouse() == jungle.length) {
+                playersInfo[0] = String.valueOf(playersJogo[i].getId());
+                playersInfo[1] = playersJogo[i].getName();
+                playersInfo[2] = playersJogo[i].getSpecies();
+                playersInfo[3] = String.valueOf(playersJogo[i].getCurrentEnergy());
 
 
                 return playersInfo;
             }
 
-            if(playerVencedor.casaAtual < playersJogo[i].casaAtual){
+            if (playerVencedor.getCurrentHouse() < playersJogo[i].getCurrentHouse()) {
                 playerVencedor = playersJogo[i];
 
-            }else{
-                if(playerVencedor.casaAtual == playersJogo[i].casaAtual){
-                    if(playerVencedor.id > playersJogo[i].id){
+            } else {
+                if (playerVencedor.getCurrentHouse() == playersJogo[i].getCurrentHouse()) {
+                    if (playerVencedor.getId() > playersJogo[i].getId()) {
                         playerVencedor = playersJogo[i];
 
                     }
@@ -515,19 +415,28 @@ public class GameManager {
             }
 
         }
-        // ganhou porque n ha energia
-        if(noEnergy == 0){
-            playersInfo[0] = String.valueOf(playerVencedor.id);
-            playersInfo[1] = playerVencedor.nome;
-            playersInfo[2] = playerVencedor.especie;
-            playersInfo[3] = String.valueOf(playerVencedor.currentEnergy);
+        // won because of more then double the houses of any player
+        for (int i = 0; i < playersJogo.length; i++) {
+            Player player = playersJogo[i];
 
+            for (int k = 0; i < playersJogo.length; k++) {
+                Player playerComparate = playersJogo[k];
+                if (i == k) {
+                    continue;  // Skip comparison with itself
+                }
+                if (Math.abs(player.getCurrentEnergy() - playerComparate.getCurrentHouse()) > halfTheMap) {
+                    // The difference between the currentHouse values is greater than the maximum allowed difference
+                    // Do something here, such as throwing an exception or printing an error message
+                    playersInfo[0] = String.valueOf(player.getId());
+                    playersInfo[1] = player.getName();
+                    playersInfo[2] = player.getSpecies();
+                    playersInfo[3] = String.valueOf(player.getCurrentEnergy());
 
-            return playersInfo;
+                    return playersInfo;
+                }
+            }
         }
-
         return null;
-
     }
 
     public ArrayList<String> getGameResults(){
@@ -545,12 +454,12 @@ public class GameManager {
             int nrVencedor = 0;
             playerVencedor = new Player();
             for (int i = 0; i < transitionInfo.size();i++){
-                if(playerVencedor.casaAtual < transitionInfo.get(i).casaAtual){
+                if(playerVencedor.getCurrentHouse() < transitionInfo.get(i).getCurrentHouse()){
                     playerVencedor = transitionInfo.get(i);
                     nrVencedor = i;
                 }else{
-                    if(playerVencedor.casaAtual == transitionInfo.get(i).casaAtual){
-                        if(playerVencedor.id > transitionInfo.get(i).id){
+                    if(playerVencedor.getCurrentHouse() == transitionInfo.get(i).getCurrentHouse()){
+                        if(playerVencedor.getId() > transitionInfo.get(i).getId()){
                             playerVencedor = transitionInfo.get(i);
                             nrVencedor = i;
                         }
@@ -565,7 +474,9 @@ public class GameManager {
 
             int posicao = i + 1;
 
-           winnerInfo.add("#" + posicao + " " + sortedInfo.get(i).nome + ", " + sortedInfo.get(i).especieTotal + ", " + sortedInfo.get(i).casaAtual);
+            winnerInfo.add("#" + posicao + " " + sortedInfo.get(i).getName()
+                    + ", " + sortedInfo.get(i).getTotalSpecies() + ", " + sortedInfo.get(i).getCurrentHouse() + ", " +
+                    sortedInfo.get(i).getDistanceTravelled() + ", " + sortedInfo.get(i).getFoodCount());
         }
         return winnerInfo;
     }
@@ -578,12 +489,6 @@ public class GameManager {
         return "Wrestling";
     }
 
-    //-----------------------------------------------------2ª part-----------------------------------------------------------------//
-
-    public String[] getCurrentPlayerEnergyInfo(int nrPositions){
-        return null;
-    }
-
     public boolean saveGame(File file){
         return true;
     }
@@ -591,6 +496,5 @@ public class GameManager {
     public boolean loadGame(File file){
         return true;
     }
-
 
 }
