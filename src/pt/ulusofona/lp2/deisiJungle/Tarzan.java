@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class Tarzan extends Specie {
 
-    private int TypeOfFood = 3;
+    private int typeOfFood = 3;
     int maxVelocity = 6;
     int minVelocity = 1;
     private int energyPerCell = 2;
@@ -22,7 +22,7 @@ public class Tarzan extends Specie {
 
     @Override
     public int getTypeOfFood() {
-        return TypeOfFood;
+        return typeOfFood;
     }
 
     @Override

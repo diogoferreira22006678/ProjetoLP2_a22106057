@@ -11,7 +11,7 @@ public class Player {
     private String totalSpecies;
     private int distanceTravelled;
     private int foodCount;
-    int TypeOfFood = 0;
+    int typeOfFood = 0;
     int maxVelocity = 0;
     int minVelocity = 0;
     Specie specie;

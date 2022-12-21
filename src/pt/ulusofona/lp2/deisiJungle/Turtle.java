@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class Turtle extends Specie {
 
-    private int TypeOfFood = 3;
+    private int typeOfFood = 3;
     int maxVelocity = 3;
     int minVelocity = 1;
     private int energyPerCell = 1;
@@ -24,7 +24,7 @@ public class Turtle extends Specie {
 
     @Override
     public int getTypeOfFood() {
-        return TypeOfFood;
+        return typeOfFood;
     }
 
     @Override

@@ -20,7 +20,7 @@ public class Board {
         Cell[] jungle = new Cell[tamanho];
 
         for(int i = 0; i < jungle.length; i++){
-            jungle[i] = new Cell(new ArrayList<>(), new ArrayList<>());
+            jungle[i] = new Cell(new ArrayList<>());
         }
 
         Board tabuleiro = new Board(jungle,tamanho);

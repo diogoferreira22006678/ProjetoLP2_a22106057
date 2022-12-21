@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Random;
 
 public class GameManager {
 
@@ -126,6 +127,45 @@ public class GameManager {
         }
     }
 
+    public void createFood(String[][] foodInfo){
+        for (int i = 0; i < foodInfo.length; i++){
+            String id = foodInfo[i][0];
+            int position = Integer.parseInt(foodInfo[i][1]);
+
+            switch (id){
+                case "e" -> {
+                    Food weed = new Weed(id, position,"grass.png","Erva");
+                    jungle.arrayCells[position - 1].addInformationFood(weed, jungle.arrayCells, position);
+                    break;
+                }
+                case "a" -> {
+                    Food water = new Water(id, position,"water.png","Agua");
+                    jungle.arrayCells[position - 1].addInformationFood(water, jungle.arrayCells, position);
+                    break;
+                }
+                case "b" -> {
+                    Food banana = new Bananas(id, position, "bananas.png", 3, "Cacho de bananas");
+                    jungle.arrayCells[position - 1].addInformationFood(banana, jungle.arrayCells, position);
+                    break;
+                }
+                case "c" -> {
+                    Food carne = new Meat(id, position, "meat.png", "Carne");
+                    jungle.arrayCells[position - 1].addInformationFood(carne, jungle.arrayCells, position);
+                    break;
+                }
+                case "m" -> {
+                    Random rand = new Random();
+                    int number = rand.nextInt(50) + 1;
+                    Food mushroom = new MagicMushrooms(id, position , number, "mushroom.png", "Congumelos magicos");
+                    jungle.arrayCells[position - 1].addInformationFood(mushroom, jungle.arrayCells, position);
+                    break;
+                }
+            }
+
+            }
+        }
+
+
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
         ArrayList idJogadores = new ArrayList();
         String[][] especiesList = getSpecies();
@@ -241,16 +281,21 @@ public class GameManager {
             }
         }
 
+
         jungle = jungle.createBoard(jungleSize);
         playersJogo = new Player[playersInfo.length];
 
 
+
         createPlayerSpecie(playersInfo);
+        createFood(foodInfo);
         Arrays.sort(playersJogo, Comparator.comparingInt(p -> p.getId()));
         playersJogo[0].setTurn(1);
 
         return null;
     }
+
+
 
     public int[] getPlayerIds(int squareNr){
 
@@ -275,12 +320,16 @@ public class GameManager {
             informacao[0] = "finish.png";
             informacao[1] = "Meta";
         }else {
-
-            informacao[0] = "blank.png";
-            informacao[1] = "Vazio";
+            if(jungle.arrayCells[squareNr - 1].cellInformationFood == null) {
+                informacao[0] = "blank.png";
+                informacao[1] = "Vazio";
+            }else{
+                Food food = jungle.arrayCells[squareNr - 1].cellInformationFood;
+                informacao[0] = food.getImageName();
+            }
         }
         String idPlayers = "";
-        ArrayList<Player> players = jungle.arrayCells[squareNr - 1].CellInformationPlayer;
+        ArrayList<Player> players = jungle.arrayCells[squareNr - 1].cellInformationPlayer;
 
         if(players.size() == 0){
             informacao[2] = idPlayers;

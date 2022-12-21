@@ -2,18 +2,18 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class Weed extends Food{
 
-    public Weed(String id, int position) {
-        super(id, position);
+    public Weed(String id, int position, String imageName, String name) {
+        super(id, position, imageName, name);
     }
 
     @Override
     public void eatFood(Player player, int turn, int nrSquare) {
 
-        if(player.TypeOfFood == 1 || player.TypeOfFood == 3){
+        if(player.typeOfFood == 1 || player.typeOfFood == 3){
             player.setCurrentEnergy(player.getCurrentEnergy() + 20);
         }
 
-        if(player.TypeOfFood == 2){
+        if(player.typeOfFood == 2){
             player.setCurrentEnergy(player.getCurrentEnergy() - 20);
         }
 

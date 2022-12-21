@@ -4,14 +4,14 @@ public class MagicMushrooms extends Food{
 
     int nRandom;
 
-    public MagicMushrooms(String id, int position, int nRandom) {
-        super(id, position);
+    public MagicMushrooms(String id, int position, int nRandom, String imageName, String name) {
+        super(id, position, imageName, name);
         this.nRandom = nRandom;
     }
 
     @Override
     public void eatFood(Player player, int turn, int nrSquare) {
-        if(player.TypeOfFood == 1 || player.TypeOfFood == 2 || player.TypeOfFood == 3){
+        if(player.typeOfFood == 1 || player.typeOfFood == 2 || player.typeOfFood == 3){
             if(turn % 2 == 0){
                 player.setCurrentEnergy((player.getCurrentEnergy() * (1 + (nRandom / 100))));
             }else{

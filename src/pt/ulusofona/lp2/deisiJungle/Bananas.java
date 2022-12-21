@@ -4,8 +4,8 @@ public class Bananas extends Food{
 
     int quantity;
 
-    public Bananas(String id, int position, int quantity) {
-        super(id, position);
+    public Bananas(String id, int position, String imageName,int quantity, String name) {
+        super(id, position, imageName, name);
         this.quantity = quantity;
     }
 
@@ -13,11 +13,11 @@ public class Bananas extends Food{
     public void eatFood(Player player, int turn, int nrSquare) {
         if (quantity > 0) {
             if (nrSquare != 0) {
-                if (player.TypeOfFood == 1 || player.TypeOfFood == 2 || player.TypeOfFood == 3) {
+                if (player.typeOfFood == 1 || player.typeOfFood == 2 || player.typeOfFood == 3) {
                     player.setCurrentEnergy(player.getCurrentEnergy() + 40);
                     quantity--;
                 } else {
-                    if (player.TypeOfFood == 1 || player.TypeOfFood == 2 || player.TypeOfFood == 3) {
+                    if (player.typeOfFood == 1 || player.typeOfFood == 2 || player.typeOfFood == 3) {
                         player.setCurrentEnergy(player.getCurrentEnergy() - 40);
                         quantity--;
                     }

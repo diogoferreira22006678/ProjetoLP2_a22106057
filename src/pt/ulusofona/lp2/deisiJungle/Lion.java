@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class Lion extends Specie {
 
-    private int TypeOfFood = 2;
+    private int typeOfFood = 2;
     int maxVelocity = 6;
     int minVelocity = 4;
     private int energyPerCell = 2;
@@ -23,7 +23,7 @@ public class Lion extends Specie {
 
     @Override
     public int getTypeOfFood() {
-        return TypeOfFood;
+        return typeOfFood;
     }
 
     @Override
