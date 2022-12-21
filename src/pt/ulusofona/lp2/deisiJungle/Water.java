@@ -10,10 +10,12 @@ public class Water extends Food{
 
         if(player.typeOfFood == 1 || player.typeOfFood == 2){
             player.setCurrentEnergy(player.getCurrentEnergy() + 15);
+            player.setFoodCount(player.getFoodCount() + 1);
         }
 
         if(player.typeOfFood == 3){
             player.setCurrentEnergy((int) (player.getCurrentEnergy() * 1.2));
+            player.setFoodCount(player.getFoodCount() + 1);
         }
     }
 }

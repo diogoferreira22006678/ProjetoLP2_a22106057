@@ -11,10 +11,12 @@ public class Weed extends Food{
 
         if(player.typeOfFood == 1 || player.typeOfFood == 3){
             player.setCurrentEnergy(player.getCurrentEnergy() + 20);
+            player.setFoodCount(player.getFoodCount() + 1);
         }
 
         if(player.typeOfFood == 2){
             player.setCurrentEnergy(player.getCurrentEnergy() - 20);
+            player.setFoodCount(player.getFoodCount() + 1);
         }
 
     }

@@ -11,6 +11,7 @@ public class Meat extends Food{
         if(turn <= 12) {
             if (player.typeOfFood == 2 || player.typeOfFood == 3) {
                 player.setCurrentEnergy(player.getCurrentEnergy() + 50);
+                player.setFoodCount(player.getFoodCount() + 1);
             }
 
             if (player.typeOfFood == 1) {
@@ -19,6 +20,7 @@ public class Meat extends Food{
         }else{
             if (player.typeOfFood == 2 || player.typeOfFood == 3) {
                 player.setCurrentEnergy((int) (player.getCurrentEnergy() * 0.5));
+                player.setFoodCount(player.getFoodCount() + 1);
             }
 
             if (player.typeOfFood == 1) {

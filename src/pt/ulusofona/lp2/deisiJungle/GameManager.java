@@ -11,6 +11,7 @@ public class GameManager {
 
     Board jungle = new Board();
     Player[] playersJogo;
+    int turn = 0;
 
     public String[][] getSpecies(){
 
@@ -326,6 +327,7 @@ public class GameManager {
             }else{
                 Food food = jungle.arrayCells[squareNr - 1].cellInformationFood;
                 informacao[0] = food.getImageName();
+                informacao[1] = food.getName();
             }
         }
         String idPlayers = "";
@@ -409,7 +411,6 @@ public class GameManager {
 
     public String[][] getPlayersInfo(){
 
-
         String[][] playersInfo = new String[playersJogo.length][5];
 
         for(int i = 0; i < playersJogo.length; i++){
@@ -426,7 +427,56 @@ public class GameManager {
         return playersInfo;
     }
 
+    public int turnRegulator(){
+
+        int correctPosition = - 1;
+
+        for(int i = 0; i < playersJogo.length; i++){
+            if(playersJogo[i].getTurn() == 1){
+                correctPosition = i;
+                playersJogo[i].setTurn(0);
+                if(i == playersJogo.length - 1){
+                    playersJogo[0].setTurn(1);
+                }else{
+                    playersJogo[i + 1].setTurn(1);
+                }
+                break;
+            }
+        }
+
+        return correctPosition;
+    }
+
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations){
+        turn++;
+        int correctPosition = turnRegulator();
+        Specie specie = playersJogo[correctPosition].getSpecie();
+        int energyCost = specie.getEnergyPerCell() * nrSquares;
+
+        //NOTENOUGHENERGY
+        if(energyCost > playersJogo[correctPosition].getCurrentEnergy()){
+            return new MovementResult(MovementResultCode.NO_ENERGY,"");
+        }
+
+        //SLEEP
+        if(nrSquares == 0){
+            playersJogo[correctPosition].getSpecie().sleep(playersJogo[correctPosition]);
+            if(jungle.arrayCells[nrSquares - 1].cellInformationFood != null){
+                Food food = jungle.arrayCells[nrSquares - 1].cellInformationFood;
+                food.eatFood(playersJogo[correctPosition], nrSquares, turn);
+                return new MovementResult(MovementResultCode.CAUGHT_FOOD,"Apanhou " + food.getName());
+            }
+            return new MovementResult(MovementResultCode.VALID_MOVEMENT,"");
+        }
+
+        //BYPASS
+        if(!bypassValidations){
+            if(Math.abs(nrSquares) >= specie.getMinVelocity() && Math.abs(nrSquares) <= 6){
+
+            }else{
+                return new MovementResult( MovementResultCode.INVALID_MOVEMENT,"");
+            }
+        }
         return new MovementResult( MovementResultCode.INVALID_MOVEMENT,"");
     }
 

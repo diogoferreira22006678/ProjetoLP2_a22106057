@@ -14,8 +14,10 @@ public class MagicMushrooms extends Food{
         if(player.typeOfFood == 1 || player.typeOfFood == 2 || player.typeOfFood == 3){
             if(turn % 2 == 0){
                 player.setCurrentEnergy((player.getCurrentEnergy() * (1 + (nRandom / 100))));
+                player.setFoodCount(player.getFoodCount() + 1);
             }else{
                 player.setCurrentEnergy((player.getCurrentEnergy() * (1 - (nRandom / 100))));
+                player.setFoodCount(player.getFoodCount() + 1);
             }
         }
     }

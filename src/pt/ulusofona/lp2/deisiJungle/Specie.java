@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 abstract public class Specie {
 
-    private int TypeOfFood;
+    private int typeOfFood;
     private int energyPerCell;
 
     public Specie() {}
