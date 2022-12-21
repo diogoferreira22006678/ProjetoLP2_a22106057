@@ -2,15 +2,26 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class Meat extends Food{
 
+    String toolTip = "Carne : +- 50 energia : ";
+
     public Meat(String id, int position, String imageName, String name) {
         super(id, position, imageName, name);
     }
 
     @Override
-    public void eatFood(Player player, int turn, int nrSquare) {
+    public String getToolTip(int turn) {
+        return this.toolTip + turn + " jogadas";
+    }
+
+    @Override
+    public Player eatFood(Player player, int turn, int nrSquare) {
         if(turn <= 12) {
             if (player.typeOfFood == 2 || player.typeOfFood == 3) {
-                player.setCurrentEnergy(player.getCurrentEnergy() + 50);
+                if(player.getCurrentEnergy() + 50 > player.specie.getEnergyCap()){
+                    player.setCurrentEnergy(player.specie.getEnergyCap());
+                }else {
+                    player.setCurrentEnergy(player.getCurrentEnergy() + 50);
+                }
                 player.setFoodCount(player.getFoodCount() + 1);
             }
 
@@ -27,5 +38,6 @@ public class Meat extends Food{
 
             }
         }
+        return player;
     }
 }

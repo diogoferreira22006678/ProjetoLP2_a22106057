@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.deisiJungle;
 public class Bananas extends Food{
 
     int quantity;
+    String toolTip = "Bananas : " + quantity + " : + 40 energia";
 
     public Bananas(String id, int position, String imageName,int quantity, String name) {
         super(id, position, imageName, name);
@@ -10,21 +11,35 @@ public class Bananas extends Food{
     }
 
     @Override
-    public void eatFood(Player player, int turn, int nrSquare) {
+    public String getToolTip(int turn) {
+        return this.toolTip;
+    }
+
+    @Override
+    public Player eatFood(Player player, int turn, int nrSquare) {
         if (quantity > 0) {
             if (nrSquare != 0) {
                 if (player.typeOfFood == 1 || player.typeOfFood == 2 || player.typeOfFood == 3) {
-                    player.setCurrentEnergy(player.getCurrentEnergy() + 40);
+                    if(player.getCurrentEnergy() + 40 > player.specie.getEnergyCap()){
+                        player.setCurrentEnergy(player.specie.getEnergyCap());
+                    }else {
+                        player.setCurrentEnergy(player.getCurrentEnergy() + 40);
+                    }
                     player.setFoodCount(player.getFoodCount() + 1);
                     quantity--;
                 } else {
                     if (player.typeOfFood == 1 || player.typeOfFood == 2 || player.typeOfFood == 3) {
-                        player.setCurrentEnergy(player.getCurrentEnergy() - 40);
+                        if(player.getCurrentEnergy() - 40 < 0){
+                            player.setCurrentEnergy(0);
+                        }else {
+                            player.setCurrentEnergy(player.getCurrentEnergy() - 40);
+                        }
                         player.setFoodCount(player.getFoodCount() + 1);
                         quantity--;
                     }
                 }
             }
         }
+        return player;
     }
 }

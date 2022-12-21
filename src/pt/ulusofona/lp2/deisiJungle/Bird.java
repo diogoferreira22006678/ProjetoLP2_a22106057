@@ -7,6 +7,7 @@ public class Bird extends Specie {
     int minVelocity = 5;
     private int energyPerCell = 4;
     private int recoveryEnergy = 50;
+    private int energyCap = 70;
 
     public Bird() {
     }
@@ -49,5 +50,9 @@ public class Bird extends Specie {
     @Override
     public void move(Player player) {
 
+    }
+
+    public int getEnergyCap() {
+        return energyCap;
     }
 }

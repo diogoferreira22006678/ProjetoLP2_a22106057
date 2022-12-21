@@ -6,7 +6,7 @@ abstract public class Food{
     private int position;
     private String imageName;
     private String name;
-
+    private String toolTip;
 
     public Food(String id, int position, String imageName, String name){
         this.id = id;
@@ -15,11 +15,11 @@ abstract public class Food{
         this.name = name;
     }
 
-    public Food(){
+    public Food(){}
 
-    }
+    abstract public String getToolTip(int turn);
 
-    abstract public void eatFood(Player player, int turn, int nrSquare);
+    abstract public Player eatFood(Player player, int turn, int nrSquare);
 
     public String getId() {
         return id;

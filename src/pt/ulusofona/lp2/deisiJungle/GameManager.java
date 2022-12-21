@@ -157,7 +157,7 @@ public class GameManager {
                 case "m" -> {
                     Random rand = new Random();
                     int number = rand.nextInt(50) + 1;
-                    Food mushroom = new MagicMushrooms(id, position , number, "mushroom.png", "Congumelos magicos");
+                    Food mushroom = new MagicMushrooms(id, position , "mushroom.png", number, "Congumelos magicos");
                     jungle.arrayCells[position - 1].addInformationFood(mushroom, jungle.arrayCells, position);
                     break;
                 }
@@ -165,7 +165,6 @@ public class GameManager {
 
             }
         }
-
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
         ArrayList idJogadores = new ArrayList();
@@ -296,8 +295,6 @@ public class GameManager {
         return null;
     }
 
-
-
     public int[] getPlayerIds(int squareNr){
 
         if(squareNr < 1 || squareNr > jungle.arrayCells.length){
@@ -327,7 +324,7 @@ public class GameManager {
             }else{
                 Food food = jungle.arrayCells[squareNr - 1].cellInformationFood;
                 informacao[0] = food.getImageName();
-                informacao[1] = food.getName();
+                informacao[1] = food.getToolTip(turn);
             }
         }
         String idPlayers = "";
@@ -452,18 +449,26 @@ public class GameManager {
         int correctPosition = turnRegulator();
         Specie specie = playersJogo[correctPosition].getSpecie();
         int energyCost = specie.getEnergyPerCell() * nrSquares;
+        int playerCurrentHouse = playersJogo[correctPosition].getCurrentHouse();
+        Player player = playersJogo[correctPosition];
+        int energyCap = specie.getEnergyCap();
 
         //NOTENOUGHENERGY
-        if(energyCost > playersJogo[correctPosition].getCurrentEnergy()){
+        if(energyCost > player.getCurrentEnergy()){
             return new MovementResult(MovementResultCode.NO_ENERGY,"");
         }
 
         //SLEEP
         if(nrSquares == 0){
+            if(player.getCurrentEnergy() + specie.getRecoveryEnergy() > energyCap){
+                playersJogo[correctPosition].setCurrentEnergy(energyCap);
+            }else{
             playersJogo[correctPosition].getSpecie().sleep(playersJogo[correctPosition]);
-            if(jungle.arrayCells[nrSquares - 1].cellInformationFood != null){
-                Food food = jungle.arrayCells[nrSquares - 1].cellInformationFood;
-                food.eatFood(playersJogo[correctPosition], nrSquares, turn);
+            }
+            //SLEEP AND FOOD
+            if(jungle.arrayCells[playerCurrentHouse - 1].cellInformationFood != null){
+                Food food = jungle.arrayCells[playerCurrentHouse - 1].cellInformationFood;
+                playersJogo[correctPosition] = food.eatFood(playersJogo[correctPosition], nrSquares, turn);
                 return new MovementResult(MovementResultCode.CAUGHT_FOOD,"Apanhou " + food.getName());
             }
             return new MovementResult(MovementResultCode.VALID_MOVEMENT,"");
@@ -512,18 +517,17 @@ public class GameManager {
                     }
                 }
             }
-
         }
         // won because of more then double the houses of any player
         for (int i = 0; i < playersJogo.length; i++) {
             Player player = playersJogo[i];
 
-            for (int k = 0; i < playersJogo.length; k++) {
+            for (int k = 0; k < playersJogo.length; k++) {
                 Player playerComparate = playersJogo[k];
                 if (i == k) {
                     continue;  // Skip comparison with itself
                 }
-                if (Math.abs(player.getCurrentEnergy() - playerComparate.getCurrentHouse()) > halfTheMap) {
+                if (Math.abs(player.getCurrentHouse() - playerComparate.getCurrentHouse()) > halfTheMap) {
                     // The difference between the currentHouse values is greater than the maximum allowed difference
                     // Do something here, such as throwing an exception or printing an error message
                     playersInfo[0] = String.valueOf(player.getId());

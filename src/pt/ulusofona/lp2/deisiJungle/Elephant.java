@@ -7,6 +7,7 @@ public class Elephant extends Specie {
     int minVelocity = 1;
     private int energyPerCell = 4;
     private int recoveryEnergy = 10;
+    private int energyCap = 180;
 
     public Elephant() {
     }
@@ -49,5 +50,13 @@ public class Elephant extends Specie {
     @Override
     public void move(Player player) {
 
+    }
+
+    public int getEnergyCap() {
+        return energyCap;
+    }
+
+    public void setEnergyCap(int energyCap) {
+        this.energyCap = energyCap;
     }
 }

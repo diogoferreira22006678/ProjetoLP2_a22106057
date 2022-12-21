@@ -7,6 +7,7 @@ public class Lion extends Specie {
     int minVelocity = 4;
     private int energyPerCell = 2;
     private int recoveryEnergy = 10;
+    private int energyCap = 80;
 
     public Lion() {
     }
@@ -49,5 +50,9 @@ public class Lion extends Specie {
     @Override
     public void move(Player player) {
 
+    }
+
+    public int getEnergyCap() {
+        return energyCap;
     }
 }

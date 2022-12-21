@@ -7,6 +7,7 @@ public class Tarzan extends Specie {
     int minVelocity = 1;
     private int energyPerCell = 2;
     private int recoveryEnergy = 20;
+    private int energyCap = 70;
 
     public Tarzan() {}
 
@@ -46,5 +47,9 @@ public class Tarzan extends Specie {
     @Override
     public void move(Player player) {
 
+    }
+
+    public int getEnergyCap() {
+        return energyCap;
     }
 }

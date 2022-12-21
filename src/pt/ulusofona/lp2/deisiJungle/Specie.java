@@ -4,10 +4,13 @@ abstract public class Specie {
 
     private int typeOfFood;
     private int energyPerCell;
+    private int energyCap;
 
     public Specie() {}
 
     public abstract int getEnergyPerCell();
+
+    public abstract int getEnergyCap();
 
     public abstract int getTypeOfFood();
 

@@ -7,6 +7,7 @@ public class Turtle extends Specie {
     int minVelocity = 1;
     private int energyPerCell = 1;
     private int recoveryEnergy = 5;
+    private int energyCap = 150;
 
     public Turtle() {
 
@@ -50,5 +51,9 @@ public class Turtle extends Specie {
     @Override
     public void move(Player player) {
 
+    }
+
+    public int getEnergyCap() {
+        return energyCap;
     }
 }
