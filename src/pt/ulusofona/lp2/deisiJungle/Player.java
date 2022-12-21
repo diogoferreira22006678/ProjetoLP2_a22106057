@@ -35,6 +35,14 @@ public class Player {
 
     public Player() {}
 
+    public Player move(int nrSquares, Player player){
+
+        player.distanceTravelled += nrSquares;
+        player.currentEnergy -= nrSquares * player.specie.getEnergyPerCell();
+
+        return player;
+    }
+
     // getters and setters for each instance variable
 
     public Specie getSpecie(){

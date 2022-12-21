@@ -453,7 +453,7 @@ public class GameManager {
         Player player = playersJogo[correctPosition];
         int energyCap = specie.getEnergyCap();
 
-        System.out.println(player.getId());
+
 
         //NOTENOUGHENERGY
         if(energyCost > player.getCurrentEnergy()){
@@ -480,7 +480,11 @@ public class GameManager {
         if(!bypassValidations){
             //WITHOUTBYPASS
             if(Math.abs(nrSquares) >= specie.getMinVelocity() && Math.abs(nrSquares) <= specie.getMaxVelocity()){
-
+                if(playerCurrentHouse + nrSquares > 0 && playerCurrentHouse + nrSquares < jungle.length){
+                    playersJogo[correctPosition] = player.move(nrSquares,player);
+                    jungle.arrayCells = jungle.arrayCells[playerCurrentHouse-1].removeInformation(player.getId(),jungle.arrayCells,playerCurrentHouse);
+                    jungle.arrayCells = jungle.arrayCells[playerCurrentHouse-1].addInformation(player, jungle.arrayCells, playerCurrentHouse);
+                }
             }else{
                 return new MovementResult( MovementResultCode.INVALID_MOVEMENT,"");
             }

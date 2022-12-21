@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class Meat extends Food{
 
-    String toolTip = "Carne : +- 50 energia : ";
+    String toolTip = "Carne : + 50 energia : ";
 
     public Meat(String id, int position, String imageName, String name) {
         super(id, position, imageName, name);
