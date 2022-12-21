@@ -49,7 +49,6 @@ public class Elephant extends Specie {
 
     @Override
     public void move(Player player) {
-
     }
 
     public int getEnergyCap() {
