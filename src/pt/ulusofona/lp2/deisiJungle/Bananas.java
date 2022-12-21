@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class Bananas extends Food{
 
-    int quantity;
+    int quantity = 3;
     String toolTip = "Bananas : " + quantity + " : + 40 energia";
 
     public Bananas(String id, int position, String imageName,int quantity, String name) {

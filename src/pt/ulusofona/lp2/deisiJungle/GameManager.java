@@ -103,7 +103,7 @@ public class GameManager {
                 }
                 case "L" -> {
                     Player lion = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
-                            playersInfo[i][2], 70, 0, 1, "Leao", 0, 0);
+                            playersInfo[i][2], 80, 0, 1, "Leao", 0, 0);
                     lion.setSpecie(new Lion());
                     playersJogo[i] = lion;
                     jungle.arrayCells[0].addInformation(lion, jungle.arrayCells, 1);
@@ -453,6 +453,8 @@ public class GameManager {
         Player player = playersJogo[correctPosition];
         int energyCap = specie.getEnergyCap();
 
+        System.out.println(player.getId());
+
         //NOTENOUGHENERGY
         if(energyCost > player.getCurrentEnergy()){
             return new MovementResult(MovementResultCode.NO_ENERGY,"");
@@ -476,14 +478,14 @@ public class GameManager {
 
         //BYPASS
         if(!bypassValidations){
-            //WITHBYPASS
-            if(Math.abs(nrSquares) >= specie.getMinVelocity() && Math.abs(nrSquares) <= 6){
+            //WITHOUTBYPASS
+            if(Math.abs(nrSquares) >= specie.getMinVelocity() && Math.abs(nrSquares) <= specie.getMaxVelocity()){
 
             }else{
                 return new MovementResult( MovementResultCode.INVALID_MOVEMENT,"");
             }
         }else{
-            //WITHOUTBYPASS
+            //WITHBYPASS
             if(playerCurrentHouse +nrSquares > jungle.length){
 
             }else{
