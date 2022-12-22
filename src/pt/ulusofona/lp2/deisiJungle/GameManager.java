@@ -157,7 +157,7 @@ public class GameManager {
                 case "m" -> {
                     Random rand = new Random();
                     int number = rand.nextInt(50) + 1;
-                    Food mushroom = new MagicMushrooms(id, position , "mushroom.png", number, "Congumelo Magico");
+                    Food mushroom = new MagicMushrooms(id, position , "mushroom.png", number, "Cogumelo Magico");
                     jungle.arrayCells[position - 1].addInformationFood(mushroom, jungle.arrayCells, position);
                     break;
                 }
@@ -263,21 +263,15 @@ public class GameManager {
             return new InitializationError("INVALID LENGTH"); }
 
         for(int i = 0; i < foodInfo.length; i++){
-            int valid = 0;
-            for(int k = 0; k < foodList.length; k++){
-                if(foodInfo[i][0].equals(foodList[k][0])){
-                    valid = 1;
-                }
-            }
-            if(valid == 0){
-                return new InitializationError("Invalid ID");
-            }
-
-
             if(Integer.parseInt(foodInfo[i][1]) < 1 || Integer.parseInt(foodInfo[i][1]) > jungleSize){
                 return new InitializationError("Invalid Food Positioning");
             }
+            if(!foodInfo[i][0].equals("e") && !foodInfo[i][0].equals("a") && !foodInfo[i][0].equals("b")
+                    && !foodInfo[i][0].equals("m") && !foodInfo[i][0].equals("c")){
+                return new InitializationError("Invalid Food ID");
+            }
         }
+
 
 
         jungle = jungle.createBoard(jungleSize);
@@ -553,7 +547,7 @@ public class GameManager {
                 if (i == k) {
                     continue;  // Skip comparison with itself
                 }
-                if (Math.abs(player.getCurrentHouse() - playerComparate.getCurrentHouse()) > halfTheMap) {
+                if (Math.abs(player.getCurrentHouse() - playerComparate.getCurrentHouse()) > halfTheMap - 1) {
                     // The difference between the currentHouse values is greater than the maximum allowed difference
                     // Do something here, such as throwing an exception or printing an error message
                     playersInfo[0] = String.valueOf(player.getId());

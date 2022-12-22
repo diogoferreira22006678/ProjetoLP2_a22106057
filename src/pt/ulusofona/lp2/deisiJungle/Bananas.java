@@ -1,9 +1,12 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import java.util.ArrayList;
+
 public class Bananas extends Food{
 
     int quantity;
     String toolTip = "Bananas : ";
+    ArrayList<Player> playersAte = new ArrayList<>();
 
     public Bananas(String id, int position, String imageName,int quantity, String name) {
         super(id, position, imageName, name);
@@ -18,16 +21,8 @@ public class Bananas extends Food{
     @Override
     public Player eatFood(Player player, int turn, int nrSquare) {
         if (quantity > 0) {
-            if (nrSquare != 0) {
-                if (player.specie.getTypeOfFood() == 1 || player.specie.getTypeOfFood() == 2 || player.specie.getTypeOfFood() == 3) {
-                    if(player.getCurrentEnergy() + 40 > 200){
-                        player.setCurrentEnergy(200);
-                    }else {
-                        player.setCurrentEnergy(player.getCurrentEnergy() + 40);
-                    }
-                    player.setFoodCount(player.getFoodCount() + 1);
-                    quantity--;
-                } else {
+            for (int i = 0; i < playersAte.size(); i++){
+                if(playersAte.get(i).getId() == player.getId()){
                     if (player.specie.getTypeOfFood() == 1 || player.specie.getTypeOfFood() == 2 || player.specie.getTypeOfFood() == 3) {
                         if(player.getCurrentEnergy() - 40 < 0){
                             player.setCurrentEnergy(0);
@@ -37,8 +32,19 @@ public class Bananas extends Food{
                         player.setFoodCount(player.getFoodCount() + 1);
                         quantity--;
                     }
+                    return player;
                 }
             }
+                if (player.specie.getTypeOfFood() == 1 || player.specie.getTypeOfFood() == 2 || player.specie.getTypeOfFood() == 3) {
+                    if(player.getCurrentEnergy() + 40 > 200){
+                        player.setCurrentEnergy(200);
+                    }else {
+                        player.setCurrentEnergy(player.getCurrentEnergy() + 40);
+                    }
+                    playersAte.add(player);
+                    player.setFoodCount(player.getFoodCount() + 1);
+                    quantity--;
+                }
         }
         return player;
     }

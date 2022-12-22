@@ -10,7 +10,11 @@ public class Meat extends Food{
 
     @Override
     public String getToolTip(int turn) {
-        return this.toolTip + turn + " jogadas";
+        if(turn <= 12) {
+            return this.toolTip + turn + " jogadas";
+        }else{
+            return "Carne toxica";
+        }
     }
 
     @Override
