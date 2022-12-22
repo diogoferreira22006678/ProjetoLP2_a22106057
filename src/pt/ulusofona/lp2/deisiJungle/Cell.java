@@ -37,10 +37,11 @@ public class Cell {
 
         ArrayList<Player> playersInCell = arrayCell[nrSquare - 1].cellInformationPlayer;
 
+
         for (int i = 0; i < playersInCell.size();i++ ){
 
             if(playersInCell.get(i).getId() == idPlayer){
-                playersInCell.remove(i);
+                arrayCell[nrSquare - 1].cellInformationPlayer.remove(i);
             }
 
         }

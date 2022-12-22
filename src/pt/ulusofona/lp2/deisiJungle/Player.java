@@ -38,7 +38,8 @@ public class Player {
     public Player move(int nrSquares, Player player){
 
         player.distanceTravelled += nrSquares;
-        player.currentEnergy -= nrSquares * player.specie.getEnergyPerCell();
+        player.currentEnergy -= Math.abs(nrSquares * player.specie.getEnergyPerCell());
+        player.setCurrentHouse(player.getCurrentHouse() + nrSquares);
 
         return player;
     }
