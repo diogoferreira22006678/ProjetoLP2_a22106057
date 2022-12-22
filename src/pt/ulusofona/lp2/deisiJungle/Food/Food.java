@@ -1,4 +1,6 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Food;
+
+import pt.ulusofona.lp2.deisiJungle.Player;
 
 abstract public class Food{
 

@@ -1,8 +1,10 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Food;
+
+import pt.ulusofona.lp2.deisiJungle.Player;
 
 import java.util.ArrayList;
 
-public class Bananas extends Food{
+public class Bananas extends Food {
 
     int quantity;
     String toolTip = "Bananas : ";

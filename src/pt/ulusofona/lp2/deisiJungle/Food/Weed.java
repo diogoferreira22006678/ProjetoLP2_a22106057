@@ -1,6 +1,8 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Food;
 
-public class Weed extends Food{
+import pt.ulusofona.lp2.deisiJungle.Player;
+
+public class Weed extends Food {
 
     String toolTip = "Erva : +- 20 energia";
 

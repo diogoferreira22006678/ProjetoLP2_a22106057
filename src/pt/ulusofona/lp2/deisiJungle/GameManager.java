@@ -1,5 +1,8 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import pt.ulusofona.lp2.deisiJungle.Food.*;
+import pt.ulusofona.lp2.deisiJungle.Specie.*;
+
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -74,7 +77,7 @@ public class GameManager {
         foodTypesList[3][2] = "meat.png";
 
         foodTypesList[4][0] = "m";
-        foodTypesList[4][1] = "Congumelos magicos";
+        foodTypesList[4][1] = "Cogumelos magicos";
         foodTypesList[4][2] = "mushroom.png";
 
         return foodTypesList;
@@ -169,7 +172,7 @@ public class GameManager {
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
         ArrayList idJogadores = new ArrayList();
         String[][] especiesList = getSpecies();
-
+        int procurarTarzan = 0;
         //validar energia inicial
         for(int i = 0; i < playersInfo.length;i++){
 
@@ -184,8 +187,7 @@ public class GameManager {
 
             idJogadores.add(playersInfo[i][0]);
             //validar Nº de Tarzans
-            int procurarTarzan = 0;
-            if (playersInfo[i][0].equals("Z")){
+            if (playersInfo[i][2].equals("Z")){
                 procurarTarzan++; }
             if(procurarTarzan > 1){
                 return new InitializationError("MORE THEN ONE TARZAN"); }
@@ -222,7 +224,7 @@ public class GameManager {
         ArrayList idJogadores = new ArrayList();
         String[][] especiesList = getSpecies();
         String [][] foodList = getFoodTypes();
-
+        int procurarTarzan = 0;
         //validar energia inicial
         for(int i = 0; i < playersInfo.length;i++){
 
@@ -237,8 +239,8 @@ public class GameManager {
 
             idJogadores.add(playersInfo[i][0]);
             //validar Nº de Tarzans
-            int procurarTarzan = 0;
-            if (playersInfo[i][0].equals("Z")){
+
+            if (playersInfo[i][2].equals("Z")){
                 procurarTarzan++; }
             if(procurarTarzan > 1){
                 return new InitializationError("MORE THEN ONE TARZAN"); }
@@ -271,14 +273,8 @@ public class GameManager {
                 return new InitializationError("Invalid Food ID");
             }
         }
-
-
-
         jungle = jungle.createBoard(jungleSize);
         playersJogo = new Player[playersInfo.length];
-
-
-
         createPlayerSpecie(playersInfo);
         createFood(foodInfo);
         Arrays.sort(playersJogo, Comparator.comparingInt(p -> p.getId()));

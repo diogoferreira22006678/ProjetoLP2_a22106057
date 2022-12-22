@@ -1,4 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
+import pt.ulusofona.lp2.deisiJungle.Food.Food;
+
 import java.util.ArrayList;
 
 

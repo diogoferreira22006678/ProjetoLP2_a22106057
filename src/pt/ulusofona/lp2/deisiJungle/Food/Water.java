@@ -1,6 +1,9 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Food;
 
-public class Water extends Food{
+import pt.ulusofona.lp2.deisiJungle.Food.Food;
+import pt.ulusofona.lp2.deisiJungle.Player;
+
+public class Water extends Food {
 
     String toolTip = "Agua : + 15U|20% energia";
 

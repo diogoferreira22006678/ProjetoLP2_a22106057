@@ -1,15 +1,18 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Specie;
 
-public class Bird extends Specie {
+import pt.ulusofona.lp2.deisiJungle.Player;
 
-    private int typeOfFood = 1;
-    int maxVelocity = 6;
-    int minVelocity = 5;
-    private int energyPerCell = 4;
-    private int recoveryEnergy = 50;
-    private int energyCap = 70;
+public class Turtle extends Specie {
 
-    public Bird() {
+    private int typeOfFood = 3;
+    int maxVelocity = 3;
+    int minVelocity = 1;
+    private int energyPerCell = 1;
+    private int recoveryEnergy = 5;
+    private int energyCap = 150;
+
+    public Turtle() {
+
     }
 
     @Override

@@ -1,6 +1,9 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Food;
 
-public class Meat extends Food{
+import pt.ulusofona.lp2.deisiJungle.Food.Food;
+import pt.ulusofona.lp2.deisiJungle.Player;
+
+public class Meat extends Food {
 
     String toolTip = "Carne : + 50 energia : ";
 

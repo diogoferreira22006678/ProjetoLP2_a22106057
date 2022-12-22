@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import pt.ulusofona.lp2.deisiJungle.Specie.Specie;
+
 public class Player {
     // instance variables
     private int id;
@@ -14,7 +16,7 @@ public class Player {
     int typeOfFood = 0;
     int maxVelocity = 0;
     int minVelocity = 0;
-    Specie specie;
+    public Specie specie;
 
     // constructor to initialize player with given values
     public Player(int id, String name, String species,

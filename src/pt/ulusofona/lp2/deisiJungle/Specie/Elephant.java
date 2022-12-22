@@ -1,15 +1,18 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Specie;
 
-public class Tarzan extends Specie {
+import pt.ulusofona.lp2.deisiJungle.Player;
 
-    private int typeOfFood = 3;
+public class Elephant extends Specie {
+
+    private int typeOfFood = 1;
     int maxVelocity = 6;
     int minVelocity = 1;
-    private int energyPerCell = 2;
-    private int recoveryEnergy = 20;
-    private int energyCap = 70;
+    private int energyPerCell = 4;
+    private int recoveryEnergy = 10;
+    private int energyCap = 180;
 
-    public Tarzan() {}
+    public Elephant() {
+    }
 
     @Override
     public int getRecoveryEnergy(){
@@ -37,7 +40,9 @@ public class Tarzan extends Specie {
     }
 
     @Override
-    public void eat(Player player) {}
+    public void eat(Player player) {
+
+    }
 
     @Override
     public Player sleep(Player player) {
@@ -47,10 +52,13 @@ public class Tarzan extends Specie {
 
     @Override
     public void move(Player player) {
-
     }
 
     public int getEnergyCap() {
         return energyCap;
+    }
+
+    public void setEnergyCap(int energyCap) {
+        this.energyCap = energyCap;
     }
 }

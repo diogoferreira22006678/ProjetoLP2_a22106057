@@ -1,8 +1,11 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Food;
+
+import pt.ulusofona.lp2.deisiJungle.Food.Food;
+import pt.ulusofona.lp2.deisiJungle.Player;
 
 import java.util.Random;
 
-public class MagicMushrooms extends Food{
+public class MagicMushrooms extends Food {
     Random rand = new Random();
     int nRandom = rand.nextInt(50) + 1;
     String toolTip = "Cogumelo Magico: +- "+ nRandom +"% energia";

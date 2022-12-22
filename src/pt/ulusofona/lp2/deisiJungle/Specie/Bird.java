@@ -1,15 +1,17 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Specie;
 
-public class Elephant extends Specie {
+import pt.ulusofona.lp2.deisiJungle.Player;
+
+public class Bird extends Specie {
 
     private int typeOfFood = 1;
     int maxVelocity = 6;
-    int minVelocity = 1;
+    int minVelocity = 5;
     private int energyPerCell = 4;
-    private int recoveryEnergy = 10;
-    private int energyCap = 180;
+    private int recoveryEnergy = 50;
+    private int energyCap = 70;
 
-    public Elephant() {
+    public Bird() {
     }
 
     @Override
@@ -50,13 +52,10 @@ public class Elephant extends Specie {
 
     @Override
     public void move(Player player) {
+
     }
 
     public int getEnergyCap() {
         return energyCap;
-    }
-
-    public void setEnergyCap(int energyCap) {
-        this.energyCap = energyCap;
     }
 }

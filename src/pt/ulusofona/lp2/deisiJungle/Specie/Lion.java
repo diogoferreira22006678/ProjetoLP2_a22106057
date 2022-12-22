@@ -1,4 +1,6 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Specie;
+
+import pt.ulusofona.lp2.deisiJungle.Player;
 
 public class Lion extends Specie {
 
