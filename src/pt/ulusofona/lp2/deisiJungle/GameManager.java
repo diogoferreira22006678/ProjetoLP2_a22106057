@@ -465,7 +465,7 @@ public class GameManager {
             if(jungle.arrayCells[playerCurrentHouse - 1].cellInformationFood != null){
                 Food food = jungle.arrayCells[playerCurrentHouse - 1].cellInformationFood;
                 playersJogo[correctPosition] = food.eatFood(playersJogo[correctPosition], nrSquares, turn);
-                if(player.getFoodCount() == playersJogo[correctPosition].getFoodCount()){
+                if(food.getId().equals("c") && specie.getTypeOfFood() == 1){
                     return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
                 }
                 return new MovementResult(MovementResultCode.CAUGHT_FOOD,"Apanhou " + food.getName());
@@ -476,9 +476,7 @@ public class GameManager {
         if(!bypassValidations){
             if(Math.abs(nrSquares) < specie.getMinVelocity() && Math.abs(nrSquares) > specie.getMaxVelocity()){
                 return new MovementResult( MovementResultCode.INVALID_MOVEMENT,null);
-            }
-        }
-            if(Math.abs(nrSquares) >= specie.getMinVelocity() && Math.abs(nrSquares) <= specie.getMaxVelocity()){}
+            } }
                 if(playerCurrentHouse + nrSquares > 0 && playerCurrentHouse + nrSquares < jungle.length){
                     if(jungle.arrayCells[playerCurrentHouse + nrSquares - 1].cellInformationFood == null){
                          playersJogo[correctPosition] = player.move(nrSquares,player);
@@ -491,7 +489,7 @@ public class GameManager {
                         jungle.arrayCells = jungle.arrayCells[playerCurrentHouse - 1].removeInformation(player.getId(),jungle.arrayCells,playerCurrentHouse);
                         jungle.arrayCells = jungle.arrayCells[playerCurrentHouse + nrSquares - 1].addInformation(player, jungle.arrayCells, playerCurrentHouse + nrSquares);
                         playersJogo[correctPosition] = food.eatFood(playersJogo[correctPosition], nrSquares, turn);
-                        if(player.getFoodCount() == playersJogo[correctPosition].getFoodCount()){
+                        if(food.getId().equals("c") && specie.getTypeOfFood() == 1){
                             return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
                         }
                         return new MovementResult(MovementResultCode.CAUGHT_FOOD,"Apanhou " + food.getName());

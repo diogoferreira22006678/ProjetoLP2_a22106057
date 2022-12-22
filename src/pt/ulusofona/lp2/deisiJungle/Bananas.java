@@ -2,8 +2,8 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class Bananas extends Food{
 
-    int quantity = 3;
-    String toolTip = "Bananas : " + quantity + " : + 40 energia";
+    int quantity;
+    String toolTip = "Bananas : ";
 
     public Bananas(String id, int position, String imageName,int quantity, String name) {
         super(id, position, imageName, name);
@@ -12,7 +12,7 @@ public class Bananas extends Food{
 
     @Override
     public String getToolTip(int turn) {
-        return this.toolTip;
+        return this.toolTip + quantity + " : + 40 energia";
     }
 
     @Override
