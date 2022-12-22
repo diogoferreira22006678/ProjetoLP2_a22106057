@@ -145,7 +145,7 @@ public class GameManager {
                     break;
                 }
                 case "b" -> {
-                    Food banana = new Bananas(id, position, "bananas.png", 3, "Cacho de bananas");
+                    Food banana = new Bananas(id, position, "bananas.png", 3, "Bananas");
                     jungle.arrayCells[position - 1].addInformationFood(banana, jungle.arrayCells, position);
                     break;
                 }
@@ -452,10 +452,9 @@ public class GameManager {
         int playerCurrentHouse = playersJogo[correctPosition].getCurrentHouse();
         Player player = playersJogo[correctPosition];
         int energyCap = specie.getEnergyCap();
-        System.out.print(specie.getTypeOfFood() + "\n" + player.getFoodCount());
         //NOTENOUGHENERGY
         if(energyCost > player.getCurrentEnergy()){
-            return new MovementResult(MovementResultCode.NO_ENERGY,"");
+            return new MovementResult(MovementResultCode.NO_ENERGY,null);
         }
         //SLEEP
         if(nrSquares == 0){
@@ -470,18 +469,21 @@ public class GameManager {
                 playersJogo[correctPosition] = food.eatFood(playersJogo[correctPosition], nrSquares, turn);
                 return new MovementResult(MovementResultCode.CAUGHT_FOOD,"Apanhou " + food.getName());
             }
-            return new MovementResult(MovementResultCode.VALID_MOVEMENT,"");
+            return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
         }
         //BYPASS
         if(!bypassValidations){
-            //WITHOUTBYPASS
-            if(Math.abs(nrSquares) >= specie.getMinVelocity() && Math.abs(nrSquares) <= specie.getMaxVelocity()){
+            if(Math.abs(nrSquares) < specie.getMinVelocity() && Math.abs(nrSquares) > specie.getMaxVelocity()){
+                return new MovementResult( MovementResultCode.INVALID_MOVEMENT,null);
+            }
+        }
+            if(Math.abs(nrSquares) >= specie.getMinVelocity() && Math.abs(nrSquares) <= specie.getMaxVelocity()){}
                 if(playerCurrentHouse + nrSquares > 0 && playerCurrentHouse + nrSquares < jungle.length){
                     if(jungle.arrayCells[playerCurrentHouse + nrSquares - 1].cellInformationFood == null){
                          playersJogo[correctPosition] = player.move(nrSquares,player);
                          jungle.arrayCells = jungle.arrayCells[playerCurrentHouse-1].removeInformation(player.getId(),jungle.arrayCells,playerCurrentHouse);
                          jungle.arrayCells = jungle.arrayCells[playerCurrentHouse + nrSquares -1].addInformation(player, jungle.arrayCells, playerCurrentHouse + nrSquares);
-                      return new MovementResult(MovementResultCode.VALID_MOVEMENT,"");
+                      return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
                     }else{
                         playersJogo[correctPosition] = player.move(nrSquares,player);
                         Food food = jungle.arrayCells[playerCurrentHouse + nrSquares - 1].cellInformationFood;
@@ -495,27 +497,16 @@ public class GameManager {
                         playersJogo[correctPosition] = player.move(1 - playerCurrentHouse,player);
                         jungle.arrayCells = jungle.arrayCells[playerCurrentHouse - 1].removeInformation(player.getId(),jungle.arrayCells,playerCurrentHouse);
                         jungle.arrayCells = jungle.arrayCells[0].addInformation(player, jungle.arrayCells, 1);
-                        return new MovementResult(MovementResultCode.VALID_MOVEMENT,"");
+                        return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
                     }
                     if(playerCurrentHouse + nrSquares > jungle.length){
                         playersJogo[correctPosition] = player.move(jungle.length - playerCurrentHouse, player);
                         jungle.arrayCells = jungle.arrayCells[playerCurrentHouse - 1].removeInformation(player.getId(),jungle.arrayCells,playerCurrentHouse);
                         jungle.arrayCells = jungle.arrayCells[jungle.length - 1].addInformation(player, jungle.arrayCells, jungle.length);
-                        return new MovementResult(MovementResultCode.VALID_MOVEMENT,"");
+                        return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
                     }
                 }
-            }else{
-                return new MovementResult( MovementResultCode.INVALID_MOVEMENT,"");
-            }
-        }else{
-            //WITHBYPASS
-            if(playerCurrentHouse +nrSquares > jungle.length){
-
-            }else{
-
-            }
-        }
-        return new MovementResult( MovementResultCode.INVALID_MOVEMENT,"");
+        return new MovementResult( MovementResultCode.INVALID_MOVEMENT,null);
     }
 
     public String[] getWinnerInfo() {

@@ -20,8 +20,8 @@ public class Bananas extends Food{
         if (quantity > 0) {
             if (nrSquare != 0) {
                 if (player.specie.getTypeOfFood() == 1 || player.specie.getTypeOfFood() == 2 || player.specie.getTypeOfFood() == 3) {
-                    if(player.getCurrentEnergy() + 40 > player.specie.getEnergyCap()){
-                        player.setCurrentEnergy(player.specie.getEnergyCap());
+                    if(player.getCurrentEnergy() + 40 > 200){
+                        player.setCurrentEnergy(200);
                     }else {
                         player.setCurrentEnergy(player.getCurrentEnergy() + 40);
                     }

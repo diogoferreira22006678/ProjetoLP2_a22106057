@@ -17,8 +17,8 @@ public class Water extends Food{
     public Player eatFood(Player player, int turn, int nrSquare) {
 
         if(player.specie.getTypeOfFood() == 1 || player.specie.getTypeOfFood() == 2){
-            if(player.getCurrentEnergy() + 15 > player.specie.getEnergyCap()){
-                player.setCurrentEnergy(player.specie.getEnergyCap());
+            if(player.getCurrentEnergy() + 15 > 200){
+                player.setCurrentEnergy(200);
             }else {
                 player.setCurrentEnergy(player.getCurrentEnergy() + 15);
             }
@@ -27,7 +27,7 @@ public class Water extends Food{
 
         if(player.specie.getTypeOfFood() == 3){
             if(player.getCurrentEnergy() * 1.2 > player.specie.getEnergyCap()){
-                player.setCurrentEnergy(player.specie.getEnergyCap());
+                player.setCurrentEnergy(200);
             }else {
                 player.setCurrentEnergy((int) (player.getCurrentEnergy() * 1.2));
             }
