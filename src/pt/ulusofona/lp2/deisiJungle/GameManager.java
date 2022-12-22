@@ -443,7 +443,6 @@ public class GameManager {
         int energyCost = specie.getEnergyPerCell() * nrSquares;
         int playerCurrentHouse = playersJogo[correctPosition].getCurrentHouse();
         Player player = playersJogo[correctPosition];
-        int energyCap = specie.getEnergyCap();
         //NOTENOUGHENERGY
         if(energyCost > player.getCurrentEnergy()){
             return new MovementResult(MovementResultCode.NO_ENERGY,null);
@@ -547,7 +546,7 @@ public class GameManager {
                 if (i == k) {
                     continue;  // Skip comparison with itself
                 }
-                if (Math.abs(player.getCurrentHouse() - playerComparate.getCurrentHouse()) > halfTheMap - 1) {
+                if (Math.abs(player.getCurrentHouse() - playerComparate.getCurrentHouse()) + 1 > halfTheMap) {
                     // The difference between the currentHouse values is greater than the maximum allowed difference
                     // Do something here, such as throwing an exception or printing an error message
                     playersInfo[0] = String.valueOf(player.getId());
