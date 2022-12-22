@@ -399,7 +399,7 @@ public class GameManager {
             if (playersJogo[i].getTurn() == 1){
                 Player player = playersJogo[i];
 
-                playerInfo[0] = String.valueOf(player.getSpecie().getEnergyPerCell() * nrPositions);
+                playerInfo[0] = String.valueOf(Math.abs(player.getSpecie().getEnergyPerCell() * nrPositions));
                 playerInfo[1] = String.valueOf(player.getSpecie().getRecoveryEnergy());
             }
         }
@@ -452,12 +452,11 @@ public class GameManager {
         int playerCurrentHouse = playersJogo[correctPosition].getCurrentHouse();
         Player player = playersJogo[correctPosition];
         int energyCap = specie.getEnergyCap();
-
+        System.out.print(specie.getTypeOfFood() + "\n" + player.getFoodCount());
         //NOTENOUGHENERGY
         if(energyCost > player.getCurrentEnergy()){
             return new MovementResult(MovementResultCode.NO_ENERGY,"");
         }
-
         //SLEEP
         if(nrSquares == 0){
             if(player.getCurrentEnergy() + specie.getRecoveryEnergy() > energyCap){
@@ -473,7 +472,6 @@ public class GameManager {
             }
             return new MovementResult(MovementResultCode.VALID_MOVEMENT,"");
         }
-
         //BYPASS
         if(!bypassValidations){
             //WITHOUTBYPASS
@@ -489,6 +487,7 @@ public class GameManager {
                         Food food = jungle.arrayCells[playerCurrentHouse + nrSquares - 1].cellInformationFood;
                         jungle.arrayCells = jungle.arrayCells[playerCurrentHouse - 1].removeInformation(player.getId(),jungle.arrayCells,playerCurrentHouse);
                         jungle.arrayCells = jungle.arrayCells[playerCurrentHouse + nrSquares - 1].addInformation(player, jungle.arrayCells, playerCurrentHouse + nrSquares);
+                        playersJogo[correctPosition] = food.eatFood(playersJogo[correctPosition], nrSquares, turn);
                         return new MovementResult(MovementResultCode.CAUGHT_FOOD,"Apanhou " + food.getName());
                     }
                 }else{

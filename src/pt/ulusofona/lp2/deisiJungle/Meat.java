@@ -16,7 +16,7 @@ public class Meat extends Food{
     @Override
     public Player eatFood(Player player, int turn, int nrSquare) {
         if(turn <= 12) {
-            if (player.typeOfFood == 2 || player.typeOfFood == 3) {
+            if (player.specie.getTypeOfFood() == 2 || player.specie.getTypeOfFood() == 3) {
                 if(player.getCurrentEnergy() + 50 > player.specie.getEnergyCap()){
                     player.setCurrentEnergy(player.specie.getEnergyCap());
                 }else {
@@ -25,16 +25,16 @@ public class Meat extends Food{
                 player.setFoodCount(player.getFoodCount() + 1);
             }
 
-            if (player.typeOfFood == 1) {
+            if (player.specie.getTypeOfFood() == 1) {
 
             }
         }else{
-            if (player.typeOfFood == 2 || player.typeOfFood == 3) {
+            if (player.specie.getTypeOfFood() == 2 || player.specie.getTypeOfFood() == 3) {
                 player.setCurrentEnergy((int) (player.getCurrentEnergy() * 0.5));
                 player.setFoodCount(player.getFoodCount() + 1);
             }
 
-            if (player.typeOfFood == 1) {
+            if (player.specie.getTypeOfFood() == 1) {
 
             }
         }

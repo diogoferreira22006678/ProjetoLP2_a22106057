@@ -4,7 +4,7 @@ public record MovementResult(MovementResultCode code, String message){
 
 
 public String message(){
-        return code + "\n" + message;
+        return message;
         }
 
 }

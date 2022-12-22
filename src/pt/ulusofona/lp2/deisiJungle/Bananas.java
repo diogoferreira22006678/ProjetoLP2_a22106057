@@ -19,7 +19,7 @@ public class Bananas extends Food{
     public Player eatFood(Player player, int turn, int nrSquare) {
         if (quantity > 0) {
             if (nrSquare != 0) {
-                if (player.typeOfFood == 1 || player.typeOfFood == 2 || player.typeOfFood == 3) {
+                if (player.specie.getTypeOfFood() == 1 || player.specie.getTypeOfFood() == 2 || player.specie.getTypeOfFood() == 3) {
                     if(player.getCurrentEnergy() + 40 > player.specie.getEnergyCap()){
                         player.setCurrentEnergy(player.specie.getEnergyCap());
                     }else {
@@ -28,7 +28,7 @@ public class Bananas extends Food{
                     player.setFoodCount(player.getFoodCount() + 1);
                     quantity--;
                 } else {
-                    if (player.typeOfFood == 1 || player.typeOfFood == 2 || player.typeOfFood == 3) {
+                    if (player.specie.getTypeOfFood() == 1 || player.specie.getTypeOfFood() == 2 || player.specie.getTypeOfFood() == 3) {
                         if(player.getCurrentEnergy() - 40 < 0){
                             player.setCurrentEnergy(0);
                         }else {

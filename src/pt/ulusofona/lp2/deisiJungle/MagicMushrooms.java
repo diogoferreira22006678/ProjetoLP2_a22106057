@@ -19,7 +19,7 @@ public class MagicMushrooms extends Food{
 
     @Override
     public Player eatFood(Player player, int turn, int nrSquare) {
-        if(player.typeOfFood == 1 || player.typeOfFood == 2 || player.typeOfFood == 3){
+        if(player.specie.getTypeOfFood() == 1 || player.specie.getTypeOfFood() == 2 || player.specie.getTypeOfFood() == 3){
             if(turn % 2 == 0){
                 if(player.getCurrentEnergy() * (1 + (nRandom / 100)) > player.specie.getEnergyCap()){
                     player.setCurrentEnergy(player.specie.getEnergyCap());
