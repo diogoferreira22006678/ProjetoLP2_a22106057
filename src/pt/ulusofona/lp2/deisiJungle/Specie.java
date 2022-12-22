@@ -22,7 +22,7 @@ abstract public class Specie {
 
     public abstract void eat(Player player);
 
-    public abstract void sleep(Player player);
+    public abstract Player sleep(Player player);
 
     public abstract void move(Player player);
 }

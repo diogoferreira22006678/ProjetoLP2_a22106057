@@ -157,7 +157,7 @@ public class GameManager {
                 case "m" -> {
                     Random rand = new Random();
                     int number = rand.nextInt(50) + 1;
-                    Food mushroom = new MagicMushrooms(id, position , "mushroom.png", number, "Congumelos magicos");
+                    Food mushroom = new MagicMushrooms(id, position , "mushroom.png", number, "Congumelo Magico");
                     jungle.arrayCells[position - 1].addInformationFood(mushroom, jungle.arrayCells, position);
                     break;
                 }
@@ -262,19 +262,17 @@ public class GameManager {
         if(jungleSize < 2 * playersInfo.length){
             return new InitializationError("INVALID LENGTH"); }
 
-        int valid = 0;
-
         for(int i = 0; i < foodInfo.length; i++){
-
+            int valid = 0;
             for(int k = 0; k < foodList.length; k++){
                 if(foodInfo[i][0].equals(foodList[k][0])){
                     valid = 1;
-                    break;
                 }
             }
             if(valid == 0){
                 return new InitializationError("Invalid ID");
             }
+
 
             if(Integer.parseInt(foodInfo[i][1]) < 1 || Integer.parseInt(foodInfo[i][1]) > jungleSize){
                 return new InitializationError("Invalid Food Positioning");
@@ -458,15 +456,18 @@ public class GameManager {
         }
         //SLEEP
         if(nrSquares == 0){
-            if(player.getCurrentEnergy() + specie.getRecoveryEnergy() > energyCap){
-                playersJogo[correctPosition].setCurrentEnergy(energyCap);
+            if(player.getCurrentEnergy() + specie.getRecoveryEnergy() > 200){
+                playersJogo[correctPosition].setCurrentEnergy(200);
             }else{
-            playersJogo[correctPosition].getSpecie().sleep(playersJogo[correctPosition]);
+            playersJogo[correctPosition] = playersJogo[correctPosition].getSpecie().sleep(playersJogo[correctPosition]);
             }
             //SLEEP AND FOOD
             if(jungle.arrayCells[playerCurrentHouse - 1].cellInformationFood != null){
                 Food food = jungle.arrayCells[playerCurrentHouse - 1].cellInformationFood;
                 playersJogo[correctPosition] = food.eatFood(playersJogo[correctPosition], nrSquares, turn);
+                if(player.getFoodCount() == playersJogo[correctPosition].getFoodCount()){
+                    return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
+                }
                 return new MovementResult(MovementResultCode.CAUGHT_FOOD,"Apanhou " + food.getName());
             }
             return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
@@ -490,6 +491,9 @@ public class GameManager {
                         jungle.arrayCells = jungle.arrayCells[playerCurrentHouse - 1].removeInformation(player.getId(),jungle.arrayCells,playerCurrentHouse);
                         jungle.arrayCells = jungle.arrayCells[playerCurrentHouse + nrSquares - 1].addInformation(player, jungle.arrayCells, playerCurrentHouse + nrSquares);
                         playersJogo[correctPosition] = food.eatFood(playersJogo[correctPosition], nrSquares, turn);
+                        if(player.getFoodCount() == playersJogo[correctPosition].getFoodCount()){
+                            return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
+                        }
                         return new MovementResult(MovementResultCode.CAUGHT_FOOD,"Apanhou " + food.getName());
                     }
                 }else{

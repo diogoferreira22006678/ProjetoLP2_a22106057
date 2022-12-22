@@ -43,8 +43,9 @@ public class Bird extends Specie {
     }
 
     @Override
-    public void sleep(Player player) {
+    public Player sleep(Player player) {
         player.setCurrentEnergy(player.getCurrentEnergy() + recoveryEnergy);
+        return player;
     }
 
     @Override

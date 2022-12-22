@@ -26,7 +26,7 @@ public class Water extends Food{
         }
 
         if(player.specie.getTypeOfFood() == 3){
-            if(player.getCurrentEnergy() * 1.2 > player.specie.getEnergyCap()){
+            if(player.getCurrentEnergy() * 1.2 > 200){
                 player.setCurrentEnergy(200);
             }else {
                 player.setCurrentEnergy((int) (player.getCurrentEnergy() * 1.2));

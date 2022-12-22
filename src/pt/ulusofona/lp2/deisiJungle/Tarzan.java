@@ -40,8 +40,9 @@ public class Tarzan extends Specie {
     public void eat(Player player) {}
 
     @Override
-    public void sleep(Player player) {
+    public Player sleep(Player player) {
         player.setCurrentEnergy(player.getCurrentEnergy() + recoveryEnergy);
+        return player;
     }
 
     @Override
