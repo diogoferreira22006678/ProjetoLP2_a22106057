@@ -156,8 +156,7 @@ public class GameManager {
                 }
                 case "m" -> {
                     Random rand = new Random();
-                    int number = rand.nextInt(50) + 1;
-                    Food mushroom = new MagicMushrooms(id, position , "mushroom.png", number, "Cogumelo Magico");
+                    Food mushroom = new MagicMushrooms(id, position ,"mushroom.png", "Cogumelo Magico");
                     jungle.arrayCells[position - 1].addInformationFood(mushroom, jungle.arrayCells, position);
                     break;
                 }

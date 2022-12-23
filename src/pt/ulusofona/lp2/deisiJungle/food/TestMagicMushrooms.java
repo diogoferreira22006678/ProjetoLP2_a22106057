@@ -11,8 +11,8 @@ public class TestMagicMushrooms {
     @Test
     public void testEatFoodTarzan() {
         // Create a MagicMushrooms instance with a fixed random value
-        MagicMushrooms mushrooms = new MagicMushrooms("id", 0, "imageName", 25, "name");
-
+        MagicMushrooms mushrooms = new MagicMushrooms("id", 0, "imageName", "name");
+        mushrooms.nRandom = 25;
         // Create a player instance with an initial energy of 100
         Player playerIncrease = new Player(1, "Diogo","L", 100);
         playerIncrease.setSpecie(new Tarzan());
@@ -61,8 +61,8 @@ public class TestMagicMushrooms {
     @Test
     public void testEatFoodBird() {
         // Create a MagicMushrooms instance with a fixed random value
-        MagicMushrooms mushrooms = new MagicMushrooms("id", 0, "imageName", 25, "name");
-
+        MagicMushrooms mushrooms = new MagicMushrooms("id", 0, "imageName", "name");
+        mushrooms.nRandom = 25;
         // Create a player instance with an initial energy of 100
         Player playerIncrease = new Player(1, "Diogo","L", 100);
         playerIncrease.setSpecie(new Bird());
@@ -111,8 +111,8 @@ public class TestMagicMushrooms {
     @Test
     public void testEatFoodLion() {
         // Create a MagicMushrooms instance with a fixed random value
-        MagicMushrooms mushrooms = new MagicMushrooms("id", 0, "imageName", 25, "name");
-
+        MagicMushrooms mushrooms = new MagicMushrooms("id", 0, "imageName", "name");
+        mushrooms.nRandom = 25;
         // Create a player instance with an initial energy of 100
         Player playerIncrease = new Player(1, "Diogo","L", 100);
         playerIncrease.setSpecie(new Lion());
@@ -161,8 +161,8 @@ public class TestMagicMushrooms {
     @Test
     public void testEatFoodElephant() {
         // Create a MagicMushrooms instance with a fixed random value
-        MagicMushrooms mushrooms = new MagicMushrooms("id", 0, "imageName", 25, "name");
-
+        MagicMushrooms mushrooms = new MagicMushrooms("id", 0, "imageName", "name");
+        mushrooms.nRandom = 25;
         // Create a player instance with an initial energy of 100
         Player playerIncrease = new Player(1, "Diogo","L", 100);
         playerIncrease.setSpecie(new Elephant());
@@ -211,8 +211,8 @@ public class TestMagicMushrooms {
     @Test
     public void testEatFoodTurtle() {
         // Create a MagicMushrooms instance with a fixed random value
-        MagicMushrooms mushrooms = new MagicMushrooms("id", 0, "imageName", 25, "name");
-
+        MagicMushrooms mushrooms = new MagicMushrooms("id", 0, "imageName", "name");
+        mushrooms.nRandom = 25;
         // Create a player instance with an initial energy of 100
         Player playerIncrease = new Player(1, "Diogo","L", 100);
         playerIncrease.setSpecie(new Turtle());
@@ -262,7 +262,7 @@ public class TestMagicMushrooms {
     @Test
     public void testRandomGetToolTip() {
         // Create a MagicMushrooms instance with a fixed random value
-        Food mushrooms = new MagicMushrooms("id", 1, "imageName", 25, "name");
+        Food mushrooms = new MagicMushrooms("id", 1, "imageName", "name");
 
         // Invoke the getToolTip() method on the mushrooms instance
         String toolTip = mushrooms.getToolTip(1);
