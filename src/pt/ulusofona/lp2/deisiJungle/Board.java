@@ -1,9 +1,10 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Board {
+public class Board implements Serializable {
 
     Cell[] arrayCells;
     int length;

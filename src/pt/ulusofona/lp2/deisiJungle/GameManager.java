@@ -4,11 +4,8 @@ import pt.ulusofona.lp2.deisiJungle.food.*;
 import pt.ulusofona.lp2.deisiJungle.specie.*;
 
 import javax.swing.*;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Random;
+import java.io.*;
+import java.util.*;
 
 public class GameManager {
 
@@ -608,11 +605,39 @@ public class GameManager {
     }
 
     public boolean saveGame(File file){
-        return true;
+            try {
+
+                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
+                out.writeObject(jungle);
+                out.writeInt(turn);
+                out.writeObject(playersJogo);
+                // fecha o arquivo
+                out.close();
+
+                return true;
+            } catch (IOException e) {
+                return false;
+            }
+
     }
 
-    public boolean loadGame(File file){
-        return true;
+    public boolean loadGame(File file) {
+        try {
+            // cria um ObjectInputStream para ler do arquivo
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
+
+            // lê os dados do arquivo
+            jungle = (Board) in.readObject();
+            playersJogo = (Player[]) in.readObject();
+            turn = in.readInt();
+
+            // fecha o arquivo
+            in.close();
+
+            return true;
+        } catch (IOException | ClassNotFoundException e) {
+            return false;
+        }
     }
 
 }
