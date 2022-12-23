@@ -270,7 +270,7 @@ public class GameManager {
             if(!isNumeric){
                 return new InitializationError("POSITION NOT NUMERIC");
             }
-            if(Integer.parseInt(foodInfo[i][1]) < 1 || Integer.parseInt(foodInfo[i][1]) > jungleSize){
+            if(Integer.parseInt(foodInfo[i][1]) <= 1 || Integer.parseInt(foodInfo[i][1]) >= jungleSize){
                 return new InitializationError("Invalid Food Positioning");
             }
             if(!foodInfo[i][0].equals("e") && !foodInfo[i][0].equals("a") && !foodInfo[i][0].equals("b")
@@ -446,15 +446,11 @@ public class GameManager {
         Player player = playersJogo[correctPosition];
         //NOTENOUGHENERGY
         if(energyCost > player.getCurrentEnergy()){
-            return new MovementResult(MovementResultCode.NO_ENERGY,null);
-        }
+            playersJogo[correctPosition] = playersJogo[correctPosition].getSpecie().sleep(playersJogo[correctPosition]);
+            return new MovementResult(MovementResultCode.NO_ENERGY,null);}
         //SLEEP
         if(nrSquares == 0){
-            if(player.getCurrentEnergy() + specie.getRecoveryEnergy() > 200){
-                playersJogo[correctPosition].setCurrentEnergy(200);
-            }else{
             playersJogo[correctPosition] = playersJogo[correctPosition].getSpecie().sleep(playersJogo[correctPosition]);
-            }
             //SLEEP AND FOOD
             if(jungle.arrayCells[playerCurrentHouse - 1].cellInformationFood != null){
                 Food food = jungle.arrayCells[playerCurrentHouse - 1].cellInformationFood;
@@ -464,7 +460,6 @@ public class GameManager {
                 }
                 return new MovementResult(MovementResultCode.CAUGHT_FOOD,"Apanhou " + food.getName());
             }
-            return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
         }
         //BYPASS
         if(!bypassValidations){

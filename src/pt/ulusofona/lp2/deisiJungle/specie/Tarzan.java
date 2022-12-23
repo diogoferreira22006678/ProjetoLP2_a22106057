@@ -43,7 +43,11 @@ public class Tarzan extends Specie {
 
     @Override
     public Player sleep(Player player) {
-        player.setCurrentEnergy(player.getCurrentEnergy() + recoveryEnergy);
+        if(player.getCurrentEnergy() + recoveryEnergy > 200){
+            player.setCurrentEnergy(200);
+        }else {
+            player.setCurrentEnergy(player.getCurrentEnergy() + recoveryEnergy);
+        }
         return player;
     }
 

@@ -10,7 +10,7 @@ public class TestBananas {
     @Test
     public void testEatFoodTarzan() {
 
-        // Create a Banana instance with a fixed random value
+        // Create Bananas instances with a fixed value
         Bananas bananasZeroQuantity = new Bananas("id", 0, "imageName", 0, "name");
         Bananas bananasIncrease = new Bananas("id", 0, "imageName", 3, "name");
         Bananas bananasDecrease = new Bananas("id", 1, "imageName", 3, "name");
@@ -77,7 +77,7 @@ public class TestBananas {
 
     @Test
     public void testEatFoodBird() {
-        // Create a Banana instance with a fixed random value
+        // Create Bananas instances with a fixed value
         Bananas bananasZeroQuantity = new Bananas("id", 0, "imageName", 0, "name");
         Bananas bananasIncrease = new Bananas("id", 0, "imageName", 3, "name");
         Bananas bananasDecrease = new Bananas("id", 1, "imageName", 3, "name");
@@ -144,7 +144,7 @@ public class TestBananas {
 
     @Test
     public void testEatFoodLion() {
-        // Create a Banana instance with a fixed random value
+        // Create Bananas instances with a fixed value
         Bananas bananasZeroQuantity = new Bananas("id", 0, "imageName", 0, "name");
         Bananas bananasIncrease = new Bananas("id", 0, "imageName", 3, "name");
         Bananas bananasDecrease = new Bananas("id", 1, "imageName", 3, "name");
@@ -211,7 +211,7 @@ public class TestBananas {
 
     @Test
     public void testEatFoodElephant() {
-        // Create a Banana instance with a fixed random value
+        // Create Bananas instances with a fixed value
         Bananas bananasZeroQuantity = new Bananas("id", 0, "imageName", 0, "name");
         Bananas bananasIncrease = new Bananas("id", 0, "imageName", 3, "name");
         Bananas bananasDecrease = new Bananas("id", 1, "imageName", 3, "name");
@@ -278,7 +278,7 @@ public class TestBananas {
 
     @Test
     public void testEatFoodTurtle() {
-        // Create a Banana instance with a fixed random value
+        // Create Bananas instances with a fixed value
         Bananas bananasZeroQuantity = new Bananas("id", 0, "imageName", 0, "name");
         Bananas bananasIncrease = new Bananas("id", 0, "imageName", 3, "name");
         Bananas bananasDecrease = new Bananas("id", 1, "imageName", 3, "name");
@@ -345,7 +345,7 @@ public class TestBananas {
 
     @Test
     public void testRandomGetToolTip() {
-        // Create a Banana instance with a fixed random value
+        // Create Bananas instances with a fixed value
         Food bananas = new Bananas("id", 1, "imageName", 3, "name");
         Player player = new Player(1, "Diogo","L", 100);
         player.setSpecie(new Lion());

@@ -42,6 +42,20 @@ public class TestMagicMushrooms {
 
         // Assert that the player's energy has capped
         assertEquals(200, playerMax.getCurrentEnergy(), 0.01);
+
+        // Create a player instance with an initial energy of 200
+        Player playerRepeat = new Player(1, "Diogo","L", 200);
+        playerRepeat.setSpecie(new Tarzan());
+
+        // Invoke the eatFood() method again, this time on an odd turn
+        playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
+        // Invoke the eatFood() method again, this time on an odd turn
+        playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
+        // Invoke the eatFood() method again, this time on an odd turn
+        playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
+
+        // Assert that the player's energy has decreased
+        assertEquals(84, playerRepeat.getCurrentEnergy(), 0.01);
     }
 
     @Test
@@ -78,6 +92,20 @@ public class TestMagicMushrooms {
 
         // Assert that the player's energy has capped
         assertEquals(200, playerMax.getCurrentEnergy(), 0.01);
+
+        // Create a player instance with an initial energy of 200
+        Player playerRepeat = new Player(1, "Diogo","L", 200);
+        playerRepeat.setSpecie(new Bird());
+
+        // Invoke the eatFood() method again, this time on an odd turn
+        playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
+        // Invoke the eatFood() method again, this time on an odd turn
+        playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
+        // Invoke the eatFood() method again, this time on an odd turn
+        playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
+
+        // Assert that the player's energy has decreased
+        assertEquals(84, playerRepeat.getCurrentEnergy(), 0.01);
     }
 
     @Test
@@ -95,7 +123,7 @@ public class TestMagicMushrooms {
         // Assert that the player's energy has increased by 25%
         assertEquals(125, playerIncrease.getCurrentEnergy(), 0.01);
 
-        // Create a player instance with an initial energy of 100
+        // Create a player instance with an initial energy of 66
         Player playerDecrease = new Player(1, "Diogo","L", 66);
         playerDecrease.setSpecie(new Lion());
 
@@ -114,6 +142,20 @@ public class TestMagicMushrooms {
 
         // Assert that the player's energy has capped
         assertEquals(200, playerMax.getCurrentEnergy(), 0.01);
+
+        // Create a player instance with an initial energy of 200
+        Player playerRepeat = new Player(1, "Diogo","L", 200);
+        playerRepeat.setSpecie(new Lion());
+
+        // Invoke the eatFood() method again, this time on an odd turn
+        playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
+        // Invoke the eatFood() method again, this time on an odd turn
+        playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
+        // Invoke the eatFood() method again, this time on an odd turn
+        playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
+
+        // Assert that the player's energy has decreased
+        assertEquals(84, playerRepeat.getCurrentEnergy(), 0.01);
     }
 
     @Test
@@ -150,6 +192,20 @@ public class TestMagicMushrooms {
 
         // Assert that the player's energy has capped
         assertEquals(200, playerMax.getCurrentEnergy(), 0.01);
+
+        // Create a player instance with an initial energy of 200
+        Player playerRepeat = new Player(1, "Diogo","L", 200);
+        playerRepeat.setSpecie(new Elephant());
+
+        // Invoke the eatFood() method again, this time on an odd turn
+        playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
+        // Invoke the eatFood() method again, this time on an odd turn
+        playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
+        // Invoke the eatFood() method again, this time on an odd turn
+        playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
+
+        // Assert that the player's energy has decreased
+        assertEquals(84, playerRepeat.getCurrentEnergy(), 0.01);
     }
 
     @Test
@@ -186,7 +242,22 @@ public class TestMagicMushrooms {
 
         // Assert that the player's energy has capped
         assertEquals(200, playerMax.getCurrentEnergy(), 0.01);
+
+        // Create a player instance with an initial energy of 200
+        Player playerRepeat = new Player(1, "Diogo","L", 200);
+        playerRepeat.setSpecie(new Turtle());
+
+        // Invoke the eatFood() method again, this time on an odd turn
+        playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
+        // Invoke the eatFood() method again, this time on an odd turn
+        playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
+        // Invoke the eatFood() method again, this time on an odd turn
+        playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
+
+        // Assert that the player's energy has decreased
+        assertEquals(84, playerRepeat.getCurrentEnergy(), 0.01);
     }
+
 
     @Test
     public void testRandomGetToolTip() {
