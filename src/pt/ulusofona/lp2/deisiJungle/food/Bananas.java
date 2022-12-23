@@ -23,6 +23,7 @@ public class Bananas extends Food {
     @Override
     public Player eatFood(Player player, int turn, int nrSquare) {
         if (quantity > 0) {
+
             for (int i = 0; i < playersAte.size(); i++){
                 if(playersAte.get(i).getId() == player.getId()){
                     if (player.getSpecie().getTypeOfFood() == 1 || player.getSpecie().getTypeOfFood() == 2 || player.getSpecie().getTypeOfFood() == 3) {
@@ -48,6 +49,7 @@ public class Bananas extends Food {
                     quantity--;
                 }
         }
+
         return player;
     }
 }

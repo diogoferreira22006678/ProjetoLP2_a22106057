@@ -507,7 +507,7 @@ public class GameManager {
 
         for (int i = 0; i < playersJogo.length; i++) {
 
-            //ganhou porque chegou a meta
+            //won cuz it made to the final
             if (playersJogo[i].getCurrentHouse() == jungle.length) {
                 playersInfo[0] = String.valueOf(playersJogo[i].getId());
                 playersInfo[1] = playersJogo[i].getName();
@@ -542,10 +542,10 @@ public class GameManager {
                 if (Math.abs(player.getCurrentHouse() - playerComparate.getCurrentHouse()) + 1 > halfTheMap) {
                     // The difference between the currentHouse values is greater than the maximum allowed difference
                     // Do something here, such as throwing an exception or printing an error message
-                    playersInfo[0] = String.valueOf(player.getId());
-                    playersInfo[1] = player.getName();
-                    playersInfo[2] = player.getSpecies();
-                    playersInfo[3] = String.valueOf(player.getCurrentEnergy());
+                    playersInfo[0] = String.valueOf(playerComparate.getId());
+                    playersInfo[1] = playerComparate.getName();
+                    playersInfo[2] = playerComparate.getSpecies();
+                    playersInfo[3] = String.valueOf(playerComparate.getCurrentEnergy());
 
                     return playersInfo;
                 }
