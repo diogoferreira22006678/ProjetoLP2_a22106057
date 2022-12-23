@@ -100,8 +100,8 @@ public class TestWater {
         // Invoke the eatFood() method on the water instance
         playerIncrease = water.eatFood(playerIncrease, 7, 0);
 
-        // Assert that the player's energy has increased by 15
-        assertEquals(115, playerIncrease.getCurrentEnergy(), 0.01);
+        // Assert that the player's energy has increased by 20
+        assertEquals(120, playerIncrease.getCurrentEnergy(), 0.01);
 
         // Create a player instance with an initial energy of 199
         Player playerMax = new Player(1, "Diogo","L", 199);
@@ -125,7 +125,7 @@ public class TestWater {
         playerRepeat = water.eatFood(playerRepeat, 1, 0);
 
         // Assert that the player's energy has changed
-        assertEquals(145, playerRepeat.getCurrentEnergy(), 0.01);
+        assertEquals(172, playerRepeat.getCurrentEnergy(), 0.01);
     }
 
     @Test

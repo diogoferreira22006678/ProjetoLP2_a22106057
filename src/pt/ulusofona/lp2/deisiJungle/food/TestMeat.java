@@ -69,8 +69,8 @@ public class TestMeat {
         // Invoke the eatFood() method on the meat instance
         playerIncrease = meat.eatFood(playerIncrease, 7, 0);
 
-        // Assert that the player's energy has increased by 0%
-        assertEquals(100, playerIncrease.getCurrentEnergy(), 0.01);
+        // Assert that the player's energy has increased by 50%
+        assertEquals(150, playerIncrease.getCurrentEnergy(), 0.01);
 
         // Create a player instance with an initial energy of 100
         Player playerDecrease = new Player(1, "Diogo","L", 100);
@@ -79,8 +79,8 @@ public class TestMeat {
         // Invoke the eatFood() method again, this time on expired terms
         playerDecrease = meat.eatFood(playerDecrease, 16, 0);
 
-        // Assert that the player's energy has decreased by 0%
-        assertEquals(100, playerDecrease.getCurrentEnergy(), 0.01);
+        // Assert that the player's energy has decreased by 50%
+        assertEquals(50, playerDecrease.getCurrentEnergy(), 0.01);
 
         // Create a player instance with an initial energy of 199
         Player playerMax = new Player(1, "Diogo","L", 199);
@@ -89,8 +89,8 @@ public class TestMeat {
         // Invoke the eatFood() method on the meat instance
         playerMax = meat.eatFood(playerMax, 0, 0);
 
-        // Assert that the player's energy has not changed
-        assertEquals(199, playerMax.getCurrentEnergy(), 0.01);
+        // Assert that the player's energy has capped
+        assertEquals(200, playerMax.getCurrentEnergy(), 0.01);
 
         // Create a player instance with an initial energy of 200
         Player playerRepeat = new Player(1, "Diogo","L", 200);
@@ -103,8 +103,8 @@ public class TestMeat {
         // Invoke the eatFood() method again, this time on an expired turn
         playerRepeat = meat.eatFood(playerRepeat, 13, 0);
 
-        // Assert that the player's energy has not changed
-        assertEquals(200, playerRepeat.getCurrentEnergy(), 0.01);
+        // Assert that the player's energy has changed
+        assertEquals(75, playerRepeat.getCurrentEnergy(), 0.01);
     }
 
     @Test

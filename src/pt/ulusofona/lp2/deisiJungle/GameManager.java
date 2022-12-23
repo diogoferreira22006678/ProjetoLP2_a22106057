@@ -481,7 +481,7 @@ public class GameManager {
                         return new MovementResult(MovementResultCode.CAUGHT_FOOD,"Apanhou " + food.getName());
                     }
                 }else{
-                    if(playerCurrentHouse + nrSquares < 0){
+                    if(playerCurrentHouse + nrSquares <= 0){
                         playersJogo[correctPosition] = player.move(1 - playerCurrentHouse,player);
                         jungle.arrayCells = jungle.arrayCells[playerCurrentHouse - 1].removeInformation(player.getId(),jungle.arrayCells,playerCurrentHouse);
                         jungle.arrayCells = jungle.arrayCells[0].addInformation(player, jungle.arrayCells, 1);
