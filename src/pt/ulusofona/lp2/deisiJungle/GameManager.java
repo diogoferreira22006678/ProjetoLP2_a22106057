@@ -451,7 +451,7 @@ public class GameManager {
             //SLEEP AND FOOD
             if(jungle.arrayCells[playerCurrentHouse - 1].cellInformationFood != null){
                 Food food = jungle.arrayCells[playerCurrentHouse - 1].cellInformationFood;
-                playersJogo[correctPosition] = food.eatFood(playersJogo[correctPosition], nrSquares, turn);
+                playersJogo[correctPosition] = food.eatFood(playersJogo[correctPosition], turn, nrSquares);
                 if(food.getId().equals("c") && specie.getTypeOfFood() == 1){
                     return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
                 }
@@ -474,7 +474,7 @@ public class GameManager {
                         Food food = jungle.arrayCells[playerCurrentHouse + nrSquares - 1].cellInformationFood;
                         jungle.arrayCells = jungle.arrayCells[playerCurrentHouse - 1].removeInformation(player.getId(),jungle.arrayCells,playerCurrentHouse);
                         jungle.arrayCells = jungle.arrayCells[playerCurrentHouse + nrSquares - 1].addInformation(player, jungle.arrayCells, playerCurrentHouse + nrSquares);
-                        playersJogo[correctPosition] = food.eatFood(playersJogo[correctPosition], nrSquares, turn);
+                        playersJogo[correctPosition] = food.eatFood(playersJogo[correctPosition], turn, nrSquares);
                         if(food.getId().equals("c") && specie.getTypeOfFood() == 1){
                             return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
                         }

@@ -152,4 +152,31 @@ public class TestGameManager {
         assertEquals("VALID_MOVEMENT",resultFourthPlay.code().toString());
     }
 
+    @Test
+    public void playerEatsSpoiledMeat(){
+        String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
+        String[][] foodInfo = {{"c","3"}};
+
+        gameManager.createInitialJungle(10,playerInfo,foodInfo);
+
+        gameManager.moveCurrentPlayer(0,false); //1
+        gameManager.moveCurrentPlayer(0,false); //2
+        gameManager.moveCurrentPlayer(0,false); //3
+        gameManager.moveCurrentPlayer(0,false); //4
+        gameManager.moveCurrentPlayer(0,false); //5
+        gameManager.moveCurrentPlayer(0,false); //6
+        gameManager.moveCurrentPlayer(0,false); //7
+        gameManager.moveCurrentPlayer(0,false); //8
+        gameManager.moveCurrentPlayer(0,false); //9
+        gameManager.moveCurrentPlayer(0,false); //10
+        gameManager.moveCurrentPlayer(2,false); //11
+        gameManager.moveCurrentPlayer(0,false); //12
+
+        MovementResult resultSpoiled = gameManager.moveCurrentPlayer(0,false); //13
+        String[] infoPlayer1 = gameManager.getPlayerInfo(1);
+        String[] infoPlayer2 = gameManager.getPlayerInfo(2);
+        assertEquals("CAUGHT_FOOD",resultSpoiled.code().toString());
+        assertEquals("100",infoPlayer1[3]);
+        assertEquals("140",infoPlayer2[3]);
+    }
 }
