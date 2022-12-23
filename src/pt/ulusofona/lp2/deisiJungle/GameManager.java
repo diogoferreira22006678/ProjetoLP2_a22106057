@@ -221,6 +221,7 @@ public class GameManager {
     }
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodInfo){
+
         ArrayList idJogadores = new ArrayList();
         String[][] especiesList = getSpecies();
         String [][] foodList = getFoodTypes();
@@ -265,6 +266,10 @@ public class GameManager {
             return new InitializationError("INVALID LENGTH"); }
 
         for(int i = 0; i < foodInfo.length; i++){
+            boolean isNumeric =  foodInfo[i][1].matches("[+-]?\\d*(\\.\\d+)?");
+            if(!isNumeric){
+                return new InitializationError("POSITION NOT NUMERIC");
+            }
             if(Integer.parseInt(foodInfo[i][1]) < 1 || Integer.parseInt(foodInfo[i][1]) > jungleSize){
                 return new InitializationError("Invalid Food Positioning");
             }

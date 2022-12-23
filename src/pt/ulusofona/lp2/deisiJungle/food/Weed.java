@@ -18,7 +18,7 @@ public class Weed extends Food {
     @Override
     public Player eatFood(Player player, int turn, int nrSquare) {
 
-        if(player.specie.getTypeOfFood() == 1 || player.specie.getTypeOfFood() == 3){
+        if(player.getSpecie().getTypeOfFood() == 1 || player.getSpecie().getTypeOfFood() == 3){
             if(player.getCurrentEnergy() + 20 > 200){
                 player.setCurrentEnergy(200);
             }else {
@@ -27,7 +27,7 @@ public class Weed extends Food {
             player.setFoodCount(player.getFoodCount() + 1);
         }
 
-        if(player.specie.getTypeOfFood() == 2){
+        if(player.getSpecie().getTypeOfFood() == 2){
             if(player.getCurrentEnergy() - 20 < 0){
                 player.setCurrentEnergy(0);
             }else {

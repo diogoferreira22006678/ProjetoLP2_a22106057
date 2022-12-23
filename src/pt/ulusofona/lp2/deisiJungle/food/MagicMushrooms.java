@@ -22,7 +22,7 @@ public class MagicMushrooms extends Food {
     @Override
     public Player eatFood(Player player, int turn, int nrSquare) {
         double result = nRandom;
-        if(player.specie.getTypeOfFood() == 1 || player.specie.getTypeOfFood() == 2 || player.specie.getTypeOfFood() == 3){
+        if(player.getSpecie().getTypeOfFood() == 1 || player.getSpecie().getTypeOfFood() == 2 || player.getSpecie().getTypeOfFood() == 3){
             if(turn % 2 == 0){
                 if(player.getCurrentEnergy() * (1 + (result / 100)) > 200){
                     player.setCurrentEnergy(200);

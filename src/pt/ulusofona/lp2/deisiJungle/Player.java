@@ -16,7 +16,7 @@ public class Player {
     int typeOfFood = 0;
     int maxVelocity = 0;
     int minVelocity = 0;
-    public Specie specie;
+    Specie specie;
 
     // constructor to initialize player with given values
     public Player(int id, String name, String species,
