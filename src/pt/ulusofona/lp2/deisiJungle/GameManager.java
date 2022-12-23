@@ -487,7 +487,7 @@ public class GameManager {
                         jungle.arrayCells = jungle.arrayCells[0].addInformation(player, jungle.arrayCells, 1);
                         return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
                     }
-                    if(playerCurrentHouse + nrSquares > jungle.length){
+                    if(playerCurrentHouse + nrSquares >= jungle.length){
                         playersJogo[correctPosition] = player.move(jungle.length - playerCurrentHouse, player);
                         jungle.arrayCells = jungle.arrayCells[playerCurrentHouse - 1].removeInformation(player.getId(),jungle.arrayCells,playerCurrentHouse);
                         jungle.arrayCells = jungle.arrayCells[jungle.length - 1].addInformation(player, jungle.arrayCells, jungle.length);

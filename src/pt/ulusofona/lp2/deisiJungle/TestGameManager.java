@@ -1,6 +1,8 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import org.junit.Test;
+import pt.ulusofona.lp2.deisiJungle.food.Food;
+import pt.ulusofona.lp2.deisiJungle.food.Water;
 import pt.ulusofona.lp2.deisiJungle.specie.*;
 
 import static org.junit.Assert.*;
@@ -101,6 +103,53 @@ public class TestGameManager {
         assertEquals("Invalid Food Positioning", errorFoodInvalidPositioning.getMessage());
         assertNotNull(errorFoodInfoInvalidID);
         assertEquals("Invalid Food ID", errorFoodInfoInvalidID.getMessage());
+    }
+
+    @Test
+    public void playFromEnunciado(){
+        Board board = new Board();
+        board = board.createBoard(10);
+        Food water = new Water("u",0,"Image","Name");
+        Player tarzanTest = new Player(1, "Joao", "Z", 70, 0, 1, "Tarzan", 0, 0);
+        tarzanTest.setSpecie(new Tarzan());
+        Player tarzanTestSerious = new Player(1, "Joao", "Z", 70, 0, 1, "Tarzan", 0, 0);
+        tarzanTest.setSpecie(new Tarzan());
+        Player lionTest = new Player(1, "Diogo", "L", 80, 0, 1, "Tarzan", 0, 0);
+        lionTest.setSpecie(new Lion());
+        Player lionTestSerious = new Player(1, "Diogo", "L", 80, 0, 1, "Tarzan", 0, 0);
+        lionTest.setSpecie(new Lion());
+
+        String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
+        String[][] foodInfo = {{"a","3"}};
+
+        gameManager.createInitialJungle(10,playerInfo,foodInfo);
+
+        tarzanTest = tarzanTest.move(3,tarzanTest);
+        water.eatFood(tarzanTest,1,3);
+        assertEquals(76,tarzanTest.getCurrentEnergy());
+
+        lionTest = lionTest.move(5,lionTest);
+        assertEquals(70,lionTest.getCurrentEnergy());
+
+        tarzanTest = tarzanTest.specie.sleep(tarzanTest);
+        water.eatFood(tarzanTest,3,3);
+        assertEquals(115,tarzanTest.getCurrentEnergy());
+
+        lionTest.move(4,lionTest);
+        assertEquals(62,lionTest.getCurrentEnergy());
+
+
+        MovementResult resultFirstPlay = gameManager.moveCurrentPlayer(3,false);
+        assertEquals("VALID_MOVEMENT",resultFirstPlay.code().toString());
+
+        MovementResult resultSecondPlay = gameManager.moveCurrentPlayer(5,false);
+        assertEquals("VALID_MOVEMENT",resultSecondPlay.code().toString());
+
+        MovementResult resultThirdPlay = gameManager.moveCurrentPlayer(0,false);
+        assertEquals("VALID_MOVEMENT",resultThirdPlay.code().toString());
+
+        MovementResult resultFourthPlay = gameManager.moveCurrentPlayer(4,false);
+        assertEquals("VALID_MOVEMENT",resultFourthPlay.code().toString());
     }
 
 }
