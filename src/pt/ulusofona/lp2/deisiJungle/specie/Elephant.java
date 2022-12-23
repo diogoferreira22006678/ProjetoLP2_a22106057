@@ -1,4 +1,4 @@
-package pt.ulusofona.lp2.deisiJungle.Specie;
+package pt.ulusofona.lp2.deisiJungle.specie;
 
 import pt.ulusofona.lp2.deisiJungle.Player;
 

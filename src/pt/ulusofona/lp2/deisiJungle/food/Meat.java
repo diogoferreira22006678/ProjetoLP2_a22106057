@@ -1,6 +1,5 @@
-package pt.ulusofona.lp2.deisiJungle.Food;
+package pt.ulusofona.lp2.deisiJungle.food;
 
-import pt.ulusofona.lp2.deisiJungle.Food.Food;
 import pt.ulusofona.lp2.deisiJungle.Player;
 
 public class Meat extends Food {

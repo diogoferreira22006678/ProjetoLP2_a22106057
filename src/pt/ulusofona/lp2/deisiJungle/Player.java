@@ -1,6 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import pt.ulusofona.lp2.deisiJungle.Specie.Specie;
+import pt.ulusofona.lp2.deisiJungle.specie.Specie;
 
 public class Player {
     // instance variables
@@ -36,6 +36,13 @@ public class Player {
     }
 
     public Player() {}
+
+    public Player(int id, String name, String species, int currentEnergy) {
+        this.id = id;
+        this.name = name;
+        this.species = species;
+        this.currentEnergy = currentEnergy;
+    }
 
     public Player move(int nrSquares, Player player){
 

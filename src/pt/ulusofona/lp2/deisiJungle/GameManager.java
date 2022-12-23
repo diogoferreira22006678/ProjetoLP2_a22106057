@@ -1,7 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import pt.ulusofona.lp2.deisiJungle.Food.*;
-import pt.ulusofona.lp2.deisiJungle.Specie.*;
+import pt.ulusofona.lp2.deisiJungle.food.*;
+import pt.ulusofona.lp2.deisiJungle.specie.*;
 
 import javax.swing.*;
 import java.io.File;

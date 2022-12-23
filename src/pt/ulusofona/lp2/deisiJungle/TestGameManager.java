@@ -1,8 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import org.junit.Assert;
 import org.junit.Test;
-import pt.ulusofona.lp2.deisiJungle.Specie.*;
+import pt.ulusofona.lp2.deisiJungle.specie.*;
 
 import static org.junit.Assert.*;
 
@@ -10,8 +9,6 @@ import static org.junit.Assert.*;
 public class TestGameManager {
     GameManager gameManager = new GameManager();
     Player[] playerJogo = new Player[2];
-
-
 
     @Test
     public void testGetSpeciesSize() {
@@ -104,8 +101,6 @@ public class TestGameManager {
         assertEquals("Invalid Food Positioning", errorFoodInvalidPositioning.getMessage());
         assertNotNull(errorFoodInfoInvalidID);
         assertEquals("Invalid Food ID", errorFoodInfoInvalidID.getMessage());
-
-
     }
 
 }

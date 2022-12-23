@@ -1,6 +1,5 @@
-package pt.ulusofona.lp2.deisiJungle.Food;
+package pt.ulusofona.lp2.deisiJungle.food;
 
-import pt.ulusofona.lp2.deisiJungle.Food.Food;
 import pt.ulusofona.lp2.deisiJungle.Player;
 
 import java.util.Random;
@@ -22,16 +21,17 @@ public class MagicMushrooms extends Food {
 
     @Override
     public Player eatFood(Player player, int turn, int nrSquare) {
+        double result = nRandom;
         if(player.specie.getTypeOfFood() == 1 || player.specie.getTypeOfFood() == 2 || player.specie.getTypeOfFood() == 3){
             if(turn % 2 == 0){
-                if(player.getCurrentEnergy() * (1 + (nRandom / 100)) > 200){
+                if(player.getCurrentEnergy() * (1 + (result / 100)) > 200){
                     player.setCurrentEnergy(200);
                 }else{
-                    player.setCurrentEnergy((player.getCurrentEnergy() * (1 + (nRandom / 100))));
+                    player.setCurrentEnergy((int)(player.getCurrentEnergy() * (1 + (result / 100))));
                 }
                 player.setFoodCount(player.getFoodCount() + 1);
             }else{
-                player.setCurrentEnergy((player.getCurrentEnergy() * (1 - (nRandom / 100))));
+                player.setCurrentEnergy((int)(player.getCurrentEnergy() * (1 - (result / 100))));
 
                 player.setFoodCount(player.getFoodCount() + 1);
             }

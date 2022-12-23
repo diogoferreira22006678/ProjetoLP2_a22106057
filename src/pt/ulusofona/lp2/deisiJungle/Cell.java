@@ -1,5 +1,5 @@
 package pt.ulusofona.lp2.deisiJungle;
-import pt.ulusofona.lp2.deisiJungle.Food.Food;
+import pt.ulusofona.lp2.deisiJungle.food.Food;
 
 import java.util.ArrayList;
 

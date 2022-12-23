@@ -1,4 +1,4 @@
-package pt.ulusofona.lp2.deisiJungle.Food;
+package pt.ulusofona.lp2.deisiJungle.food;
 
 import pt.ulusofona.lp2.deisiJungle.Player;
 
