@@ -10,6 +10,7 @@ public class Tarzan extends Specie {
     private int energyPerCell = 2;
     private int recoveryEnergy = 20;
     private int energyCap = 70;
+    private int ateBanana = 0;
 
     public Tarzan() {}
 
@@ -54,6 +55,16 @@ public class Tarzan extends Specie {
     @Override
     public void move(Player player) {
 
+    }
+
+    @Override
+    public int getAteBanana() {
+        return this.ateBanana;
+    }
+
+    @Override
+    public void setAteBanana(int ateBanana) {
+        this.ateBanana = ateBanana;
     }
 
     public int getEnergyCap() {

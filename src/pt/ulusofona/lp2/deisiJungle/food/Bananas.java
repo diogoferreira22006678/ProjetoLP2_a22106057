@@ -22,10 +22,9 @@ public class Bananas extends Food {
 
     @Override
     public Player eatFood(Player player, int turn, int nrSquare) {
-        if (quantity > 0) {
 
-            for (int i = 0; i < playersAte.size(); i++){
-                if(playersAte.get(i).getId() == player.getId()){
+        if (quantity > 0) {
+                if(player.getSpecie().getAteBanana() == 1){
                     if (player.getSpecie().getTypeOfFood() == 1 || player.getSpecie().getTypeOfFood() == 2 || player.getSpecie().getTypeOfFood() == 3) {
                         if(player.getCurrentEnergy() - 40 < 0){
                             player.setCurrentEnergy(0);
@@ -37,7 +36,7 @@ public class Bananas extends Food {
                     }
                     return player;
                 }
-            }
+
                 if (player.getSpecie().getTypeOfFood() == 1 || player.getSpecie().getTypeOfFood() == 2 || player.getSpecie().getTypeOfFood() == 3) {
                     if(player.getCurrentEnergy() + 40 > 200){
                         player.setCurrentEnergy(200);
@@ -47,6 +46,7 @@ public class Bananas extends Food {
                     playersAte.add(player);
                     player.setFoodCount(player.getFoodCount() + 1);
                     quantity--;
+                    player.getSpecie().setAteBanana(1);
                 }
         }
 

@@ -59,6 +59,16 @@ public class Lion extends Specie {
 
     }
 
+    @Override
+    public int getAteBanana() {
+        return 0;
+    }
+
+    @Override
+    public void setAteBanana(int ateBanana) {
+
+    }
+
     public int getEnergyCap() {
         return energyCap;
     }

@@ -10,6 +10,7 @@ public class Elephant extends Specie {
     private int energyPerCell = 4;
     private int recoveryEnergy = 10;
     private int energyCap = 180;
+    private int ateBanana = 0;
 
     public Elephant() {
     }
@@ -56,6 +57,16 @@ public class Elephant extends Specie {
 
     @Override
     public void move(Player player) {
+    }
+
+    @Override
+    public int getAteBanana() {
+        return this.ateBanana;
+    }
+
+    @Override
+    public void setAteBanana(int ateBanana) {
+        this.ateBanana = ateBanana;
     }
 
     public int getEnergyCap() {

@@ -10,6 +10,7 @@ public class Bird extends Specie {
     private int energyPerCell = 4;
     private int recoveryEnergy = 50;
     private int energyCap = 70;
+    private int ateBanana = 0;
 
     public Bird() {
     }
@@ -57,6 +58,16 @@ public class Bird extends Specie {
     @Override
     public void move(Player player) {
 
+    }
+
+    @Override
+    public int getAteBanana() {
+        return this.ateBanana;
+    }
+
+    @Override
+    public void setAteBanana(int ateBanana) {
+        this.ateBanana = ateBanana;
     }
 
     public int getEnergyCap() {

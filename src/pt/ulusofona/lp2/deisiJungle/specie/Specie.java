@@ -7,6 +7,7 @@ abstract public class Specie {
     private int typeOfFood;
     private int energyPerCell;
     private int energyCap;
+    private int ateBanana;
 
     public Specie() {}
 
@@ -27,4 +28,8 @@ abstract public class Specie {
     public abstract Player sleep(Player player);
 
     public abstract void move(Player player);
+
+    public abstract int getAteBanana();
+
+    public abstract void setAteBanana(int ateBanana);
 }
