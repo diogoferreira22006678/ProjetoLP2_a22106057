@@ -31,7 +31,7 @@ public class TestMagicMushrooms {
         playerDecrease = mushrooms.eatFood(playerDecrease, 3, 0);
 
         // Assert that the player's energy has decreased by 25%
-        assertEquals(49, playerDecrease.getCurrentEnergy(), 0.01);
+        assertEquals(50, playerDecrease.getCurrentEnergy(), 0.01);
 
         // Create a player instance with an initial energy of 199
         Player playerMax = new Player(1, "Diogo","L", 199);
@@ -55,7 +55,7 @@ public class TestMagicMushrooms {
         playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
 
         // Assert that the player's energy has decreased
-        assertEquals(84, playerRepeat.getCurrentEnergy(), 0.01);
+        assertEquals(86, playerRepeat.getCurrentEnergy(), 0.01);
     }
 
     @Test
@@ -81,7 +81,7 @@ public class TestMagicMushrooms {
         playerDecrease = mushrooms.eatFood(playerDecrease, 3, 0);
 
         // Assert that the player's energy has decreased by 25%
-        assertEquals(49, playerDecrease.getCurrentEnergy(), 0.01);
+        assertEquals(50, playerDecrease.getCurrentEnergy(), 0.01);
 
         // Create a player instance with an initial energy of 199
         Player playerMax = new Player(1, "Diogo","L", 199);
@@ -105,7 +105,7 @@ public class TestMagicMushrooms {
         playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
 
         // Assert that the player's energy has decreased
-        assertEquals(84, playerRepeat.getCurrentEnergy(), 0.01);
+        assertEquals(86, playerRepeat.getCurrentEnergy(), 0.01);
     }
 
     @Test
@@ -131,7 +131,7 @@ public class TestMagicMushrooms {
         playerDecrease = mushrooms.eatFood(playerDecrease, 3, 0);
 
         // Assert that the player's energy has decreased by 25%
-        assertEquals(49, playerDecrease.getCurrentEnergy(), 0.01);
+        assertEquals(50, playerDecrease.getCurrentEnergy(), 0.01);
 
         // Create a player instance with an initial energy of 199
         Player playerMax = new Player(1, "Diogo","L", 199);
@@ -155,7 +155,7 @@ public class TestMagicMushrooms {
         playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
 
         // Assert that the player's energy has decreased
-        assertEquals(84, playerRepeat.getCurrentEnergy(), 0.01);
+        assertEquals(86, playerRepeat.getCurrentEnergy(), 0.01);
     }
 
     @Test
@@ -181,7 +181,7 @@ public class TestMagicMushrooms {
         playerDecrease = mushrooms.eatFood(playerDecrease, 3, 0);
 
         // Assert that the player's energy has decreased by 25%
-        assertEquals(49, playerDecrease.getCurrentEnergy(), 0.01);
+        assertEquals(50, playerDecrease.getCurrentEnergy(), 0.01);
 
         // Create a player instance with an initial energy of 199
         Player playerMax = new Player(1, "Diogo","L", 199);
@@ -205,7 +205,7 @@ public class TestMagicMushrooms {
         playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
 
         // Assert that the player's energy has decreased
-        assertEquals(84, playerRepeat.getCurrentEnergy(), 0.01);
+        assertEquals(86, playerRepeat.getCurrentEnergy(), 0.01);
     }
 
     @Test
@@ -231,7 +231,7 @@ public class TestMagicMushrooms {
         playerDecrease = mushrooms.eatFood(playerDecrease, 3, 0);
 
         // Assert that the player's energy has decreased by 25%
-        assertEquals(49, playerDecrease.getCurrentEnergy(), 0.01);
+        assertEquals(50, playerDecrease.getCurrentEnergy(), 0.01);
 
         // Create a player instance with an initial energy of 199
         Player playerMax = new Player(1, "Diogo","L", 199);
@@ -255,7 +255,7 @@ public class TestMagicMushrooms {
         playerRepeat = mushrooms.eatFood(playerRepeat, 3, 0);
 
         // Assert that the player's energy has decreased
-        assertEquals(84, playerRepeat.getCurrentEnergy(), 0.01);
+        assertEquals(86, playerRepeat.getCurrentEnergy(), 0.01);
     }
 
 

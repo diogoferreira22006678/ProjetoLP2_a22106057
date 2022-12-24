@@ -7,7 +7,7 @@ import java.util.Random;
 public class MagicMushrooms extends Food {
     Random rand = new Random();
     int nRandom = rand.nextInt(41) + 10;
-    String toolTip = "Cogumelo Magico: +- "+ nRandom +"% energia";
+    String toolTip = "Cogumelo Magico : +-"+ nRandom +"% energia";
 
     public MagicMushrooms(String id, int position, String imageName, String name) {
         super(id, position, imageName, name);
