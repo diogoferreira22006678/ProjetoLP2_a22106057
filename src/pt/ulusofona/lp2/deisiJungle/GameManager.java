@@ -440,10 +440,6 @@ public class GameManager {
         int energyCost = specie.getEnergyPerCell() * nrSquares;
         int playerCurrentHouse = playersJogo[correctPosition].getCurrentHouse();
         Player player = playersJogo[correctPosition];
-        //NOTENOUGHENERGY
-        if(energyCost > player.getCurrentEnergy()){
-            playersJogo[correctPosition] = playersJogo[correctPosition].getSpecie().sleep(playersJogo[correctPosition]);
-            return new MovementResult(MovementResultCode.NO_ENERGY,null);}
         //SLEEP
         if(nrSquares == 0){
             playersJogo[correctPosition] = playersJogo[correctPosition].getSpecie().sleep(playersJogo[correctPosition]);
@@ -457,6 +453,10 @@ public class GameManager {
                 return new MovementResult(MovementResultCode.CAUGHT_FOOD,"Apanhou " + food.getName());
             }
         }
+        //NOTENOUGHENERGY
+        if(energyCost > player.getCurrentEnergy()){
+            playersJogo[correctPosition] = playersJogo[correctPosition].getSpecie().sleep(playersJogo[correctPosition]);
+            return new MovementResult(MovementResultCode.NO_ENERGY,null);}
         //BYPASS
         if(!bypassValidations){
             if(Math.abs(nrSquares) < specie.getMinVelocity() && Math.abs(nrSquares) > specie.getMaxVelocity()){
@@ -481,10 +481,7 @@ public class GameManager {
                     }
                 }else{
                     if(playerCurrentHouse + nrSquares <= 0){
-                        playersJogo[correctPosition] = player.move(1 - playerCurrentHouse,player);
-                        jungle.arrayCells = jungle.arrayCells[playerCurrentHouse - 1].removeInformation(player.getId(),jungle.arrayCells,playerCurrentHouse);
-                        jungle.arrayCells = jungle.arrayCells[0].addInformation(player, jungle.arrayCells, 1);
-                        return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
+                        return new MovementResult(MovementResultCode.INVALID_MOVEMENT,null);
                     }
                     if(playerCurrentHouse + nrSquares >= jungle.length){
                         playersJogo[correctPosition] = player.move(jungle.length - playerCurrentHouse, player);
