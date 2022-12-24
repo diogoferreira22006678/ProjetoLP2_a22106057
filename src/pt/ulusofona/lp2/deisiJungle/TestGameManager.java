@@ -179,4 +179,41 @@ public class TestGameManager {
         assertEquals("100",infoPlayer1[3]);
         assertEquals("140",infoPlayer2[3]);
     }
+
+    @Test
+    public void playerEatsSpoiledTestMultipleBananas(){
+        String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
+        String[][] foodInfo = {{"b","3"}};
+
+        gameManager.createInitialJungle(10,playerInfo,foodInfo);
+
+        gameManager.moveCurrentPlayer(0,false); //1
+        gameManager.moveCurrentPlayer(0,false); //2
+        gameManager.moveCurrentPlayer(0,false); //3
+        gameManager.moveCurrentPlayer(0,false); //4
+        gameManager.moveCurrentPlayer(0,false); //5
+        gameManager.moveCurrentPlayer(0,false); //6
+        gameManager.moveCurrentPlayer(0,false); //7
+        gameManager.moveCurrentPlayer(0,false); //8
+        gameManager.moveCurrentPlayer(0,false); //9
+        gameManager.moveCurrentPlayer(0,false); //10
+
+        MovementResult firstBanana = gameManager.moveCurrentPlayer(2,false); //11
+        String[] infoPlayer1 = gameManager.getPlayerInfo(1);
+        String[] infoPlayer2 = gameManager.getPlayerInfo(2);
+        assertEquals("200",infoPlayer1[3]);
+        assertEquals("130",infoPlayer2[3]);
+        gameManager.moveCurrentPlayer(0,false); //12
+        MovementResult secondBanana = gameManager.moveCurrentPlayer(0,false); //13
+        infoPlayer1 = gameManager.getPlayerInfo(1);
+        infoPlayer2 = gameManager.getPlayerInfo(2);
+        assertEquals("160",infoPlayer1[3]);
+        assertEquals("140",infoPlayer2[3]);
+        gameManager.moveCurrentPlayer(0,false);
+        MovementResult thirdBanana = gameManager.moveCurrentPlayer(0,false); //14
+        infoPlayer1 = gameManager.getPlayerInfo(1);
+        infoPlayer2 = gameManager.getPlayerInfo(2);
+        assertEquals("140",infoPlayer1[3]);
+        assertEquals("150",infoPlayer2[3]);
+    }
 }
