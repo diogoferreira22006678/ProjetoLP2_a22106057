@@ -455,7 +455,6 @@ public class GameManager {
         }
         //NOTENOUGHENERGY
         if(energyCost > player.getCurrentEnergy()){
-            playersJogo[correctPosition] = playersJogo[correctPosition].getSpecie().sleep(playersJogo[correctPosition]);
             return new MovementResult(MovementResultCode.NO_ENERGY,null);}
         //BYPASS
         if(!bypassValidations){
