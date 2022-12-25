@@ -170,7 +170,7 @@ public class TestBananas {
         playerDecrease = bananasDecrease.eatFood(playerDecrease, 3, 1);
 
         // Assert that the player's energy has stayed at 100
-        assertEquals(100, playerDecrease.getCurrentEnergy(), 0.01);
+        assertEquals(180, playerDecrease.getCurrentEnergy(), 0.01);
         assertEquals(1, bananasDecrease.quantity);
 
         // Create a player instance with an initial energy of 199
@@ -194,7 +194,7 @@ public class TestBananas {
         playerZero = bananasZero.eatFood(playerZero, 0, 0);
 
         // Assert that the player's energy has capped
-        assertEquals(0, playerZero.getCurrentEnergy(), 0.01);
+        assertEquals(120, playerZero.getCurrentEnergy(), 0.01);
         assertEquals(0, bananasZero.quantity);
 
         // Create a player instance with an initial energy of 100
