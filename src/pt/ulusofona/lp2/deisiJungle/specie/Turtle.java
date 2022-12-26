@@ -5,8 +5,8 @@ import pt.ulusofona.lp2.deisiJungle.Player;
 public class Turtle extends Specie {
 
     private int typeOfFood = 3;
-    int maxVelocity = 3;
-    int minVelocity = 1;
+    int maxVelocity ;
+    int minVelocity ;
     private int energyPerCell = 1;
     private int recoveryEnergy = 5;
     private int energyCap = 150;
@@ -29,6 +29,16 @@ public class Turtle extends Specie {
     @Override
     public int getTypeOfFood() {
         return typeOfFood;
+    }
+
+    @Override
+    public void setMaxSpeed(int speed){
+        this.maxVelocity = speed;
+    }
+
+    @Override
+    public void setMinSpeed(int speed){
+        this.minVelocity = speed;
     }
 
     @Override

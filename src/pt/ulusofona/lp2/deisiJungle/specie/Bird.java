@@ -5,15 +5,14 @@ import pt.ulusofona.lp2.deisiJungle.Player;
 public class Bird extends Specie {
 
     private int typeOfFood = 3;
-    int maxVelocity = 6;
-    int minVelocity = 5;
+    int maxVelocity;
+    int minVelocity;
     private int energyPerCell = 4;
     private int recoveryEnergy = 50;
     private int energyCap = 70;
     private int ateBanana = 0;
 
-    public Bird() {
-    }
+    public Bird() {}
 
     @Override
     public int getRecoveryEnergy(){
@@ -28,6 +27,16 @@ public class Bird extends Specie {
     @Override
     public int getTypeOfFood() {
         return typeOfFood;
+    }
+
+    @Override
+    public void setMaxSpeed(int speed){
+        this.maxVelocity = speed;
+    }
+
+    @Override
+    public void setMinSpeed(int speed){
+         this.minVelocity = speed;
     }
 
     @Override

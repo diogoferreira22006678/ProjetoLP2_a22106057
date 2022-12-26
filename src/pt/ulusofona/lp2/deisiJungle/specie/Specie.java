@@ -19,6 +19,10 @@ abstract public class Specie {
 
     public abstract int getRecoveryEnergy();
 
+
+    public abstract void setMaxSpeed(int speed);
+    public abstract void setMinSpeed(int speed);
+
     public abstract int getMaxVelocity();
 
     public abstract int getMinVelocity();

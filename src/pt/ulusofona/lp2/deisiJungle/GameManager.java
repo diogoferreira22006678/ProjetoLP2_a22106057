@@ -91,6 +91,8 @@ public class GameManager {
                     Player tarzan = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
                             playersInfo[i][2], 70, 0, 1, "Tarzan", 0, 0);
                     tarzan.setSpecie(new Tarzan());
+                    tarzan.getSpecie().setMinSpeed(1);
+                    tarzan.getSpecie().setMaxSpeed(6);
                     playersJogo[i] = tarzan;
                     jungle.arrayCells[0].addInformation(tarzan, jungle.arrayCells, 1);
                 }
@@ -98,6 +100,8 @@ public class GameManager {
                     Player elephant = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
                             playersInfo[i][2], 180, 0, 1, "Elefante", 0, 0);
                     elephant.setSpecie(new Elephant());
+                    elephant.getSpecie().setMinSpeed(1);
+                    elephant.getSpecie().setMaxSpeed(6);
                     playersJogo[i] = elephant;
                     jungle.arrayCells[0].addInformation(elephant, jungle.arrayCells, 1);
                 }
@@ -105,6 +109,8 @@ public class GameManager {
                     Player lion = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
                             playersInfo[i][2], 80, 0, 1, "Leao", 0, 0);
                     lion.setSpecie(new Lion());
+                    lion.getSpecie().setMinSpeed(4);
+                    lion.getSpecie().setMaxSpeed(6);
                     playersJogo[i] = lion;
                     jungle.arrayCells[0].addInformation(lion, jungle.arrayCells, 1);
                 }
@@ -112,6 +118,8 @@ public class GameManager {
                     Player bird = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
                             playersInfo[i][2], 70, 0, 1, "Passaro", 0, 0);
                     bird.setSpecie(new Bird());
+                    bird.getSpecie().setMinSpeed(5);
+                    bird.getSpecie().setMaxSpeed(6);
                     playersJogo[i] = bird;
                     jungle.arrayCells[0].addInformation(bird, jungle.arrayCells, 1);
                 }
@@ -119,6 +127,8 @@ public class GameManager {
                     Player turtle = new Player(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1],
                             playersInfo[i][2], 150, 0, 1, "Tartaruga", 0, 0);
                     turtle.setSpecie(new Turtle());
+                    turtle.getSpecie().setMinSpeed(1);
+                    turtle.getSpecie().setMaxSpeed(3);
                     playersJogo[i] = turtle;
                     jungle.arrayCells[0].addInformation(turtle, jungle.arrayCells, 1);
                 }

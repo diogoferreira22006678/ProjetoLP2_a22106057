@@ -5,8 +5,8 @@ import pt.ulusofona.lp2.deisiJungle.Player;
 public class Tarzan extends Specie {
 
     private int typeOfFood = 3;
-    int maxVelocity = 6;
-    int minVelocity = 1;
+    int maxVelocity ;
+    int minVelocity ;
     private int energyPerCell = 2;
     private int recoveryEnergy = 20;
     private int energyCap = 70;
@@ -27,6 +27,16 @@ public class Tarzan extends Specie {
     @Override
     public int getTypeOfFood() {
         return typeOfFood;
+    }
+
+    @Override
+    public void setMaxSpeed(int speed){
+        this.maxVelocity = speed;
+    }
+
+    @Override
+    public void setMinSpeed(int speed){
+        this.minVelocity = speed;
     }
 
     @Override

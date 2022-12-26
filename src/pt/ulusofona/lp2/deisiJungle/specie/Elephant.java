@@ -7,8 +7,8 @@ public class Elephant extends Specie {
     private int typeOfFood = 1;
     int maxVelocity = 6;
     int minVelocity = 1;
-    private int energyPerCell = 4;
-    private int recoveryEnergy = 10;
+    private int energyPerCell ;
+    private int recoveryEnergy ;
     private int energyCap = 180;
     private int ateBanana = 0;
 
@@ -28,6 +28,16 @@ public class Elephant extends Specie {
     @Override
     public int getTypeOfFood() {
         return typeOfFood;
+    }
+
+    @Override
+    public void setMaxSpeed(int speed){
+        this.maxVelocity = speed;
+    }
+
+    @Override
+    public void setMinSpeed(int speed){
+        this.minVelocity = speed;
     }
 
     @Override
