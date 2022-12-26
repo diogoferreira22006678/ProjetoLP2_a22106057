@@ -9,7 +9,6 @@ public class Turtle extends Specie {
     int minVelocity ;
     private int energyPerCell = 1;
     private int recoveryEnergy = 5;
-    private int energyCap = 150;
     private int ateBanana = 0;
 
     public Turtle() {
@@ -52,11 +51,6 @@ public class Turtle extends Specie {
     }
 
     @Override
-    public void eat(Player player) {
-
-    }
-
-    @Override
     public Player sleep(Player player) {
         if(player.getCurrentEnergy() + recoveryEnergy > 200){
             player.setCurrentEnergy(200);
@@ -67,11 +61,6 @@ public class Turtle extends Specie {
     }
 
     @Override
-    public void move(Player player) {
-
-    }
-
-    @Override
     public int getAteBanana() {
         return this.ateBanana;
     }
@@ -79,9 +68,5 @@ public class Turtle extends Specie {
     @Override
     public void setAteBanana(int ateBanana) {
         this.ateBanana = ateBanana;
-    }
-
-    public int getEnergyCap() {
-        return energyCap;
     }
 }

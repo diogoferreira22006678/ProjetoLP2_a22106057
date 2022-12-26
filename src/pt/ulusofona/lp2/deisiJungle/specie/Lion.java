@@ -9,7 +9,6 @@ public class Lion extends Specie {
     int minVelocity ;
     private int energyPerCell = 2;
     private int recoveryEnergy = 10;
-    private int energyCap = 80;
     private int ateBanana = 0;
 
     public Lion() {
@@ -51,11 +50,6 @@ public class Lion extends Specie {
     }
 
     @Override
-    public void eat(Player player) {
-
-    }
-
-    @Override
     public Player sleep(Player player) {
         if(player.getCurrentEnergy() + recoveryEnergy > 200){
             player.setCurrentEnergy(200);
@@ -66,11 +60,6 @@ public class Lion extends Specie {
     }
 
     @Override
-    public void move(Player player) {
-
-    }
-
-    @Override
     public int getAteBanana() {
         return this.ateBanana;
     }
@@ -78,9 +67,5 @@ public class Lion extends Specie {
     @Override
     public void setAteBanana(int ateBanana) {
         this.ateBanana = ateBanana;
-    }
-
-    public int getEnergyCap() {
-        return energyCap;
     }
 }
