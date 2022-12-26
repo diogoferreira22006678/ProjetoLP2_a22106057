@@ -462,6 +462,7 @@ public class GameManager {
                 }
                 return new MovementResult(MovementResultCode.CAUGHT_FOOD,"Apanhou " + food.getName());
             }
+            return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
         }
         //NOTENOUGHENERGY
         if(energyCost > player.getCurrentEnergy()){
