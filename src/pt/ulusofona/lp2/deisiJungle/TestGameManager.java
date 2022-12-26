@@ -10,7 +10,6 @@ import static org.junit.Assert.*;
 
 public class TestGameManager {
     GameManager gameManager = new GameManager();
-    Player[] playerJogo = new Player[2];
 
     @Test
     public void testGetSpeciesSize() {
@@ -291,7 +290,6 @@ public class TestGameManager {
         String[][] foodInfo = {{"b","3"}};
 
         gameManager.createInitialJungle(10,playerInfo,foodInfo);
-
         gameManager.moveCurrentPlayer(2,false); //1
         gameManager.moveCurrentPlayer(0,false); //2
         String[] infoPlayer1 = gameManager.getPlayerInfo(1);
@@ -317,5 +315,18 @@ public class TestGameManager {
         assertEquals("38",infoPlayer1[3]);
         assertEquals("120",infoPlayer2[3]);
 
+    }
+
+    @Test
+    public void playerTestOverrideSpeed(){
+        String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"},{"3","Daniela","P"},{"4","Jonas","E"}};
+        String[][] foodInfo = {{"b","3"}};
+
+        gameManager.createInitialJungle(10,playerInfo,foodInfo);
+
+        assertEquals(gameManager.playersJogo[0].getSpecie().getMinVelocity() + " " + gameManager.playersJogo[0].getSpecie().getMaxVelocity(),"1 6");
+        assertEquals(gameManager.playersJogo[1].getSpecie().getMinVelocity() + " " + gameManager.playersJogo[1].getSpecie().getMaxVelocity(),"4 6");
+        assertEquals(gameManager.playersJogo[2].getSpecie().getMinVelocity() + " " + gameManager.playersJogo[2].getSpecie().getMaxVelocity(),"5 6");
+        assertEquals(gameManager.playersJogo[3].getSpecie().getMinVelocity() + " " + gameManager.playersJogo[3].getSpecie().getMaxVelocity(),"1 6");
     }
 }

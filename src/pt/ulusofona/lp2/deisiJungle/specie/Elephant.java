@@ -5,10 +5,10 @@ import pt.ulusofona.lp2.deisiJungle.Player;
 public class Elephant extends Specie {
 
     private int typeOfFood = 1;
-    int maxVelocity = 6;
-    int minVelocity = 1;
-    private int energyPerCell ;
-    private int recoveryEnergy ;
+    int maxVelocity ;
+    int minVelocity ;
+    private int energyPerCell = 4;
+    private int recoveryEnergy = 10;
     private int energyCap = 180;
     private int ateBanana = 0;
 
