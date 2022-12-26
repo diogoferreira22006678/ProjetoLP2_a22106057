@@ -512,39 +512,6 @@ public class GameManager {
 
         Player playerVencedor = new Player();
 
-        // won because of more then double the houses of any player
-        for (int i = 0; i < playersJogo.length; i++) {
-            Player player = playersJogo[i];
-
-            for (int k = 0; k < playersJogo.length; k++) {
-                Player playerComparate = playersJogo[k];
-                if (i == k) {
-                    continue;  // Skip comparison with itself
-                }
-                if (Math.abs(player.getCurrentHouse() - playerComparate.getCurrentHouse()) + 1 > halfTheMap) {
-                    // The difference between the currentHouse values is greater than the maximum allowed difference
-                    // Do something here, such as throwing an exception or printing an error message
-                    playersInfo[0] = String.valueOf(playerComparate.getId());
-                    playersInfo[1] = playerComparate.getName();
-                    playersInfo[2] = playerComparate.getSpecies();
-                    playersInfo[3] = String.valueOf(playerComparate.getCurrentEnergy());
-
-                    return playersInfo;
-                }
-            }
-        }
-
-        int win = 0;
-        for (int i = 0; i < playersJogo.length; i++) {
-         if(playersJogo[i].getCurrentEnergy() == jungle.length){
-             win = 1;
-             break;
-         }
-        }
-        if(win == 0){
-            return null;
-        }
-
         for (int i = 0; i < playersJogo.length; i++) {
 
             //won cuz it made to the final
@@ -553,6 +520,7 @@ public class GameManager {
                 playersInfo[1] = playersJogo[i].getName();
                 playersInfo[2] = playersJogo[i].getSpecies();
                 playersInfo[3] = String.valueOf(playersJogo[i].getCurrentEnergy());
+
 
                 return playersInfo;
             }
@@ -569,7 +537,27 @@ public class GameManager {
                 }
             }
         }
+        // won because of more then double the houses of any player
+        for (int i = 0; i < playersJogo.length; i++) {
+            Player player = playersJogo[i];
 
+            for (int k = 0; k < playersJogo.length; k++) {
+                Player playerComparate = playersJogo[k];
+                if (i == k) {
+                    continue;  // Skip comparison with itself
+                }
+                if (Math.abs(player.getCurrentHouse() - playerComparate.getCurrentHouse()) > halfTheMap) {
+                    // The difference between the currentHouse values is greater than the maximum allowed difference
+                    // Do something here, such as throwing an exception or printing an error message
+                    playersInfo[0] = String.valueOf(playerComparate.getId());
+                    playersInfo[1] = playerComparate.getName();
+                    playersInfo[2] = playerComparate.getSpecies();
+                    playersInfo[3] = String.valueOf(playerComparate.getCurrentEnergy());
+
+                    return playersInfo;
+                }
+            }
+        }
         return null;
     }
 

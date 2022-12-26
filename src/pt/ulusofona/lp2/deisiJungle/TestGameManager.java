@@ -344,16 +344,43 @@ public class TestGameManager {
         gameManager.createInitialJungle(40,playerInfo);
 
         gameManager.moveCurrentPlayer(5,false); //1
+        assertNull(gameManager.getWinnerInfo());
         gameManager.moveCurrentPlayer(5,false); //2
+        assertNull(gameManager.getWinnerInfo());
         gameManager.moveCurrentPlayer(5,false); //3
+        assertNull(gameManager.getWinnerInfo());
         gameManager.moveCurrentPlayer(5,false); //4
+        assertNull(gameManager.getWinnerInfo());
         gameManager.moveCurrentPlayer(5,false); //5
+        assertNull(gameManager.getWinnerInfo());
         gameManager.moveCurrentPlayer(5,false); //6
-        gameManager.moveCurrentPlayer(5,false); //7
-        gameManager.moveCurrentPlayer(5,false); //8
-        gameManager.moveCurrentPlayer(5,false); //9
-        MovementResult result = gameManager.moveCurrentPlayer(5,false); //10
+        MovementResult result = gameManager.moveCurrentPlayer(5,false); //7
         assertEquals("NO_ENERGY",result.code().toString());
         assertNull(gameManager.getWinnerInfo());
+        result = gameManager.moveCurrentPlayer(5,false); //8
+        assertEquals("NO_ENERGY",result.code().toString());
+        assertNull(gameManager.getWinnerInfo());
+
+    }
+
+    @Test
+    public void testWinnerInfoHalfBoard(){
+        String[][] playerInfo = {{"1","Diogo","P"},{"2","Joao","P"}};
+
+
+        gameManager.createInitialJungle(30,playerInfo);
+
+        gameManager.moveCurrentPlayer(5,false); //1
+        assertNull(gameManager.getWinnerInfo());
+        gameManager.moveCurrentPlayer(0,false); //2
+        assertNull(gameManager.getWinnerInfo());
+        gameManager.moveCurrentPlayer(5,false); //3
+        assertNull(gameManager.getWinnerInfo());
+        gameManager.moveCurrentPlayer(0,false); //4
+        assertNull(gameManager.getWinnerInfo());
+        gameManager.moveCurrentPlayer(6,false); //5
+        System.out.println(gameManager.playersJogo[0].getCurrentHouse() + " " +gameManager.playersJogo[1].getCurrentHouse());
+        assertNotNull(gameManager.getWinnerInfo());
+
     }
 }
