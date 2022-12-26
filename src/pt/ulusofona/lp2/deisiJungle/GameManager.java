@@ -467,6 +467,10 @@ public class GameManager {
         if(energyCost > player.getCurrentEnergy()){
             playersJogo[correctPosition] = playersJogo[correctPosition].getSpecie().sleep(playersJogo[correctPosition]);
             return new MovementResult(MovementResultCode.NO_ENERGY,null);}
+        //IFPLAYBEHIND1
+        if(playerCurrentHouse + nrSquares <= 0){
+            return new MovementResult(MovementResultCode.INVALID_MOVEMENT,null);
+        }
         //BYPASS
         if(!bypassValidations){
             if(Math.abs(nrSquares) < specie.getMinVelocity() && Math.abs(nrSquares) > specie.getMaxVelocity()){
@@ -490,9 +494,6 @@ public class GameManager {
                         return new MovementResult(MovementResultCode.CAUGHT_FOOD,"Apanhou " + food.getName());
                     }
                 }else{
-                    if(playerCurrentHouse + nrSquares <= 0){
-                        return new MovementResult(MovementResultCode.INVALID_MOVEMENT,null);
-                    }
                     if(playerCurrentHouse + nrSquares >= jungle.length){
                         playersJogo[correctPosition] = player.move(jungle.length - playerCurrentHouse, player);
                         jungle.arrayCells = jungle.arrayCells[playerCurrentHouse - 1].removeInformation(player.getId(),jungle.arrayCells,playerCurrentHouse);
