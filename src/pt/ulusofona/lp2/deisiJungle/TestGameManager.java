@@ -399,7 +399,7 @@ public class TestGameManager {
         assertNull(gameManager.getWinnerInfo());
         gameManager.moveCurrentPlayer(0,false); //4
         assertNull(gameManager.getWinnerInfo());
-        gameManager.moveCurrentPlayer(6,false); //5
+        gameManager.moveCurrentPlayer(5,false); //5
         System.out.println(gameManager.playersJogo[0].getCurrentHouse() + " " +gameManager.playersJogo[1].getCurrentHouse());
         assertNotNull(gameManager.getWinnerInfo());
 
