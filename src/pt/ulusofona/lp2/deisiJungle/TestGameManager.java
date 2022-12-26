@@ -328,5 +328,11 @@ public class TestGameManager {
         assertEquals(gameManager.playersJogo[1].getSpecie().getMinVelocity() + " " + gameManager.playersJogo[1].getSpecie().getMaxVelocity(),"4 6");
         assertEquals(gameManager.playersJogo[2].getSpecie().getMinVelocity() + " " + gameManager.playersJogo[2].getSpecie().getMaxVelocity(),"5 6");
         assertEquals(gameManager.playersJogo[3].getSpecie().getMinVelocity() + " " + gameManager.playersJogo[3].getSpecie().getMaxVelocity(),"1 6");
+
+        gameManager.moveCurrentPlayer(-2,false);
+        gameManager.getPlayerIds(3);
+        MovementResult result = gameManager.moveCurrentPlayer(2,false);
+
+        assertEquals("INVALID_MOVEMENT",result.code().toString());
     }
 }

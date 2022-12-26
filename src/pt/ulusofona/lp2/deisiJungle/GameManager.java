@@ -473,7 +473,7 @@ public class GameManager {
         }
         //BYPASS
         if(!bypassValidations){
-            if(Math.abs(nrSquares) < specie.getMinVelocity() && Math.abs(nrSquares) > specie.getMaxVelocity()){
+            if(Math.abs(nrSquares) < specie.getMinVelocity() || Math.abs(nrSquares) > specie.getMaxVelocity()){
                 return new MovementResult( MovementResultCode.INVALID_MOVEMENT,null);
             } }
                 if(playerCurrentHouse + nrSquares > 0 && playerCurrentHouse + nrSquares < jungle.length){
