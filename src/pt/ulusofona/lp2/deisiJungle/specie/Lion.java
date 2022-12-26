@@ -10,6 +10,7 @@ public class Lion extends Specie {
     private int energyPerCell = 2;
     private int recoveryEnergy = 10;
     private int energyCap = 80;
+    private int ateBanana = 0;
 
     public Lion() {
     }
@@ -71,12 +72,12 @@ public class Lion extends Specie {
 
     @Override
     public int getAteBanana() {
-        return 0;
+        return this.ateBanana;
     }
 
     @Override
     public void setAteBanana(int ateBanana) {
-
+        this.ateBanana = ateBanana;
     }
 
     public int getEnergyCap() {

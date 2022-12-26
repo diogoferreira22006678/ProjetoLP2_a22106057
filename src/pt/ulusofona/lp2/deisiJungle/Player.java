@@ -46,7 +46,7 @@ public class Player {
 
     public Player move(int nrSquares, Player player){
 
-        player.distanceTravelled += nrSquares;
+        player.distanceTravelled += Math.abs(nrSquares);
         player.currentEnergy -= Math.abs(nrSquares * player.specie.getEnergyPerCell());
         player.setCurrentHouse(player.getCurrentHouse() + nrSquares);
 
@@ -134,7 +134,4 @@ public class Player {
     public void setFoodCount(int foodCount) {
         this.foodCount = foodCount;
     }
-
-
-
 }
