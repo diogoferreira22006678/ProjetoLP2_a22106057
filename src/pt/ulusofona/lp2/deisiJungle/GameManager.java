@@ -508,10 +508,6 @@ public class GameManager {
 
         int halfTheMap = jungle.length / 2;
 
-        if(halfTheMap % 2 != 0){
-            halfTheMap -= 1;
-        }
-
         String[] playersInfo = new String[4];
 
         Player playerVencedor = new Player();
@@ -541,7 +537,12 @@ public class GameManager {
                 }
             }
         }
+
         // won because of more then double the houses of any player
+        if(halfTheMap % 2 == 0){
+            halfTheMap -= 1;
+        }
+
         for (int i = 0; i < playersJogo.length; i++) {
             Player player = playersJogo[i];
             for (int k = 0; k < playersJogo.length; k++) {

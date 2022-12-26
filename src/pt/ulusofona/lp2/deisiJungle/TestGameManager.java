@@ -386,10 +386,10 @@ public class TestGameManager {
 
     @Test
     public void testWinnerInfoHalfBoardOdd(){
-        String[][] playerInfo = {{"1","Diogo","P"},{"2","Joao","P"}};
+        String[][] playerInfo = {{"1","Diogo","E"},{"2","Joao","E"}};
 
 
-        gameManager.createInitialJungle(31,playerInfo);
+        gameManager.createInitialJungle(29,playerInfo);
 
         gameManager.moveCurrentPlayer(5,false); //1
         assertNull(gameManager.getWinnerInfo());
