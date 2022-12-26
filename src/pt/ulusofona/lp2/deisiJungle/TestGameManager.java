@@ -335,4 +335,25 @@ public class TestGameManager {
 
         assertEquals("INVALID_MOVEMENT",result.code().toString());
     }
+
+    @Test
+    public void testWinnerInfoNoEnergy(){
+        String[][] playerInfo = {{"1","Diogo","P"},{"2","Joao","P"}};
+
+
+        gameManager.createInitialJungle(40,playerInfo);
+
+        gameManager.moveCurrentPlayer(5,false); //1
+        gameManager.moveCurrentPlayer(5,false); //2
+        gameManager.moveCurrentPlayer(5,false); //3
+        gameManager.moveCurrentPlayer(5,false); //4
+        gameManager.moveCurrentPlayer(5,false); //5
+        gameManager.moveCurrentPlayer(5,false); //6
+        gameManager.moveCurrentPlayer(5,false); //7
+        gameManager.moveCurrentPlayer(5,false); //8
+        gameManager.moveCurrentPlayer(5,false); //9
+        MovementResult result = gameManager.moveCurrentPlayer(5,false); //10
+        assertEquals("NO_ENERGY",result.code().toString());
+        assertNull(gameManager.getWinnerInfo());
+    }
 }

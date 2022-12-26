@@ -466,7 +466,6 @@ public class GameManager {
         }
         //NOTENOUGHENERGY
         if(energyCost > player.getCurrentEnergy()){
-
             return new MovementResult(MovementResultCode.NO_ENERGY,null);}
         //IFPLAYBEHIND1
         if(playerCurrentHouse + nrSquares <= 0){
@@ -513,31 +512,6 @@ public class GameManager {
 
         Player playerVencedor = new Player();
 
-        for (int i = 0; i < playersJogo.length; i++) {
-
-            //won cuz it made to the final
-            if (playersJogo[i].getCurrentHouse() == jungle.length) {
-                playersInfo[0] = String.valueOf(playersJogo[i].getId());
-                playersInfo[1] = playersJogo[i].getName();
-                playersInfo[2] = playersJogo[i].getSpecies();
-                playersInfo[3] = String.valueOf(playersJogo[i].getCurrentEnergy());
-
-
-                return playersInfo;
-            }
-
-            if (playerVencedor.getCurrentHouse() < playersJogo[i].getCurrentHouse()) {
-                playerVencedor = playersJogo[i];
-
-            } else {
-                if (playerVencedor.getCurrentHouse() == playersJogo[i].getCurrentHouse()) {
-                    if (playerVencedor.getId() > playersJogo[i].getId()) {
-                        playerVencedor = playersJogo[i];
-
-                    }
-                }
-            }
-        }
         // won because of more then double the houses of any player
         for (int i = 0; i < playersJogo.length; i++) {
             Player player = playersJogo[i];
@@ -559,6 +533,43 @@ public class GameManager {
                 }
             }
         }
+
+        int win = 0;
+        for (int i = 0; i < playersJogo.length; i++) {
+         if(playersJogo[i].getCurrentEnergy() == jungle.length){
+             win = 1;
+             break;
+         }
+        }
+        if(win == 0){
+            return null;
+        }
+
+        for (int i = 0; i < playersJogo.length; i++) {
+
+            //won cuz it made to the final
+            if (playersJogo[i].getCurrentHouse() == jungle.length) {
+                playersInfo[0] = String.valueOf(playersJogo[i].getId());
+                playersInfo[1] = playersJogo[i].getName();
+                playersInfo[2] = playersJogo[i].getSpecies();
+                playersInfo[3] = String.valueOf(playersJogo[i].getCurrentEnergy());
+
+                return playersInfo;
+            }
+
+            if (playerVencedor.getCurrentHouse() < playersJogo[i].getCurrentHouse()) {
+                playerVencedor = playersJogo[i];
+
+            } else {
+                if (playerVencedor.getCurrentHouse() == playersJogo[i].getCurrentHouse()) {
+                    if (playerVencedor.getId() > playersJogo[i].getId()) {
+                        playerVencedor = playersJogo[i];
+
+                    }
+                }
+            }
+        }
+
         return null;
     }
 
