@@ -669,6 +669,7 @@ public class GameManager {
     }
 
     public boolean loadGame(File file) {
+
         // Open the file for reading
         BufferedReader reader = null;
         ArrayList<Food> foodList = new ArrayList<>();
