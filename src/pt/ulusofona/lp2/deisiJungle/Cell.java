@@ -1,11 +1,12 @@
 package pt.ulusofona.lp2.deisiJungle;
 import pt.ulusofona.lp2.deisiJungle.food.Food;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 
-public class Cell {
+public class Cell implements Serializable {
 
     ArrayList<Player> cellInformationPlayer;
     Food cellInformationFood;

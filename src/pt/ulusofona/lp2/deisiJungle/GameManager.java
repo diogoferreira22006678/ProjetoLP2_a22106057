@@ -12,6 +12,8 @@ public class GameManager {
     Board jungle = new Board();
     Player[] playersJogo;
     int turn = 0;
+    String[][] saveInfoFood;
+    String[][] saveInfoPlayer;
 
     public String[][] getSpecies(){
 
@@ -176,6 +178,7 @@ public class GameManager {
         }
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
+        saveInfoPlayer = playersInfo;
         ArrayList idJogadores = new ArrayList();
         String[][] especiesList = getSpecies();
         int procurarTarzan = 0;
@@ -227,7 +230,8 @@ public class GameManager {
     }
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodInfo){
-
+        saveInfoPlayer = playersInfo;
+        saveInfoFood = foodInfo;
         ArrayList idJogadores = new ArrayList();
         String[][] especiesList = getSpecies();
         String [][] foodList = getFoodTypes();
@@ -543,25 +547,20 @@ public class GameManager {
             halfTheMap -= 1;
         }
 
-        for (int i = 0; i < playersJogo.length; i++) {
-            Player player = playersJogo[i];
-            for (int k = 0; k < playersJogo.length; k++) {
-                Player playerComparate = playersJogo[k];
-                if (i == k) {
-                    continue;  // Skip comparison with itself
-                }
-                if (Math.abs(player.getCurrentHouse() - playerComparate.getCurrentHouse()) > halfTheMap) {
-                    // The difference between the currentHouse values is greater than the maximum allowed difference
-                    // Do something here, such as throwing an exception or printing an error message
-                    playersInfo[0] = String.valueOf(playerComparate.getId());
-                    playersInfo[1] = playerComparate.getName();
-                    playersInfo[2] = playerComparate.getSpecies();
-                    playersInfo[3] = String.valueOf(playerComparate.getCurrentEnergy());
+        Player[] tempArray = playersJogo;
+        Arrays.sort(tempArray, (p1, p2) -> p2.getCurrentHouse() - p1.getCurrentHouse());
+        Player player1 = tempArray[0];
+        Player player2 = tempArray[1];
 
-                    return playersInfo;
-                }
-            }
+        if (Math.abs(player1.getCurrentHouse() - player2.getCurrentHouse()) > halfTheMap) {
+            playersInfo[0] = String.valueOf(player2.getId());
+            playersInfo[1] = player2.getName();
+            playersInfo[2] = player2.getSpecies();
+            playersInfo[3] = String.valueOf(player2.getCurrentEnergy());
+
+            return playersInfo;
         }
+
         return null;
     }
 
@@ -616,39 +615,23 @@ public class GameManager {
     }
 
     public boolean saveGame(File file){
-            try {
 
-                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
-                out.writeObject(jungle);
-                out.writeInt(turn);
-                out.writeObject(playersJogo);
-                // fecha o arquivo
-                out.close();
 
-                return true;
-            } catch (IOException e) {
-                return false;
+        if(saveInfoFood != null){
+            //WITHFOOD
+
+        }
+
+            //WITHOUTFOOD
+            for(int i = 0; i < saveInfoPlayer.length; i++){
+
             }
 
+        return false;
     }
 
     public boolean loadGame(File file) {
-        try {
-            // cria um ObjectInputStream para ler do arquivo
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
+        return true;
 
-            // lê os dados do arquivo
-            jungle = (Board) in.readObject();
-            playersJogo = (Player[]) in.readObject();
-            turn = in.readInt();
-
-            // fecha o arquivo
-            in.close();
-
-            return true;
-        } catch (IOException | ClassNotFoundException e) {
-            return false;
-        }
     }
-
 }
