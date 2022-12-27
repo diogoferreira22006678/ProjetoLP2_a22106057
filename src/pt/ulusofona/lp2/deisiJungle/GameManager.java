@@ -609,23 +609,55 @@ public class GameManager {
     }
 
     public boolean saveGame(File file){
+        if(saveInfoFood != null){ // saveWithFood
+            try {
+                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
+                out.writeObject(jungle);
+                out.writeInt(turn);
+                out.writeObject(playersJogo);
+                out.writeObject(saveInfoPlayer);
+                out.writeObject(saveInfoFood);
+                // fecha o arquivo
+                out.close();
 
-
-        if(saveInfoFood != null){
-            //WITHFOOD
-
-        }
-
-            //WITHOUTFOOD
-            for(int i = 0; i < saveInfoPlayer.length; i++){
-
+                return true;
+            } catch (IOException e) {
+                return false;
             }
+        }else { // saveWithOutFood
+            try {
+                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
+                out.writeObject(jungle);
+                out.writeInt(turn);
+                out.writeObject(playersJogo);
+                out.writeObject(saveInfoPlayer);
+                // fecha o arquivo
+                out.close();
 
-        return false;
+                return true;
+            } catch (IOException e) {
+                return false;
+            }
+        }
     }
 
     public boolean loadGame(File file) {
-        return true;
+        try {
+            // cria um ObjectInputStream para ler do arquivo
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
 
+            // lê os dados do arquivo
+            jungle = (Board) in.readObject();
+            playersJogo = (Player[]) in.readObject();
+            turn = in.readInt();
+            saveInfoFood = (String[][]) in.readObject();
+            saveInfoPlayer = (String[][]) in.readObject();
+            // fecha o arquivo
+            in.close();
+
+            return true;
+        } catch (IOException | ClassNotFoundException e) {
+            return false;
+        }
     }
 }
