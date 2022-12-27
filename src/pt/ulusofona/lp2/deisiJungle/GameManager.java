@@ -609,55 +609,218 @@ public class GameManager {
     }
 
     public boolean saveGame(File file){
-        if(saveInfoFood != null){ // saveWithFood
-            try {
-                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
-                out.writeObject(jungle);
-                out.writeInt(turn);
-                out.writeObject(playersJogo);
-                out.writeObject(saveInfoPlayer);
-                out.writeObject(saveInfoFood);
-                // fecha o arquivo
-                out.close();
 
-                return true;
-            } catch (IOException e) {
-                return false;
-            }
-        }else { // saveWithOutFood
-            try {
-                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
-                out.writeObject(jungle);
-                out.writeInt(turn);
-                out.writeObject(playersJogo);
-                out.writeObject(saveInfoPlayer);
-                // fecha o arquivo
-                out.close();
+        BufferedWriter writer;
 
-                return true;
-            } catch (IOException e) {
-                return false;
+        try {
+            writer = new BufferedWriter(new FileWriter(file));
+
+
+            writer.write("Length " + jungle.length + "\n");
+
+            // Write the players array to the file
+            for (int i = 0; i < playersJogo.length; i++) {
+                    writer.write("Player " + playersJogo[i].getId() + " " + playersJogo[i].getName() + " " +
+                            playersJogo[i].getCurrentHouse() + " " + playersJogo[i].getCurrentEnergy() + " " +
+                            playersJogo[i].getFoodCount() + " " + saveInfoPlayer[i][2] + " " +
+                            playersJogo[i].getDistanceTravelled() + " " + playersJogo[i].getTotalSpecies() + " " +
+                            playersJogo[i].getTurn() + " " + playersJogo[i].getSpecie().getAteBanana());
+
+                writer.write("\n");
             }
+
+            if(saveInfoFood != null) {
+                // Write the food array to the file
+                for (int i = 0; i < jungle.arrayCells.length; i++) {
+
+                    if(jungle.arrayCells[i].cellInformationFood != null) {
+                        Food food = jungle.arrayCells[i].cellInformationFood;
+                        switch (food.getId()){
+                            case"e":
+                            case"a":
+                            case"c":{
+                                writer.write("Food " + food.getId() + " " + food.getPosition() + " " + food.getImageName() +
+                                        " " + food.getName());
+                                break;
+                            }
+                            case"b":{
+                                writer.write("Food " + food.getId() + " " + food.getPosition() + " " + food.getImageName() +
+                                        " " + food.getName() + " " + food.getQuantity());
+                                break;
+                            }
+                            case"m":{
+                                writer.write("Food " + food.getId() + " " + food.getPosition() +
+                                        " " + food.getImageName() + " " + food.getName() + " " + food.getRandomNumber());
+                                break;
+                            }
+                        }
+                        writer.write("\n");
+                    }
+                }
+            }
+
+            writer.flush();
+
+        } catch (IOException e) {
+            return false;
         }
+
+        return true;
     }
 
     public boolean loadGame(File file) {
+        // Open the file for reading
+        BufferedReader reader = null;
+        ArrayList<Food> foodList = new ArrayList<>();
         try {
-            // cria um ObjectInputStream para ler do arquivo
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
+            reader = new BufferedReader(new FileReader(file));
 
-            // lê os dados do arquivo
-            jungle = (Board) in.readObject();
-            playersJogo = (Player[]) in.readObject();
-            turn = in.readInt();
-            saveInfoFood = (String[][]) in.readObject();
-            saveInfoPlayer = (String[][]) in.readObject();
-            // fecha o arquivo
-            in.close();
+           // Read each line of the file
+            String line;
+            ArrayList<Player> arrayTemp = new ArrayList();
+            int length = 0;
+            while ((line = reader.readLine()) != null) {
 
-            return true;
-        } catch (IOException | ClassNotFoundException e) {
-            return false;
+                String[] pieces = line.split(" ");
+
+                switch (pieces[0]){
+                    case "Length":{
+                        length = Integer.parseInt(pieces[1]);
+                        break;
+                    }
+                    case "Player":{
+                        Player player = new Player();
+                        player.setId(Integer.parseInt(pieces[1]));
+                        player.setName(pieces[2]);
+                        player.setCurrentHouse(Integer.parseInt(pieces[3]));
+                        player.setCurrentEnergy(Integer.parseInt(pieces[4]));
+                        player.setFoodCount(Integer.parseInt(pieces[5]));
+                        player.setidSpecie(pieces[6]);
+                        switch (pieces[6]){
+                            case "Z":
+                                player.setSpecie(new Tarzan());
+                                break;
+                            case "E":
+                                player.setSpecie(new Elephant());
+                                break;
+                            case "L":
+                                player.setSpecie(new Lion());
+                                break;
+                            case "P":
+                                player.setSpecie(new Bird());
+                                break;
+                            case "T":
+                                player.setSpecie(new Turtle());
+                                break;
+                        }
+                        player.setDistanceTravelled(Integer.parseInt(pieces[7]));
+                        player.setTotalSpecies(pieces[8]);
+                        player.setTurn(Integer.parseInt(pieces[9]));
+                        player.getSpecie().setAteBanana(Integer.parseInt(pieces[10]));
+
+                        arrayTemp.add(player);
+                    }
+                    case "Food":{
+                        switch (pieces[1]){
+                            case"e":{
+                                Food food = new Weed(pieces[1],Integer.parseInt(pieces[2]),pieces[3], pieces[4]);
+                                foodList.add(food);
+                            }
+                            case"a":{
+                                Food food = new Water(pieces[1],Integer.parseInt(pieces[2]),pieces[3], pieces[4]);
+                                foodList.add(food);
+                            }
+                            case"c":{
+                                Food food = new Meat(pieces[1],Integer.parseInt(pieces[2]),pieces[3], pieces[4]);
+                                foodList.add(food);
+                                break;
+                            }
+                            case"b":{
+                                Food food = new Bananas(pieces[1],Integer.parseInt(pieces[2]),pieces[3], Integer.parseInt(pieces[5]) ,pieces[4]);
+                                foodList.add(food);
+                                break;
+                            }
+                            case"m":{
+                                Food food = new MagicMushrooms(pieces[1],Integer.parseInt(pieces[2]),pieces[3], pieces[4] + " " + pieces[5]);
+                                food.setnRandom(Integer.parseInt(pieces[6]));
+                                foodList.add(food);
+                                break;
+                            }
+                        }
+                    }
+
+                }
+            }
+            playersJogo = new Player[arrayTemp.size()];
+            for (int i = 0; i < playersJogo.length ; i++){
+                playersJogo[i] = arrayTemp.get(i);
+            }
+
+            // Close the reader when you're done with it
+            reader.close();
+
+            if(foodList != null) {
+                String[][] playerInfo = new String[playersJogo.length][3];
+
+                for (int k = 0; k < playersJogo.length; k++) {
+                    playerInfo[k][0] = String.valueOf(playersJogo[k].getId());
+                    playerInfo[k][1] = playersJogo[k].getName();
+                    playerInfo[k][2] = playersJogo[k].getidSpecie();
+                }
+                String[][] foodInfo = new String[foodList.size()][2];
+                for(int k = 0; k < foodList.size();k++){
+                    foodInfo[k][0] = foodList.get(k).getId();
+                    foodInfo[k][1] = String.valueOf(foodList.get(k).getPosition());
+                }
+                InitializationError valid = createInitialJungle(length,playerInfo,foodInfo);
+                if(valid == null){
+                    jungle = new Board();
+
+                    jungle = jungle.createBoard(length);
+
+                    for (int k = 0; k < foodList.size(); k++){
+                        jungle.arrayCells = jungle.arrayCells[foodList.get(k).getPosition() - 1].
+                                addInformationFood(foodList.get(k),
+                                        jungle.arrayCells, foodList.get(k).getPosition());
+                    }
+                    for (int k = 0; k < playersJogo.length; k++){
+                        jungle.arrayCells = jungle.arrayCells[playersJogo[k].getCurrentHouse() -1]
+                                .addInformation(playersJogo[k], jungle.arrayCells, playersJogo[k].getCurrentHouse());
+                    }
+
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                String[][] playerInfo = new String[playersJogo.length][3];
+                for (int k = 0; k < playersJogo.length; k++) {
+                    playerInfo[k][0] = String.valueOf(playersJogo[k].getId());
+                    playerInfo[k][1] = playersJogo[k].getName();
+                    playerInfo[k][2] = playersJogo[k].getidSpecie();
+                }
+
+                InitializationError valid = createInitialJungle(length,playerInfo);
+                if(valid == null){
+                    jungle = new Board();
+
+                    jungle.createBoard(length);
+                    for (int k = 0; k < playersJogo.length; k++){
+                        jungle.arrayCells = jungle.arrayCells[playersJogo[k].getCurrentHouse() -1]
+                                .addInformation(playersJogo[k], jungle.arrayCells, playersJogo[k].getCurrentHouse());
+                    }
+
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return false;
     }
 }

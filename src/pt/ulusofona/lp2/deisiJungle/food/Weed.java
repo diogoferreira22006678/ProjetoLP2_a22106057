@@ -11,6 +11,19 @@ public class Weed extends Food {
     }
 
     @Override
+    public int getQuantity(){
+        return 0;
+    }
+
+    @Override
+    public int getRandomNumber(){
+        return 0;
+    }
+
+    @Override
+    public void setnRandom(int nRandom){}
+
+    @Override
     public String getToolTip(int turn) {
         return this.toolTip;
     }

@@ -16,6 +16,19 @@ public class Bananas extends Food {
     }
 
     @Override
+    public void setnRandom(int nRandom){}
+
+     @Override
+     public int getQuantity(){
+        return this.quantity;
+    }
+
+     @Override
+     public int getRandomNumber(){
+        return 0;
+    }
+
+    @Override
     public String getToolTip(int turn) {
         return this.toolTip + quantity + " : + 40 energia";
     }
@@ -52,4 +65,6 @@ public class Bananas extends Food {
 
         return player;
     }
+
+
 }

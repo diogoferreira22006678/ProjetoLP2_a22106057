@@ -11,6 +11,19 @@ public class Meat extends Food {
     }
 
     @Override
+    public int getQuantity(){
+        return 0;
+    }
+
+    @Override
+    public void setnRandom(int nRandom){}
+
+    @Override
+    public int getRandomNumber(){
+        return 0;
+    }
+
+    @Override
     public String getToolTip(int turn) {
         if(turn <= 12) {
             return this.toolTip + turn + " jogadas";

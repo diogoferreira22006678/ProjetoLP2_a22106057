@@ -15,6 +15,16 @@ public class MagicMushrooms extends Food {
     }
 
     @Override
+    public int getQuantity(){
+        return 0;
+    }
+
+    @Override
+    public int getRandomNumber(){
+        return this.nRandom;
+    }
+
+    @Override
     public String getToolTip(int turn) {
         return this.toolTip;
     }
@@ -38,4 +48,7 @@ public class MagicMushrooms extends Food {
         }
         return player;
     }
+
+    @Override
+    public void setnRandom(int nRandom){this.nRandom = nRandom;}
 }

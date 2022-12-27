@@ -7,6 +7,7 @@ public class Player {
     private int id;
     private String name;
     private String species;
+    private String idSpecie;
     private int currentEnergy;
     private int turn;
     private int currentHouse;
@@ -54,6 +55,14 @@ public class Player {
     }
 
     // getters and setters for each instance variable
+
+    public String getidSpecie(){
+        return idSpecie;
+    }
+
+    public void setidSpecie(String idSpecie){
+        this.idSpecie = idSpecie;
+    }
 
     public Specie getSpecie(){
         return specie;
