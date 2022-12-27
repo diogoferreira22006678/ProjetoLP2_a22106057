@@ -421,4 +421,23 @@ public class TestGameManager {
         System.out.println(gameManager.jungle.length);
         assertNotNull(gameManager.getWinnerInfo());
     }
+
+    @Test
+    public void testWinnerInfoFinalBoardOdd(){
+        String[][] playerInfo = {{"1","Diogo","E"},{"2","Joao","E"}};
+
+
+        gameManager.createInitialJungle(11,playerInfo);
+
+        gameManager.moveCurrentPlayer(5,false); //1
+        assertNull(gameManager.getWinnerInfo());
+        gameManager.moveCurrentPlayer(6,false); //2
+        assertNull(gameManager.getWinnerInfo());
+        gameManager.moveCurrentPlayer(5,false); //3
+        System.out.println(gameManager.playersJogo[0].getCurrentHouse() + " " +gameManager.playersJogo[1].getCurrentHouse());
+        System.out.println(gameManager.jungle.length);
+        assertNotNull(gameManager.getWinnerInfo());
+    }
+
+
 }

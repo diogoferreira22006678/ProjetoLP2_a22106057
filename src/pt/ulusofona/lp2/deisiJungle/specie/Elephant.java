@@ -9,7 +9,6 @@ public class Elephant extends Specie {
     int minVelocity ;
     private int energyPerCell = 4;
     private int recoveryEnergy = 10;
-    private int energyCap = 180;
     private int ateBanana = 0;
 
     public Elephant() {
@@ -51,11 +50,6 @@ public class Elephant extends Specie {
     }
 
     @Override
-    public void eat(Player player) {
-
-    }
-
-    @Override
     public Player sleep(Player player) {
         if(player.getCurrentEnergy() + recoveryEnergy > 200){
             player.setCurrentEnergy(200);
@@ -66,10 +60,6 @@ public class Elephant extends Specie {
     }
 
     @Override
-    public void move(Player player) {
-    }
-
-    @Override
     public int getAteBanana() {
         return this.ateBanana;
     }
@@ -77,13 +67,5 @@ public class Elephant extends Specie {
     @Override
     public void setAteBanana(int ateBanana) {
         this.ateBanana = ateBanana;
-    }
-
-    public int getEnergyCap() {
-        return energyCap;
-    }
-
-    public void setEnergyCap(int energyCap) {
-        this.energyCap = energyCap;
     }
 }
