@@ -570,54 +570,34 @@ public class GameManager {
 
     public ArrayList<String> getGameResults(){
 
-        ArrayList<String> winnerInfo = new ArrayList<>();
-        String especie = "";
-        ArrayList<Player> transitionInfo = new ArrayList<>();
-        ArrayList<Player> sortedInfo = new ArrayList<>();
+        Player[] tempArray = playersJogo.clone();
 
-            for (int i = 0; i < playersJogo.length; i++) {
-                transitionInfo.add(playersJogo[i]);
+        Arrays.sort(tempArray, (p1, p2) -> {
+            if (p1.getCurrentHouse() == p2.getCurrentHouse()) {
+                return p1.getId() - p2.getId();
             }
-            Player playerVencedor = new Player();
-            while (transitionInfo.size() != 0) {
-                int nrVencedor = 0;
-                playerVencedor = new Player();
-                for (int i = 0; i < transitionInfo.size(); i++) {
-                    if (playerVencedor.getCurrentHouse() < transitionInfo.get(i).getCurrentHouse()) {
-                        playerVencedor = transitionInfo.get(i);
-                        nrVencedor = i;
-                    } else {
-                        if (playerVencedor.getCurrentHouse() == transitionInfo.get(i).getCurrentHouse()) {
-                            if (playerVencedor.getId() > transitionInfo.get(i).getId()) {
-                                playerVencedor = transitionInfo.get(i);
-                                nrVencedor = i;
-                            }
-                        }
-                    }
-                }
-                sortedInfo.add(playerVencedor);
-                transitionInfo.remove(nrVencedor);
-            }
-            for (int i = 0; i < sortedInfo.size(); i++) {
+            return p2.getCurrentHouse() - p1.getCurrentHouse();
+        });
 
+        if(winnerByDefault == 1 ){
+            // Switch the first and second elements
+            Player temp = tempArray[0];
+            tempArray[0] = tempArray[1];
+            tempArray[1] = temp;
+        }
 
-                int posicao = i + 1;
+        ArrayList winnerInfo = new ArrayList();
 
-                winnerInfo.add("#" + posicao + " " + sortedInfo.get(i).getName()
-                        + ", " + sortedInfo.get(i).getTotalSpecies() + ", " + sortedInfo.get(i).getCurrentHouse() + ", " +
-                        sortedInfo.get(i).getDistanceTravelled() + ", " + sortedInfo.get(i).getFoodCount());
-            }
+        for(int i = 0; i < tempArray.length;i++) {
 
-            if(winnerByDefault == 0) {
-                return winnerInfo;
-            }else{
-                String temp = winnerInfo.get(1);
-                winnerInfo.set(0, winnerInfo.get(1));
-                winnerInfo.set(1, temp);
+            int posicao = i + 1;
 
-                return winnerInfo;
-            }
+            winnerInfo.add("#" + posicao + " " + tempArray[i].getName()
+                    + ", " + tempArray[i].getTotalSpecies() + ", " + tempArray[i].getCurrentHouse() + ", " +
+                    tempArray[i].getDistanceTravelled() + ", " + tempArray[i].getFoodCount());
+        }
 
+        return winnerInfo;
     }
 
     public JPanel getAuthorsPanel(){
