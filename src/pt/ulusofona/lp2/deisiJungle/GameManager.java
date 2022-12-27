@@ -547,7 +547,8 @@ public class GameManager {
             halfTheMap -= 1;
         }
 
-        Player[] tempArray = playersJogo;
+        Player[] tempArray = playersJogo.clone();
+
         Arrays.sort(tempArray, (p1, p2) -> p2.getCurrentHouse() - p1.getCurrentHouse());
         Player player1 = tempArray[0];
         Player player2 = tempArray[1];
