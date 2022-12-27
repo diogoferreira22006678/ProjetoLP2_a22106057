@@ -11,9 +11,11 @@ public class GameManager {
 
     Board jungle = new Board();
     Player[] playersJogo;
-    int turn = 0;
     String[][] saveInfoFood;
     String[][] saveInfoPlayer;
+    int turn = 0;
+    int winnerByDefault = 0;
+
 
     public String[][] getSpecies(){
 
@@ -525,7 +527,7 @@ public class GameManager {
                 playersInfo[2] = playersJogo[i].getSpecies();
                 playersInfo[3] = String.valueOf(playersJogo[i].getCurrentEnergy());
 
-
+                winnerByDefault = 0;
                 return playersInfo;
             }
 
@@ -559,6 +561,7 @@ public class GameManager {
             playersInfo[2] = player2.getSpecies();
             playersInfo[3] = String.valueOf(player2.getCurrentEnergy());
 
+            winnerByDefault = 1;
             return playersInfo;
         }
 
@@ -572,39 +575,49 @@ public class GameManager {
         ArrayList<Player> transitionInfo = new ArrayList<>();
         ArrayList<Player> sortedInfo = new ArrayList<>();
 
-        for(int i = 0; i < playersJogo.length ; i++){
-            transitionInfo.add(playersJogo[i]);
-        }
-        Player playerVencedor = new Player();
-        while(transitionInfo.size() != 0){
-            int nrVencedor = 0;
-            playerVencedor = new Player();
-            for (int i = 0; i < transitionInfo.size();i++){
-                if(playerVencedor.getCurrentHouse() < transitionInfo.get(i).getCurrentHouse()){
-                    playerVencedor = transitionInfo.get(i);
-                    nrVencedor = i;
-                }else{
-                    if(playerVencedor.getCurrentHouse() == transitionInfo.get(i).getCurrentHouse()){
-                        if(playerVencedor.getId() > transitionInfo.get(i).getId()){
-                            playerVencedor = transitionInfo.get(i);
-                            nrVencedor = i;
+            for (int i = 0; i < playersJogo.length; i++) {
+                transitionInfo.add(playersJogo[i]);
+            }
+            Player playerVencedor = new Player();
+            while (transitionInfo.size() != 0) {
+                int nrVencedor = 0;
+                playerVencedor = new Player();
+                for (int i = 0; i < transitionInfo.size(); i++) {
+                    if (playerVencedor.getCurrentHouse() < transitionInfo.get(i).getCurrentHouse()) {
+                        playerVencedor = transitionInfo.get(i);
+                        nrVencedor = i;
+                    } else {
+                        if (playerVencedor.getCurrentHouse() == transitionInfo.get(i).getCurrentHouse()) {
+                            if (playerVencedor.getId() > transitionInfo.get(i).getId()) {
+                                playerVencedor = transitionInfo.get(i);
+                                nrVencedor = i;
+                            }
                         }
                     }
                 }
+                sortedInfo.add(playerVencedor);
+                transitionInfo.remove(nrVencedor);
             }
-            sortedInfo.add(playerVencedor);
-            transitionInfo.remove(nrVencedor);
-        }
-        for(int i = 0; i < sortedInfo.size() ; i++){
+            for (int i = 0; i < sortedInfo.size(); i++) {
 
 
-            int posicao = i + 1;
+                int posicao = i + 1;
 
-            winnerInfo.add("#" + posicao + " " + sortedInfo.get(i).getName()
-                    + ", " + sortedInfo.get(i).getTotalSpecies() + ", " + sortedInfo.get(i).getCurrentHouse() + ", " +
-                    sortedInfo.get(i).getDistanceTravelled() + ", " + sortedInfo.get(i).getFoodCount());
-        }
-        return winnerInfo;
+                winnerInfo.add("#" + posicao + " " + sortedInfo.get(i).getName()
+                        + ", " + sortedInfo.get(i).getTotalSpecies() + ", " + sortedInfo.get(i).getCurrentHouse() + ", " +
+                        sortedInfo.get(i).getDistanceTravelled() + ", " + sortedInfo.get(i).getFoodCount());
+            }
+
+            if(winnerByDefault == 0) {
+                return winnerInfo;
+            }else{
+                String temp = winnerInfo.get(1);
+                winnerInfo.set(0, winnerInfo.get(1));
+                winnerInfo.set(1, temp);
+
+                return winnerInfo;
+            }
+
     }
 
     public JPanel getAuthorsPanel(){
