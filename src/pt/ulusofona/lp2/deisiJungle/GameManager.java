@@ -810,8 +810,9 @@ public class GameManager {
                     playersJogo[i].setTotalSpecies(arrayTemp.get(i).getTotalSpecies());
                     playersJogo[i].setId(arrayTemp.get(i).getId());
 
-                    jungle.arrayCells[playersJogo[i].getCurrentHouse() - 1].addInformation(playersJogo[i], jungle.arrayCells, playersJogo[i].getCurrentHouse());
                     jungle.arrayCells[playersJogo[i].getCurrentHouse() - 1].removeInformation(playersJogo[i].getId(), jungle.arrayCells, 1);
+                    jungle.arrayCells[playersJogo[i].getCurrentHouse() - 1].addInformation(playersJogo[i], jungle.arrayCells, playersJogo[i].getCurrentHouse());
+
 
                 }
 
