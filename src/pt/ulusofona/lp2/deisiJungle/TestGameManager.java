@@ -5,6 +5,8 @@ import pt.ulusofona.lp2.deisiJungle.food.Food;
 import pt.ulusofona.lp2.deisiJungle.food.Water;
 import pt.ulusofona.lp2.deisiJungle.specie.*;
 
+import java.io.File;
+
 import static org.junit.Assert.*;
 
 
@@ -438,6 +440,4 @@ public class TestGameManager {
         System.out.println(gameManager.jungle.length);
         assertNotNull(gameManager.getWinnerInfo());
     }
-
-
 }
