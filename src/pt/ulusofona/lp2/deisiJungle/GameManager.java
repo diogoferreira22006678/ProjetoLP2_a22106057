@@ -833,7 +833,6 @@ public class GameManager {
             jungle = new Board();
             jungle = jungle.createBoard(length);
 
-
             String[][] playerInfo = new String[playersJogo.length][3];
 
             for (int k = 0; k < playersJogo.length; k++) {
@@ -861,19 +860,38 @@ public class GameManager {
                 }
 
             }
+            if(foodInfo != null) {
+                for (int i = 0; i < playersJogo.length; i++) {
 
-            for (int i = 0; i < playersJogo.length; i++){
-                playersJogo[i].setCurrentEnergy(arrayTemp.get(i).getCurrentEnergy());
-                playersJogo[i].setFoodCount(arrayTemp.get(i).getFoodCount());
-                playersJogo[i].setidSpecie(arrayTemp.get(i).getidSpecie());
-                playersJogo[i].setCurrentHouse(arrayTemp.get(i).getCurrentHouse());
-                playersJogo[i].setDistanceTravelled(arrayTemp.get(i).getDistanceTravelled());
-                playersJogo[i].setTurn(arrayTemp.get(i).getTurn());
-                playersJogo[i].setTotalSpecies(arrayTemp.get(i).getTotalSpecies());
-                playersJogo[i].setId(arrayTemp.get(i).getId());
+                    playersJogo[i].setCurrentEnergy(arrayTemp.get(i).getCurrentEnergy());
+                    playersJogo[i].setFoodCount(arrayTemp.get(i).getFoodCount());
+                    playersJogo[i].setidSpecie(arrayTemp.get(i).getidSpecie());
+                    playersJogo[i].setCurrentHouse(arrayTemp.get(i).getCurrentHouse());
+                    playersJogo[i].setDistanceTravelled(arrayTemp.get(i).getDistanceTravelled());
+                    playersJogo[i].setTurn(arrayTemp.get(i).getTurn());
+                    playersJogo[i].setTotalSpecies(arrayTemp.get(i).getTotalSpecies());
+                    playersJogo[i].setId(arrayTemp.get(i).getId());
 
-                jungle.arrayCells[playersJogo[i].getCurrentHouse() - 1].addInformation(playersJogo[i], jungle.arrayCells, playersJogo[i].getCurrentHouse());
-                jungle.arrayCells[playersJogo[i].getCurrentHouse() - 1].removeInformation(playersJogo[i].getId(), jungle.arrayCells, 1);
+                    jungle.arrayCells[playersJogo[i].getCurrentHouse() - 1].addInformation(playersJogo[i], jungle.arrayCells, playersJogo[i].getCurrentHouse());
+                    jungle.arrayCells[playersJogo[i].getCurrentHouse() - 1].removeInformation(playersJogo[i].getId(), jungle.arrayCells, 1);
+
+                }
+            }else{
+                for (int i = 0; i < playersJogo.length + 1; i++) {
+
+                    playersJogo[i].setCurrentEnergy(arrayTemp.get(i).getCurrentEnergy());
+                    playersJogo[i].setFoodCount(arrayTemp.get(i).getFoodCount());
+                    playersJogo[i].setidSpecie(arrayTemp.get(i).getidSpecie());
+                    playersJogo[i].setCurrentHouse(arrayTemp.get(i).getCurrentHouse());
+                    playersJogo[i].setDistanceTravelled(arrayTemp.get(i).getDistanceTravelled());
+                    playersJogo[i].setTurn(arrayTemp.get(i).getTurn());
+                    playersJogo[i].setTotalSpecies(arrayTemp.get(i).getTotalSpecies());
+                    playersJogo[i].setId(arrayTemp.get(i).getId());
+
+                    jungle.arrayCells[playersJogo[i].getCurrentHouse() - 1].addInformation(playersJogo[i], jungle.arrayCells, playersJogo[i].getCurrentHouse());
+                    jungle.arrayCells[playersJogo[i].getCurrentHouse() - 1].removeInformation(playersJogo[i].getId(), jungle.arrayCells, 1);
+
+                }
             }
 
             if(foodInfo != null){
