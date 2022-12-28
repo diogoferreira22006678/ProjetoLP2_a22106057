@@ -804,7 +804,7 @@ public class GameManager {
                     playersJogo[i].setCurrentEnergy(arrayTemp.get(i).getCurrentEnergy());
                     playersJogo[i].setFoodCount(arrayTemp.get(i).getFoodCount());
                     playersJogo[i].setidSpecie(arrayTemp.get(i).getidSpecie());
-
+                    playersJogo[i].setCurrentHouse(arrayTemp.get(i).getCurrentHouse());
                     playersJogo[i].setDistanceTravelled(arrayTemp.get(i).getDistanceTravelled());
                     playersJogo[i].setTurn(arrayTemp.get(i).getTurn());
                     playersJogo[i].setTotalSpecies(arrayTemp.get(i).getTotalSpecies());
