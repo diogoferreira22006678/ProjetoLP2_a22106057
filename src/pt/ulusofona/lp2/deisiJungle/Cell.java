@@ -73,6 +73,5 @@ public class Cell implements Serializable {
 
         }
         return idPlayers;
-
     }
 }
