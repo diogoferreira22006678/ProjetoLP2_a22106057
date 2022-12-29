@@ -1,14 +1,14 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import org.junit.Test;
+import pt.ulusofona.lp2.deisiJungle.food.Bananas;
 import pt.ulusofona.lp2.deisiJungle.food.Food;
 import pt.ulusofona.lp2.deisiJungle.food.Water;
 import pt.ulusofona.lp2.deisiJungle.specie.*;
 
-import java.io.File;
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
-
 
 public class TestGameManager {
     GameManager gameManager = new GameManager();
@@ -441,4 +441,137 @@ public class TestGameManager {
         assertNotNull(gameManager.getWinnerInfo());
     }
 
+    @Test
+    public void testCreateFood() {
+
+        String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
+
+        gameManager.createInitialJungle(10,playerInfo);
+        // Set up the input for the createFood method
+
+        String[][] foodInfo = {
+                {"e", "1"},
+                {"a", "2"},
+                {"b", "3"},
+                {"c", "4"},
+                {"m", "5"}
+        };
+
+        // Create a new Game object and call the createFood method
+
+
+        gameManager.createFood(foodInfo);
+        // Verify that the food was created and added to the game correctly
+        assertEquals("e", gameManager.jungle.arrayCells[0].cellInformationFood.getId());
+        assertEquals("a", gameManager.jungle.arrayCells[1].cellInformationFood.getId());
+        assertEquals("b", gameManager.jungle.arrayCells[2].cellInformationFood.getId());
+        assertEquals("c", gameManager.jungle.arrayCells[3].cellInformationFood.getId());
+        assertEquals("m", gameManager.jungle.arrayCells[4].cellInformationFood.getId());
+    }
+
+    @Test
+    public void testGetPlayerIds() {
+        // Set up the input for the getPlayerIds method
+        int squareNr = 1;
+        String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
+        // Create a new Game object and add some players to the first square
+        GameManager game = new GameManager();
+        game.createInitialJungle(10, playerInfo);
+        game.jungle.arrayCells[0].cellInformationPlayer.add(new Player(3, "Player 3", "Z", 100, 0, 1, "Tarzan", 0, 0));
+        game.jungle.arrayCells[0].cellInformationPlayer.add(new Player(4, "Player 4", "E", 100, 0, 1, "Elephant", 0, 0));
+        game.jungle.arrayCells[0].cellInformationPlayer.add(new Player(5, "Player 5", "L", 100, 0, 1, "Lion", 0, 0));
+
+        // Call the getPlayerIds method and verify that the correct IDs are returned
+        int[] playerIds = game.getPlayerIds(squareNr);
+        assertArrayEquals(new int[] {1, 2, 3, 4, 5}, playerIds);
+    }
+
+    @Test
+    public void testGetSquareInfo() {
+
+        String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
+        // Create a new Game object and add some players to the first square
+        GameManager game = new GameManager();
+        game.createInitialJungle(10, playerInfo);
+        game.jungle.arrayCells[0].cellInformationPlayer.add(new Player(3, "Player 3", "Z", 100, 0, 1, "Tarzan", 0, 0));
+        game.jungle.arrayCells[0].cellInformationPlayer.add(new Player(4, "Player 4", "E", 100, 0, 1, "Elephant", 0, 0));
+        game.jungle.arrayCells[0].cellInformationPlayer.add(new Player(5, "Player 5", "L", 100, 0, 1, "Lion", 0, 0));
+        game.jungle.arrayCells[0].cellInformationFood = new Bananas("b", 3, "bananas.png", 3, "Bananas");
+
+        // Call the getSquareInfo method and verify that the correct information is returned
+        String[] squareInfo = game.getSquareInfo(3);
+        String[] squareInfoStart = game.getSquareInfo(1);
+        String[] squareInfoFinish = game.getSquareInfo(10);
+        assertArrayEquals(new String[] {"blank.png", "Vazio", ""}, squareInfo);
+        assertArrayEquals(new String[] {"finish.png", "Meta", ""}, squareInfoFinish);
+        assertArrayEquals(new String[] {"bananas.png", "Bananas : 3 : + 40 energia", "1,2,3,4,5"}, squareInfoStart);
+
+    }
+
+    @Test
+    public void testGetPlayerInfo() {
+        // Set up the input for the getPlayerInfo method
+        int playerId = 1;
+
+        // Create a new Game object and add a player with the given ID
+        GameManager game = new GameManager();
+        game.playersJogo = new Player[] {new Player(1, "Player 1", "Z", 100, 0, 1, "Tarzan", 0, 0)};
+        game.playersJogo[0].setSpecie(new Tarzan());
+        game.playersJogo[0].getSpecie().setMinSpeed(1);
+        game.playersJogo[0].getSpecie().setMaxSpeed(6);
+
+        // Call the getPlayerInfo method and verify that the correct information is returned
+        String[] playerInfo = game.getPlayerInfo(playerId);
+        assertArrayEquals(new String[] {"1", "Player 1", "Z", "100", "1..6"}, playerInfo);
+    }
+
+    @Test
+    public void testGetCurrentPlayerInfo() {
+        // Set up the input for the getCurrentPlayerInfo method
+        int playerId = 1;
+
+        // Create a new Game object and add a player with the given ID and set its turn to 1
+        GameManager game = new GameManager();
+        Player player = new Player(1, "Player 1", "Z", 100, 0, 1, "Tarzan", 0, 0);
+        player.setTurn(1);
+        game.playersJogo = new Player[] {player};
+        game.playersJogo[0].setSpecie(new Tarzan());
+        game.playersJogo[0].getSpecie().setMinSpeed(1);
+        game.playersJogo[0].getSpecie().setMaxSpeed(6);
+
+        // Call the getCurrentPlayerInfo method and verify that the correct information is returned
+        String[] playerInfo = game.getCurrentPlayerInfo();
+        assertArrayEquals(new String[] {"1", "Player 1", "Z", "100", "1..6"}, playerInfo);
+    }
+
+    @Test
+    public void testGetCurrentPlayerEnergyInfo() {
+        // Set up the input for the getCurrentPlayerEnergyInfo method
+        int nrPositions = 2;
+
+        // Create a new Game object and add a player with the given ID and set its turn to 1
+        GameManager game = new GameManager();
+        Player player = new Player(1, "Player 1", "Z", 100, 0, 1, "Tarzan", 0, 0);
+        player.setTurn(1);
+        player.setSpecie(new Tarzan());
+        game.playersJogo = new Player[] {player};
+
+        // Call the getCurrentPlayerEnergyInfo method and verify that the correct information is returned
+        String[] playerInfo = game.getCurrentPlayerEnergyInfo(nrPositions);
+        assertArrayEquals(new String[] {"4", "20"}, playerInfo);
+    }
+
+    @Test
+    public void testGetPlayersInfo() {
+        // Create a new Board object and add some players to it
+        String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
+        // Create a new Game object and add some players to the first square
+        GameManager game = new GameManager();
+        game.createInitialJungle(10, playerInfo);
+
+        // Test the getPlayerIds method
+        String[][] actualInfo = game.getPlayersInfo();
+        assertEquals("1 Diogo Diogo 1..6", actualInfo[0][0] + " " + actualInfo[0][1] + " " + actualInfo[0][1] + " " + actualInfo[0][4]);
+        assertEquals("2 Joao Joao 4..6", actualInfo[1][0] + " " + actualInfo[1][1] + " " + actualInfo[1][1] + " " + actualInfo[1][4]);
+    }
 }
