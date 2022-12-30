@@ -6,6 +6,10 @@ import pt.ulusofona.lp2.deisiJungle.food.Food;
 import pt.ulusofona.lp2.deisiJungle.food.Water;
 import pt.ulusofona.lp2.deisiJungle.specie.*;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -151,6 +155,7 @@ public class TestGameManager {
 
         MovementResult resultFourthPlay = gameManager.moveCurrentPlayer(4,false);
         assertEquals("VALID_MOVEMENT",resultFourthPlay.code().toString());
+        assertEquals(2,Integer.parseInt(gameManager.getWinnerInfo()[0]));
     }
 
     @Test
@@ -574,4 +579,92 @@ public class TestGameManager {
         assertEquals("1 Diogo Diogo 1..6", actualInfo[0][0] + " " + actualInfo[0][1] + " " + actualInfo[0][1] + " " + actualInfo[0][4]);
         assertEquals("2 Joao Joao 4..6", actualInfo[1][0] + " " + actualInfo[1][1] + " " + actualInfo[1][1] + " " + actualInfo[1][4]);
     }
+
+    GameManager gameManagersave = new GameManager();
+
+    @Test
+    public void testSaveGame() throws IOException {
+        // Test case 1: Save game to a new file
+        File file = new File("test1.txt");
+        boolean expectedOutput = true;
+
+        String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
+        gameManagersave.createInitialJungle(10, playerInfo);
+
+        boolean result = gameManagersave.saveGame(file);
+        assertEquals(expectedOutput, result);
+
+        // Verify that the file was created and contains the expected data
+        assertTrue(file.exists());
+        verifyFileContent(file);
+
+        // Test case 2: Save game to an existing file
+        file = new File("test2.txt");
+        file.createNewFile();
+        expectedOutput = true;
+
+        result = gameManagersave.saveGame(file);
+        assertEquals(expectedOutput, result);
+
+        // Verify that the file was overwritten and contains the expected data
+        assertTrue(file.exists());
+        verifyFileContent(file);
+
+        // Test case 3: Save game to a file with insufficient permissions
+        file = new File("/root/test3.txt");
+        expectedOutput = false;
+
+        result = gameManagersave.saveGame(file);
+        assertEquals(expectedOutput, result);
+
+        // Verify that the file was not created
+        assertFalse(file.exists());
+    }
+
+    private void verifyFileContent(File file) throws IOException {
+        // Read the file and verify its content
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String line = reader.readLine();
+        assertEquals("Turn " + gameManagersave.turn, line);
+        line = reader.readLine();
+        assertEquals("Length " + gameManagersave.jungle.length, line);
+
+        reader.close();
+    }
+
+
+    private GameManager gameManagerLoad = new GameManager();
+
+    @Test
+    public void testSaveAndLoadGame() throws IOException {
+
+        String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
+        gameManagerLoad.createInitialJungle(10, playerInfo);
+        // Set up the test by saving a game to a file
+        File file = new File("test.txt");
+        boolean saveResult = gameManagerLoad.saveGame(file);
+
+        // Invoke the method under test
+        boolean loadResult = gameManagerLoad.loadGame(file);
+
+        // Verify the results
+        assertTrue(saveResult);
+        assertTrue(loadResult);
+        // Verify that the game was loaded correctly by comparing the data to the original game
+        verifyLoadedGame(gameManagerLoad, gameManagerLoad);
+    }
+
+    private void verifyLoadedGame(GameManager expected, GameManager actual) {
+        // Compare the data of the expected and actual games
+        assertEquals(expected.turn, actual.turn);
+        assertEquals(expected.jungle.length, actual.jungle.length);
+        assertArrayEquals(expected.playersJogo, actual.playersJogo);
+        assertArrayEquals(expected.jungle.arrayCells, actual.jungle.arrayCells);
+        assertEquals(expected.saveInfoPlayer, actual.saveInfoPlayer);
+        assertEquals(expected.saveInfoFood, actual.saveInfoFood);
+        // ... compare other data as needed
+    }
+
+
+
 }
