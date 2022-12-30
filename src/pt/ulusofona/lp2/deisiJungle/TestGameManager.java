@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.deisiJungle;
 import org.junit.Test;
 import pt.ulusofona.lp2.deisiJungle.food.Bananas;
 import pt.ulusofona.lp2.deisiJungle.food.Food;
+import pt.ulusofona.lp2.deisiJungle.food.Meat;
 import pt.ulusofona.lp2.deisiJungle.food.Water;
 import pt.ulusofona.lp2.deisiJungle.specie.*;
 
@@ -665,6 +666,56 @@ public class TestGameManager {
         // ... compare other data as needed
     }
 
+    @Test
+    public void testWhoIsTaborda() {
+        // Invoke the method under test
+        String result = gameManager.whoIsTaborda();
+
+        // Verify the results
+        assertEquals("Wrestling", result);
+    }
+
+    @Test
+    public void testGetGameResults() {
+        // Set up the test data
+        Player player1 = new Player(1, "Player 1", "Z", 5, 3, 20, "Tarzan", 0, 0);
+        Player player2 = new Player(2, "Player 2", "E", 4, 2, 4, "Elefante", 0, 0);
+        Player player3 = new Player(3, "Player 3", "P", 3, 1, 7, "Leao", 0, 0);
+        gameManager.playersJogo = new Player[] {player1, player2, player3};
+
+        // Invoke the method under test
+        ArrayList<String> results = gameManager.getGameResults();
+
+        // Verify the results
+        assertEquals("#1 Player 1, Tarzan, 20, 0, 0", results.get(0));
+        assertEquals("#2 Player 3, Leao, 7, 0, 0", results.get(1));
+        assertEquals("#3 Player 2, Elefante, 4, 0, 0", results.get(2));
+    }
+
+    @Test
+    public void testWinnerByDefault() {
+        // Create an instance of Player and set its attributes
+        String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
+        gameManagerLoad.createInitialJungle(10, playerInfo);
+
+        gameManagerLoad.moveCurrentPlayer(10,true);
+
+        // Call the getWinnerInfo method and store the result in a variable
+        String[] result = gameManagerLoad.getWinnerInfo();
+
+        // Use JUnit's assertArrayEquals method to check that the returned array is equal to the expected array
+        assertArrayEquals(new String[]{"1", "Diogo", "Z", "52"}, result);
+
+        gameManagerLoad.createInitialJungle(10, playerInfo);
+
+        gameManagerLoad.moveCurrentPlayer(8,true);
+
+        // Call the getWinnerInfo method and store the result in a variable
+        String[] resultHalf = gameManagerLoad.getWinnerInfo();
+
+        // Use JUnit's assertArrayEquals method to check that the returned array is equal to the expected array
+        assertArrayEquals(new String[]{"2", "Joao", "L", "80"}, resultHalf);
+    }
 
 
 }
