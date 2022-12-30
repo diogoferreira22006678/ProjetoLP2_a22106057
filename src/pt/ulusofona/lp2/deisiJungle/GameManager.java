@@ -236,7 +236,6 @@ public class GameManager {
         saveInfoFood = foodInfo;
         ArrayList idJogadores = new ArrayList();
         String[][] especiesList = getSpecies();
-        String [][] foodList = getFoodTypes();
         int procurarTarzan = 0;
         //validar energia inicial
         for(int i = 0; i < playersInfo.length;i++){
