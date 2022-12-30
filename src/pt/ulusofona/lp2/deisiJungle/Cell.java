@@ -11,13 +11,6 @@ public class Cell implements Serializable {
     ArrayList<Player> cellInformationPlayer;
     Food cellInformationFood;
 
-    public Cell(ArrayList<Player> CellInformationPlayer, Food CellInformationFood){
-
-        this.cellInformationPlayer = CellInformationPlayer;
-        this.cellInformationFood = CellInformationFood;
-
-    }
-
     public Cell(ArrayList<Player> CellInformationPlayer) {
         this.cellInformationPlayer = CellInformationPlayer;
     }

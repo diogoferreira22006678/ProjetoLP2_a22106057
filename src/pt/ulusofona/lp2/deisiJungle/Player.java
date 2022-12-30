@@ -14,9 +14,6 @@ public class Player {
     private String totalSpecies;
     private int distanceTravelled;
     private int foodCount;
-    int typeOfFood = 0;
-    int maxVelocity = 0;
-    int minVelocity = 0;
     Specie specie;
 
     // constructor to initialize player with given values
