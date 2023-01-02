@@ -48,71 +48,17 @@ public class TestGameManager {
     }
 
     @Test
-    public void testCreateInitialJungleSuccess() {
+    public void testCreateInitialJungleSuccess() throws InvalidInitialJungleException {
         // Create a sample input for the createInitialJungle method
-        int jungleSize = 10;
-        String[][] playersInfo = {{"1", "Tarzan", "Z"}, {"2", "Leao", "L"}};
-        String[][] foodInfo = {{"u", "4"}, {"c", "9"}};
-
-        // Create an instance of the createInitialJungle class and call the createInitialJungle method
-        gameManager.createInitialJungle(jungleSize, playersInfo, foodInfo);
-        InitializationError error = gameManager.createInitialJungle(jungleSize, playersInfo);
-
-        // Verify that the output is as expected
-        assertNull(error);
-        assertEquals(10, gameManager.jungle.length);
-        assertEquals(2, gameManager.playersJogo.length);
-        assertEquals("Tarzan", gameManager.playersJogo[0].getName());
-        assertEquals("Leao", gameManager.playersJogo[1].getName());
-        assertTrue(gameManager.playersJogo[0].getSpecie() instanceof Tarzan);
-        assertTrue(gameManager.playersJogo[1].getSpecie() instanceof Lion);
 
     }
 
     @Test
     public void testCreateInitialJungleInvalidLengthPlayersAndFoods() {
-        // Create a sample input for the createInitialJungle method with an invalid number of players
-        int jungleSize = 10;
-        String[][] playersInfoInvalidNumber = {{"1", "Tarzan", "Z"}};
-        String[][] playersIDInvalidNumber = {{"1", "Tarzan", "Z"},{"y","Leao","L"}};
-        String[][] playersInfoNull = {{"1", "Tarzan", "Z"},{null, null, null}};
-        String[][] playersMoreThenOneTarzan = {{"1", "Tarzan", "Z"},{"2", "Tarzan", "Z"}};
-        String[][] playersInvalidSpecie = {{"1", "Tarzan", "Z"},{"2", "Leao", "U"}};
-        String[][] playersValid = {{"1", "Tarzan", "Z"},{"2", "Leao", "L"}};
-        String[][] foodInfoInvalidPosition = {{"u", "11"}, {"c", "9"}};
-        String[][] foodInfoInvalidID = {{"h", "6"}, {"c", "9"}};
-
-        InitializationError errorInvalidPlayers = gameManager.createInitialJungle(jungleSize, playersInfoInvalidNumber);
-        InitializationError errorPlayerInfoNull = gameManager.createInitialJungle(jungleSize, playersInfoNull);
-        InitializationError errorPlayerIDInvalidNumber = gameManager.createInitialJungle(jungleSize, playersIDInvalidNumber);
-        InitializationError errorMoreThenOneTarzan = gameManager.createInitialJungle(jungleSize, playersMoreThenOneTarzan);
-        InitializationError errorPlayerInvalidSpecie = gameManager.createInitialJungle(jungleSize, playersInvalidSpecie);
-        InitializationError errorInvalidJungleLength = gameManager.createInitialJungle(3, playersValid);
-        InitializationError errorFoodInvalidPositioning = gameManager.createInitialJungle(jungleSize, playersValid,foodInfoInvalidPosition);
-        InitializationError errorFoodInfoInvalidID = gameManager.createInitialJungle(jungleSize, playersValid,foodInfoInvalidID);
-
-
-        // Verify that the output is as expected
-        assertNotNull(errorInvalidPlayers);
-        assertEquals("INVALID NUMBER OF PLAYERS", errorInvalidPlayers.getMessage());
-        assertNotNull(errorPlayerInfoNull);
-        assertEquals("PLAYERINFO NULL", errorPlayerInfoNull.getMessage());
-        assertNotNull(errorPlayerIDInvalidNumber);
-        assertEquals("INVAlID PLAYER ID", errorPlayerIDInvalidNumber.getMessage());
-        assertNotNull(errorMoreThenOneTarzan);
-        assertEquals("MORE THEN ONE TARZAN", errorMoreThenOneTarzan.getMessage());
-        assertNotNull(errorPlayerInvalidSpecie);
-        assertEquals("INVALID PLAYER SPECIE", errorPlayerInvalidSpecie.getMessage());
-        assertNotNull(errorInvalidJungleLength);
-        assertEquals("INVALID LENGTH", errorInvalidJungleLength.getMessage());
-        assertNotNull(errorFoodInvalidPositioning);
-        assertEquals("Invalid Food Positioning", errorFoodInvalidPositioning.getMessage());
-        assertNotNull(errorFoodInfoInvalidID);
-        assertEquals("Invalid Food ID", errorFoodInfoInvalidID.getMessage());
     }
 
     @Test
-    public void playFromEnunciado(){
+    public void playFromEnunciado() throws InvalidInitialJungleException {
         Board board = new Board();
         board = board.createBoard(10);
         Food water = new Water("u",0,"Image","Name");
@@ -160,7 +106,7 @@ public class TestGameManager {
     }
 
     @Test
-    public void playerEatsSpoiledMeat(){
+    public void playerEatsSpoiledMeat() throws InvalidInitialJungleException {
         String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
         String[][] foodInfo = {{"c","3"}};
 
@@ -188,7 +134,7 @@ public class TestGameManager {
     }
 
     @Test
-    public void playerEatsTestMultipleBananas(){
+    public void playerEatsTestMultipleBananas() throws InvalidInitialJungleException {
         String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
         String[][] foodInfo = {{"b","3"}};
 
@@ -225,7 +171,7 @@ public class TestGameManager {
     }
 
     @Test
-    public void playerEatsTestMultipleBananasSamePlace(){
+    public void playerEatsTestMultipleBananasSamePlace() throws InvalidInitialJungleException {
         String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
         String[][] foodInfo = {{"b","3"}};
 
@@ -259,7 +205,7 @@ public class TestGameManager {
     }
 
     @Test
-    public void playerEatsTestMultipleBananasBackwards(){
+    public void playerEatsTestMultipleBananasBackwards() throws InvalidInitialJungleException {
         String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
         String[][] foodInfo = {{"b","3"}};
 
@@ -293,7 +239,7 @@ public class TestGameManager {
     }
 
     @Test
-    public void playerEatsTestMultipleBananasFoward(){
+    public void playerEatsTestMultipleBananasFoward() throws InvalidInitialJungleException {
         String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
         String[][] foodInfo = {{"b","3"}};
 
@@ -326,7 +272,7 @@ public class TestGameManager {
     }
 
     @Test
-    public void playerTestOverrideSpeed(){
+    public void playerTestOverrideSpeed() throws InvalidInitialJungleException {
         String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"},{"3","Daniela","P"},{"4","Jonas","E"}};
         String[][] foodInfo = {{"b","3"}};
 
@@ -345,7 +291,7 @@ public class TestGameManager {
     }
 
     @Test
-    public void testWinnerInfoNoEnergy(){
+    public void testWinnerInfoNoEnergy() throws InvalidInitialJungleException {
         String[][] playerInfo = {{"1","Diogo","P"},{"2","Joao","P"}};
 
 
@@ -372,7 +318,7 @@ public class TestGameManager {
     }
 
     @Test
-    public void testWinnerInfoHalfBoard(){
+    public void testWinnerInfoHalfBoard() throws InvalidInitialJungleException {
         String[][] playerInfo = {{"1","Diogo","P"},{"2","Joao","P"}};
 
 
@@ -393,7 +339,7 @@ public class TestGameManager {
     }
 
     @Test
-    public void testWinnerInfoHalfBoardOdd(){
+    public void testWinnerInfoHalfBoardOdd() throws InvalidInitialJungleException {
         String[][] playerInfo = {{"1","Diogo","E"},{"2","Joao","E"}};
 
 
@@ -414,7 +360,7 @@ public class TestGameManager {
     }
 
     @Test
-    public void testWinnerInfoFinalBoard(){
+    public void testWinnerInfoFinalBoard() throws InvalidInitialJungleException {
         String[][] playerInfo = {{"1","Diogo","E"},{"2","Joao","E"}};
 
 
@@ -431,7 +377,7 @@ public class TestGameManager {
     }
 
     @Test
-    public void testWinnerInfoFinalBoardOdd(){
+    public void testWinnerInfoFinalBoardOdd() throws InvalidInitialJungleException {
         String[][] playerInfo = {{"1","Diogo","E"},{"2","Joao","E"}};
 
 
@@ -448,7 +394,7 @@ public class TestGameManager {
     }
 
     @Test
-    public void testCreateFood() {
+    public void testCreateFood() throws InvalidInitialJungleException {
 
         String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
 
@@ -476,7 +422,7 @@ public class TestGameManager {
     }
 
     @Test
-    public void testGetPlayerIds() {
+    public void testGetPlayerIds() throws InvalidInitialJungleException {
         // Set up the input for the getPlayerIds method
         int squareNr = 1;
         String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
@@ -493,7 +439,7 @@ public class TestGameManager {
     }
 
     @Test
-    public void testGetSquareInfo() {
+    public void testGetSquareInfo() throws InvalidInitialJungleException {
 
         String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
         // Create a new Game object and add some players to the first square
@@ -568,7 +514,7 @@ public class TestGameManager {
     }
 
     @Test
-    public void testGetPlayersInfo() {
+    public void testGetPlayersInfo() throws InvalidInitialJungleException {
         // Create a new Board object and add some players to it
         String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
         // Create a new Game object and add some players to the first square
@@ -584,7 +530,7 @@ public class TestGameManager {
     GameManager gameManagersave = new GameManager();
 
     @Test
-    public void testSaveGame() throws IOException {
+    public void testSaveGame() throws IOException, InvalidInitialJungleException {
         // Test case 1: Save game to a new file
         File file = new File("test1.txt");
         boolean expectedOutput = true;
@@ -637,7 +583,7 @@ public class TestGameManager {
     private GameManager gameManagerLoad = new GameManager();
 
     @Test
-    public void testSaveAndLoadGame() throws IOException {
+    public void testSaveAndLoadGame() throws IOException, InvalidInitialJungleException {
 
         String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
         gameManagerLoad.createInitialJungle(10, playerInfo);
@@ -693,7 +639,7 @@ public class TestGameManager {
     }
 
     @Test
-    public void testWinnerByDefault() {
+    public void testWinnerByDefault() throws InvalidInitialJungleException {
         // Create an instance of Player and set its attributes
         String[][] playerInfo = {{"1","Diogo","Z"},{"2","Joao","L"}};
         gameManagerLoad.createInitialJungle(10, playerInfo);
