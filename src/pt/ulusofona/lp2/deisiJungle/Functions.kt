@@ -12,13 +12,13 @@ fun router(): (CommandType) -> ((GameManager, List<String>) -> String?) {
                     "MOST_TRAVELED" -> getMostTraveled(manager)
                     "TOP_ENERGETIC_OMNIVORES" -> getTopEnergeticOmnivores(manager)
                     "CONSUMED_FOODS" -> getConsumedFoods(manager)
-                    else -> "Invalid command"
+                    else -> null
                 }
             }
             CommandType.POST -> { manager, args ->
                 when (args[0]) {
                     "MOVE" -> postMove(manager, args.subList(1, args.size))
-                    else -> "Invalid command"
+                    else -> null
                 }
             }
         }
@@ -68,10 +68,10 @@ fun getTopEnergeticOmnivores(manager: GameManager): String? {
 
 fun getConsumedFoods(manager: GameManager): String {
     val foods = manager.playersJogo.flatMap { it.foodNamesList }.distinct().sorted()
-    return if (foods.size > 0) {
+    return if (foods.isNotEmpty()) {
         foods.joinToString("\n")
     } else {
-        "No foods consumed"
+        ""
     }
 }
 
@@ -87,7 +87,7 @@ fun postMove(manager: GameManager, args: List<String>): String?{
             "OK"
         }
         result.code.toString() == "CAUGHT_FOOD" -> {
-            "Apanhou Comida"
+            "Apanhou comida"
         }
         result.code.toString() == "NO_ENERGY" -> {
             "Sem energia"
