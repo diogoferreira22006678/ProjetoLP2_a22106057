@@ -744,20 +744,17 @@ public class GameManager {
                 foodInfo[k][0] = foodList.get(k).getId();
                 foodInfo[k][1] = String.valueOf(foodList.get(k).getPosition());
             }
-
             try {
                 createInitialJungle(length,playerInfo,foodInfo);
             } catch (InvalidInitialJungleException e) {
                return false;
             }
-
         }else{
             try {
                 createInitialJungle(length,playerInfo);
             } catch (InvalidInitialJungleException e) {
                 return false;
             }
-
         }
         for (int i = 0; i < playersJogo.length; i++) {
             playersJogo[i].setCurrentEnergy(arrayTemp.get(i).getCurrentEnergy());
