@@ -464,6 +464,7 @@ public class GameManager {
                 if(food.getId().equals("c") && specie.getTypeOfFood() == 1){
                     return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
                 }
+                playersJogo[correctPosition].addFoodName(food.getName());
                 return new MovementResult(MovementResultCode.CAUGHT_FOOD,"Apanhou " + food.getName());
             }
             return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
@@ -495,6 +496,7 @@ public class GameManager {
                         if(food.getId().equals("c") && specie.getTypeOfFood() == 1){
                             return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
                         }
+                        playersJogo[correctPosition].addFoodName(food.getName());
                         return new MovementResult(MovementResultCode.CAUGHT_FOOD,"Apanhou " + food.getName());
                     }
                 }else{

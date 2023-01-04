@@ -2,6 +2,8 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import pt.ulusofona.lp2.deisiJungle.specie.Specie;
 
+import java.util.List;
+
 public class Player {
     // instance variables
     private int id;
@@ -15,6 +17,7 @@ public class Player {
     private int distanceTravelled;
     private int foodCount;
     Specie specie;
+    List<String> foodName;
 
     // constructor to initialize player with given values
     public Player(int id, String name, String species,
@@ -52,6 +55,12 @@ public class Player {
     }
 
     // getters and setters for each instance variable
+
+    public List<String> getFoodNames(){return foodName;}
+
+    public void addFoodName(String name){
+            this.foodName.add(name);
+    }
 
     public String getidSpecie(){
         return idSpecie;
