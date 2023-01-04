@@ -26,7 +26,7 @@ fun router(): (CommandType) -> ((GameManager, List<String>) -> String?) {
 }
 
 fun getPlayerInfo(manager: GameManager, args: List<String>): String?{
-    val player = manager.playersJogo.firstOrNull  { it.name == args[1] }
+    val player = manager.playersJogo.firstOrNull  { it.name == args[0] }
 
     return if (player != null) {
         return "${player.id} | ${player.name} | ${player.totalSpecies} | ${player.currentEnergy} | ${player.currentHouse}"
@@ -37,7 +37,7 @@ fun getPlayerInfo(manager: GameManager, args: List<String>): String?{
 }
 
 fun getPlayerBySpecie(manager: GameManager, args: List<String>): String? {
-    val specieId = args[1]
+    val specieId = args[0]
     val players = manager.playersJogo.filter { it.getidSpecie() == specieId }
     val names = players.map { it.name }
 
@@ -52,7 +52,7 @@ fun getMostTraveled(manager: GameManager): String {
     val sortedPlayers = manager.playersJogo.sortedByDescending { it.distanceTravelled }
     val totalHouses = manager.playersJogo.sumOf { it.distanceTravelled }
 
-    return sortedPlayers.map { "${it.name}:${it.species}:${it.distanceTravelled}\n" }.joinToString("") + "$totalHouses"
+    return sortedPlayers.map { "${it.name}:${it.species}:${it.distanceTravelled}\n" }.joinToString("") + "Total:$totalHouses"
 }
 
 fun getTopEnergeticOmnivores(manager: GameManager): String? {
@@ -60,7 +60,7 @@ fun getTopEnergeticOmnivores(manager: GameManager): String? {
     val sortedPlayers = players.sortedByDescending { it.currentEnergy }
 
     return if (sortedPlayers.isNotEmpty()) {
-        sortedPlayers.map { "${it.name}: ${it.currentEnergy}" }.joinToString("\n")
+        sortedPlayers.map { "${it.name}:${it.currentEnergy}" }.joinToString("\n")
     } else {
         "Inexistent player"
     }
@@ -68,7 +68,7 @@ fun getTopEnergeticOmnivores(manager: GameManager): String? {
 
 fun getConsumedFoods(manager: GameManager): String {
     val foods = manager.playersJogo.flatMap { it.foodNamesList }.distinct().sorted()
-    return if (foods.isNotEmpty()) {
+    return if (foods.size > 0) {
         foods.joinToString("\n")
     } else {
         "No foods consumed"
@@ -77,7 +77,7 @@ fun getConsumedFoods(manager: GameManager): String {
 
 fun postMove(manager: GameManager, args: List<String>): String?{
 
-    val result = manager.moveCurrentPlayer(args[1].toInt(), true)
+    val result = manager.moveCurrentPlayer(args[0].toInt(), true)
 
     return when {
         result.code.toString() == "INVALID_MOVEMENT" -> {
