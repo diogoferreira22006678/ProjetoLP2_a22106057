@@ -2,6 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import pt.ulusofona.lp2.deisiJungle.specie.Specie;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -17,7 +18,7 @@ public class Player {
     private int distanceTravelled;
     private int foodCount;
     Specie specie;
-    List<String> foodName;
+    ArrayList<String> foodNamesList = new ArrayList();
 
     // constructor to initialize player with given values
     public Player(int id, String name, String species,
@@ -56,10 +57,10 @@ public class Player {
 
     // getters and setters for each instance variable
 
-    public List<String> getFoodNames(){return foodName;}
+    public ArrayList<String> getFoodNames(){return foodNamesList;}
 
     public void addFoodName(String name){
-            this.foodName.add(name);
+            this.foodNamesList.add(name);
     }
 
     public String getidSpecie(){

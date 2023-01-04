@@ -49,7 +49,7 @@ fun getPlayerBySpecie(manager: GameManager, args: List<String>): String? {
 }
 
 fun getMostTraveled(manager: GameManager): String {
-    val sortedPlayers = manager.playersJogo.sortedBy { it.distanceTravelled }
+    val sortedPlayers = manager.playersJogo.sortedByDescending { it.distanceTravelled }
     val totalHouses = manager.playersJogo.sumOf { it.distanceTravelled }
 
     return sortedPlayers.map { "${it.name}:${it.species}:${it.distanceTravelled}\n" }.joinToString("") + "$totalHouses"
@@ -57,7 +57,7 @@ fun getMostTraveled(manager: GameManager): String {
 
 fun getTopEnergeticOmnivores(manager: GameManager): String? {
     val players = manager.playersJogo.filter { it.specie.typeOfFood == 3 }
-    val sortedPlayers = players.sortedBy { it.currentEnergy }
+    val sortedPlayers = players.sortedByDescending { it.currentEnergy }
 
     return if (sortedPlayers.isNotEmpty()) {
         sortedPlayers.map { "${it.name}: ${it.currentEnergy}" }.joinToString("\n")
@@ -67,7 +67,7 @@ fun getTopEnergeticOmnivores(manager: GameManager): String? {
 }
 
 fun getConsumedFoods(manager: GameManager): String {
-    val foods = manager.playersJogo.flatMap { it.foodName }.distinct().sorted()
+    val foods = manager.playersJogo.flatMap { it.foodNamesList }.distinct().sorted()
     return if (foods.isNotEmpty()) {
         foods.joinToString("\n")
     } else {
