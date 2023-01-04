@@ -188,31 +188,25 @@ public class GameManager {
         for(int i = 0; i < playersInfo.length;i++){
 
             if(playersInfo[i][0] == null || playersInfo[i][1] == null){
-                InvalidInitialBoardException exception = new InvalidInitialBoardException(new InvalidInitialJungleException("PLAYERINFO NULL"));
-                exception.setInvalidPlayer(true);
-                throw exception.exception;
+                throw  new InvalidInitialJungleException("PLAYERINFO IS NULL", true , false);
+
             }
 
             boolean isNumeric =  playersInfo[i][0].matches("[+-]?\\d*(\\.\\d+)?");
 
             if(idJogadores.contains(playersInfo[i][0]) || !isNumeric){
-                InvalidInitialBoardException exception = new InvalidInitialBoardException(new InvalidInitialJungleException("INVALID PLAYER ID"));
-                exception.setInvalidPlayer(true);
-                throw exception.exception; }
+                throw  new InvalidInitialJungleException("INVALID PLAYER ID", true , false);
+                }
 
             idJogadores.add(playersInfo[i][0]);
             //validar Nº de Tarzans
             if (playersInfo[i][2].equals("Z")){
                 procurarTarzan++; }
             if(procurarTarzan > 1){
-                InvalidInitialBoardException exception = new InvalidInitialBoardException(new InvalidInitialJungleException("MORE THEN ONE TARZAN"));
-                exception.setInvalidPlayer(true);
-                throw exception.exception; }
+                throw  new InvalidInitialJungleException("MORE THEN ONE TARZAN", true , false);}
             // validar nome do player
             if(playersInfo[i] == null){
-                InvalidInitialBoardException exception = new InvalidInitialBoardException(new InvalidInitialJungleException("PLAYERINFO NULL"));
-                exception.setInvalidPlayer(true);
-                throw exception.exception; }
+                throw  new InvalidInitialJungleException("PLAYERINFO IS NULL", true , false); }
             //validar  indice da especie
             int valido = 0;
             for(int k = 0; k< especiesList.length; k++){
@@ -221,20 +215,14 @@ public class GameManager {
                     break; }
             }
             if(valido == 0){
-                InvalidInitialBoardException exception = new InvalidInitialBoardException(new InvalidInitialJungleException("INVALID PLAYER SPECIE"));
-                exception.setInvalidPlayer(true);
-                throw exception.exception; }
+                throw  new InvalidInitialJungleException("INVALID PLAYER SPECIE", true , false); }
         }
         // valida numero de players
         if(playersInfo.length < 2 || playersInfo.length > 4){
-            InvalidInitialBoardException exception = new InvalidInitialBoardException(new InvalidInitialJungleException("INVALID NUMBER OF PLAYERS"));
-            exception.setInvalidPlayer(true);
-            throw exception.exception; }
+            throw  new InvalidInitialJungleException("INVALID NUMBER OF PLAYERS", true , false); }
         // valida tamanho do tabuleiro
         if(jungleSize < 2 * playersInfo.length){
-            InvalidInitialBoardException exception = new InvalidInitialBoardException(new InvalidInitialJungleException("INVALID BOARD LENGTH"));
-            exception.setInvalidPlayer(true);
-            throw exception.exception; }
+            throw  new InvalidInitialJungleException("INVALID BOARD LENGTH", true , false); }
 
         jungle = jungle.createBoard(jungleSize);
         playersJogo = new Player[playersInfo.length];
@@ -254,31 +242,23 @@ public class GameManager {
         for(int i = 0; i < playersInfo.length;i++){
 
             if(playersInfo[i][0] == null || playersInfo[i][1] == null){
-                InvalidInitialBoardException exception = new InvalidInitialBoardException(new InvalidInitialJungleException("PLAYERINFO NULL"));
-                exception.setInvalidPlayer(true);
-                throw exception.exception;
+                throw  new InvalidInitialJungleException("PLAYERINFO IS NULL", true , false);
             }
 
             boolean isNumeric =  playersInfo[i][0].matches("[+-]?\\d*(\\.\\d+)?");
 
             if(idJogadores.contains(playersInfo[i][0]) || !isNumeric){
-                InvalidInitialBoardException exception = new InvalidInitialBoardException(new InvalidInitialJungleException("INVALID PLAYER ID"));
-                exception.setInvalidPlayer(true);
-                throw exception.exception; }
+                throw  new InvalidInitialJungleException("INVALID PLAYER ID", true , false); }
 
             idJogadores.add(playersInfo[i][0]);
             //validar Nº de Tarzans
             if (playersInfo[i][2].equals("Z")){
                 procurarTarzan++; }
             if(procurarTarzan > 1){
-                InvalidInitialBoardException exception = new InvalidInitialBoardException(new InvalidInitialJungleException("MORE THEN ONE TARZAN"));
-                exception.setInvalidPlayer(true);
-                throw exception.exception; }
+                throw  new InvalidInitialJungleException("MORE THEN ONE TARZAN", true , false); }
             // validar nome do player
             if(playersInfo[i] == null){
-                InvalidInitialBoardException exception = new InvalidInitialBoardException(new InvalidInitialJungleException("PLAYERINFO NULL"));
-                exception.setInvalidPlayer(true);
-                throw exception.exception; }
+                throw  new InvalidInitialJungleException("PLAYERINFO IS NULL", true , false); }
             //validar  indice da especie
             int valido = 0;
             for(int k = 0; k< especiesList.length; k++){
@@ -287,38 +267,26 @@ public class GameManager {
                     break; }
             }
             if(valido == 0){
-                InvalidInitialBoardException exception = new InvalidInitialBoardException(new InvalidInitialJungleException("INVALID PLAYER SPECIE"));
-                exception.setInvalidPlayer(true);
-                throw exception.exception; }
+                throw  new InvalidInitialJungleException("INVALID PLAYER SPECIE", true , false); }
         }
         // valida numero de players
         if(playersInfo.length < 2 || playersInfo.length > 4){
-            InvalidInitialBoardException exception = new InvalidInitialBoardException(new InvalidInitialJungleException("INVALID NUMBER OF PLAYERS"));
-            exception.setInvalidPlayer(true);
-            throw exception.exception; }
+            throw  new InvalidInitialJungleException("INVALID NUMBER OF PLAYERS", true , false); }
         // valida tamanho do tabuleiro
         if(jungleSize < 2 * playersInfo.length){
-            InvalidInitialBoardException exception = new InvalidInitialBoardException(new InvalidInitialJungleException("INVALID BOARD LENGTH"));
-            exception.setInvalidPlayer(true);
-            throw exception.exception; }
+            throw  new InvalidInitialJungleException("INVALID BOARD LENGTH", true , false); }
 
         for(int i = 0; i < foodInfo.length; i++){
             boolean isNumeric =  foodInfo[i][1].matches("[+-]?\\d*(\\.\\d+)?");
             if(!isNumeric){
-                InvalidInitialBoardException exception = new InvalidInitialBoardException(new InvalidInitialJungleException("POSITION NOT NUMERIC"));
-                exception.setInvalidFood(true);
-                throw exception.exception;
+                throw  new InvalidInitialJungleException("POSITION NOT NUMERIC", false , true);
             }
             if(Integer.parseInt(foodInfo[i][1]) <= 1 || Integer.parseInt(foodInfo[i][1]) >= jungleSize){
-                InvalidInitialBoardException exception = new InvalidInitialBoardException(new InvalidInitialJungleException("INVALID FOOD POSITIONING"));
-                exception.setInvalidFood(true);
-                throw exception.exception;
+                throw  new InvalidInitialJungleException("INVALID FOOD POSITION", false , true);
             }
             if(!foodInfo[i][0].equals("e") && !foodInfo[i][0].equals("a") && !foodInfo[i][0].equals("b")
                     && !foodInfo[i][0].equals("m") && !foodInfo[i][0].equals("c")){
-                InvalidInitialBoardException exception = new InvalidInitialBoardException(new InvalidInitialJungleException("INVALID FOOD ID"));
-                exception.setInvalidFood(true);
-                throw exception.exception;
+                throw  new InvalidInitialJungleException("INVALID FOOD ID", false , true);
             }
         }
         jungle = jungle.createBoard(jungleSize);
@@ -748,8 +716,7 @@ public class GameManager {
                             case"m":{Food food = new MagicMushrooms(pieces[1],Integer.parseInt(pieces[2]),pieces[3], pieces[4] + " " + pieces[5]);
                                 food.setnRandom(Integer.parseInt(pieces[6]));
                                 foodList.add(food);break;
-                            }}}}}
-            reader.close();
+                            }}}}}reader.close();
             if(foodList == null){
                 return loadGame(turnTemp, length, arrayTemp, null);
             }return loadGame(turnTemp,length,arrayTemp,foodList);
