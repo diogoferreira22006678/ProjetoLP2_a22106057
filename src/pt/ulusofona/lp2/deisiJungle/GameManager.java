@@ -451,7 +451,7 @@ public class GameManager {
         turn++;
         int correctPosition = turnRegulator();
         Specie specie = playersJogo[correctPosition].getSpecie();
-        int energyCost = specie.getEnergyPerCell() * nrSquares;
+        int energyCost = specie.getEnergyPerCell() * Math.abs(nrSquares);
         int playerCurrentHouse = playersJogo[correctPosition].getCurrentHouse();
         Player player = playersJogo[correctPosition];
         //SLEEP

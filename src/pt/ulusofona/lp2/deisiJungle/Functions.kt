@@ -10,7 +10,7 @@ fun router(): (CommandType) -> ((GameManager, List<String>) -> String?) {
                     "PLAYER_INFO" -> getPlayerInfo(manager, args.subList(1, args.size))
                     "PLAYERS_BY_SPECIE" -> getPlayerBySpecie(manager, args.subList(1, args.size))
                     "MOST_TRAVELED" -> getMostTraveled(manager)
-                    "TOP_ENERGETIC_OMNIVORES" -> getTopEnergeticOmnivores(manager)
+                    "TOP_ENERGETIC_OMNIVORES" -> getTopEnergeticOmnivores(manager, args.subList(1, args.size))
                     "CONSUMED_FOODS" -> getConsumedFoods(manager)
                     else -> null
                 }
@@ -55,12 +55,13 @@ fun getMostTraveled(manager: GameManager): String {
     return sortedPlayers.map { "${it.name}:${it.species}:${it.distanceTravelled}\n" }.joinToString("") + "Total:$totalHouses"
 }
 
-fun getTopEnergeticOmnivores(manager: GameManager): String? {
+fun getTopEnergeticOmnivores(manager: GameManager, args: List<String>): String? {
     val players = manager.playersJogo.filter { it.specie.typeOfFood == 3 }
     val sortedPlayers = players.sortedByDescending { it.currentEnergy }
 
     return if (sortedPlayers.isNotEmpty()) {
-        sortedPlayers.map { "${it.name}:${it.currentEnergy}" }.joinToString("\n")
+        val topPlayers = sortedPlayers.take(args[0].toInt())
+        topPlayers.map { "${it.name}:${it.currentEnergy}" }.joinToString("\n")
     } else {
         "Inexistent player"
     }
