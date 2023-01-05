@@ -36,7 +36,7 @@ fun getPlayerInfo(manager: GameManager, args: List<String>): String?{
     }
 }
 
-fun getPlayerBySpecie(manager: GameManager, args: List<String>): String? {
+fun getPlayerBySpecie(manager: GameManager, args: List<String>): String {
     val specieId = args[0]
     val players = manager.playersJogo.filter { it.getidSpecie() == specieId }
     val names = players.map { it.name }
@@ -46,6 +46,7 @@ fun getPlayerBySpecie(manager: GameManager, args: List<String>): String? {
     } else {
         ""
     }
+    return ""
 }
 
 fun getMostTraveled(manager: GameManager): String {
