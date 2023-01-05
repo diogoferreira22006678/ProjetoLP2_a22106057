@@ -8,7 +8,7 @@ fun router(): (CommandType) -> ((GameManager, List<String>) -> String?) {
             CommandType.GET -> { manager, args ->
                 when (args[0]) {
                     "PLAYER_INFO" -> getPlayerInfo(manager, args.subList(1, args.size))
-                    "PLAYER_BY_SPECIE" -> getPlayerBySpecie(manager, args.subList(1, args.size))
+                    "PLAYERS_BY_SPECIE" -> getPlayerBySpecie(manager, args.subList(1, args.size))
                     "MOST_TRAVELED" -> getMostTraveled(manager)
                     "TOP_ENERGETIC_OMNIVORES" -> getTopEnergeticOmnivores(manager)
                     "CONSUMED_FOODS" -> getConsumedFoods(manager)
@@ -38,15 +38,14 @@ fun getPlayerInfo(manager: GameManager, args: List<String>): String?{
 
 fun getPlayerBySpecie(manager: GameManager, args: List<String>): String {
     val specieId = args[0]
-    val players = manager.playersJogo.filter { it.getidSpecie() == specieId }
+    val players = manager.playersJogo.filter { it.species == specieId }
     val names = players.map { it.name }
 
     return if (names.isNotEmpty()) {
-        names.joinToString(",")
+        names.sortedByDescending { it }.joinToString(",")
     } else {
         ""
     }
-    return ""
 }
 
 fun getMostTraveled(manager: GameManager): String {
