@@ -722,16 +722,14 @@ public class GameManager {
             if(foodList == null){
                 return loadGame(turnTemp, length, arrayTemp, null);
             }return loadGame(turnTemp,length,arrayTemp,foodList);
-        } catch (FileNotFoundException e) {e.printStackTrace();
-        } catch (IOException e) {e.printStackTrace();}return false;
+        } catch (FileNotFoundException e) {e.printStackTrace(); } catch (IOException e) {e.printStackTrace();}return false;
     }
 
     public Boolean loadGame(int turnTemp, int length, ArrayList<Player> arrayTemp, ArrayList<Food> foodList){
         turn = turnTemp;
         playersJogo = new Player[arrayTemp.size()];
         for (int i = 0; i < playersJogo.length ; i++){
-            playersJogo[i] = arrayTemp.get(i);
-        }
+            playersJogo[i] = arrayTemp.get(i); }
         jungle = new Board();
         jungle = jungle.createBoard(length);
         String[][] playerInfo = new String[playersJogo.length][3];
@@ -785,5 +783,4 @@ public class GameManager {
                 }
             }
         }
-        return true;
-    }}
+        return true; }}
