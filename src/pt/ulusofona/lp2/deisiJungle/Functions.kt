@@ -63,7 +63,7 @@ fun getTopEnergeticOmnivores(manager: GameManager, args: List<String>): String? 
         val topPlayers = sortedPlayers.take(args[0].toInt())
         topPlayers.map { "${it.name}:${it.currentEnergy}" }.joinToString("\n")
     } else {
-        "Inexistent player"
+        ""
     }
 }
 
