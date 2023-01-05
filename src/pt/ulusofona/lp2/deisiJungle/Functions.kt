@@ -44,7 +44,7 @@ fun getPlayerBySpecie(manager: GameManager, args: List<String>): String? {
     return if (names.isNotEmpty()) {
         names.joinToString(",")
     } else {
-        "Inexistent player"
+        ""
     }
 }
 
