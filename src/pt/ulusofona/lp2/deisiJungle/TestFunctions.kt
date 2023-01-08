@@ -116,8 +116,9 @@ class TestFunctions {
         val gameManager = GameManager()
 
         // Create an instance of Player and set its attributes
-        val playerInfo = arrayOf(arrayOf("1", "Diogo", "Z"))
-        gameManager.createInitialJungle(10, playerInfo)
+        val playerInfo = arrayOf(arrayOf("1", "Diogo", "Z"), arrayOf("2", "Diogo", "E"))
+        val foodInfo = arrayOf(arrayOf("c", "3"))
+        gameManager.createInitialJungle(10, playerInfo, foodInfo)
         val player = gameManager.playersJogo[0]
 
         // Test for the case where the movement is invalid
@@ -128,16 +129,11 @@ class TestFunctions {
         assertEquals("OK", result)
 
         // Test for the case where the player caught food
-        player.currentEnergy = 1
-        player.specie.typeOfFood = 3
-        gameManager.moveCurrentPlayer(5, true)
-        result = postMove(gameManager, listOf("5"))
+        result = postMove(gameManager, listOf("2"))
         assertEquals("Apanhou comida", result)
 
         // Test for the case where the player does not have enough energy
-        player.currentEnergy = 1
-        player.specie.typeOfFood = 1
-        result = postMove(gameManager, listOf("5"))
+        result = postMove(gameManager, listOf("300"))
         assertEquals("Sem energia", result)
     }
 
